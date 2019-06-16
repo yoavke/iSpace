@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">iRoll</string>
+    <string name="one_player">1 player</string>
+    <string name="two_player">1 VS 1</string>
+</resources>
