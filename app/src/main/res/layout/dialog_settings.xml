@@ -1,6 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/custom_dialog_layout_design_user_input"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainMenu"
+    android:padding="16dp">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/sms_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/settings"
+        android:textColor="@color/redColor"
+        android:layout_gravity="center"
+        android:textStyle="bold"
+        android:fontFamily="casual"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:fontFamily="casual"
+            android:text="@string/setting_sound"
+            android:textAlignment="textStart"
+            android:textColor="@color/blackColor"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <com.suke.widget.SwitchButton
+            android:id="@+id/setting_sfx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:checked="true"
+            android:fontFamily="casual"
+            android:splitTrack="false"
+            android:switchMinWidth="50dp"
+            android:switchPadding="10dp"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+    <TextView
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:fontFamily="casual"
+            android:text="@string/setting_music"
+            android:textAlignment="textStart"
+            android:textColor="@color/blackColor"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <com.suke.widget.SwitchButton
+            android:id="@+id/setting_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:checked="true"
+            android:fontFamily="casual"
+            android:showText="false"
+            android:splitTrack="false"
+            android:switchMinWidth="50dp"
+            android:switchPadding="10dp"
+
+            />
+    </LinearLayout>
+
+</LinearLayout>
