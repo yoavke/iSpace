@@ -6,6 +6,10 @@ public class Bomb extends Obstacle implements IDestroyable {
 
     private static final String TAG = Bomb.class.getSimpleName();
 
+    public Bomb() {
+        this.destroyAnimation = Settings.Animation.BOMB_ANIMATION;
+    }
+
     @Override
     public void destroy() {
         //TODO make the destruction of all destroyable objects
