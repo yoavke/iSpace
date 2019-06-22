@@ -48,7 +48,7 @@ xmlns:tools="http://schemas.android.com/tools"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"/>
             </LinearLayout>
-
+        </LinearLayout>
         <Button
             android:id="@+id/btn_one_player"
             android:layout_width="150dp"
@@ -111,5 +111,4 @@ xmlns:tools="http://schemas.android.com/tools"
 
         </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>
