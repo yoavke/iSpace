@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">iRoll</string>
-    <string name="one_player">1 player</string>
+    <string name="one_player">Play</string>
     <string name="two_player">1 VS 1</string>
     <string name="settings" >SETTINGS</string>
     <string name="setting_sound">Sound</string>

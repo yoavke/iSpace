@@ -1,0 +1,7 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/frame_btu_player" />
+    <item android:drawable="@drawable/icon_milky_way"
+        android:width="70dp"
+        android:height="70dp"
+        android:gravity="center"/>
+</layer-list>
