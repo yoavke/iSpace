@@ -28,7 +28,7 @@ public class Level {
                 Log.i(TAG, "Level 5");
                 break;
             default:
-                Log.i(TAG, "DEFAULT LEVER WHAT TO DO?");
+                Log.i(TAG, "DEFAULT LEVER WHAT TO DO???");
         }
     }
 }
