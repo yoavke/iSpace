@@ -6,6 +6,10 @@ public class Rock extends Obstacle implements IDestroyable{
 
     private static final String TAG = Obstacle.class.getSimpleName();
 
+    public Rock() {
+        this.destroyAnimation = Animation.ROCK_ANIMATION;
+    }
+
     @Override
     public void destroy() {
         //TODO make the destruction of all destroyable objects
