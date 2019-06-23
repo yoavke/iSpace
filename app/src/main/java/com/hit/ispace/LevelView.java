@@ -13,17 +13,22 @@ import android.widget.Toast;
 
 public class LevelView extends View {
 
+    //TAG
     private static final String TAG = LevelView.class.getSimpleName();
+
+    //Bitmap of the spaceship
     private Bitmap aircraft;
+
+    //the screen height
     private int screenMaxHeight=0;
+
+    //coordinates of the spaceship
     private int aircraftCoordinateX=-1;
     private int aircraftCoordinateY=-1;
 
-    private int aircraftDistanceDownX;
-    private int fingerDistanceDownX;
-
-    private int aircraftDistanceMoveX;
-    private int fingerDistanceMoveX;
+    //coordinates of finger
+    private int fingerDownX;
+    private int distance;
 
     public LevelView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -56,33 +61,30 @@ public class LevelView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        double x = event.getX();
-        double y = event.getY();
-        if (x<0 || y<0 || x>getWidth() || y>this.screenMaxHeight) {
-            Log.i(TAG, "touched out of the screen (full height: " + screenMaxHeight + ")" + " x: " + x + " y: " + y);
-        } else {
-            Log.i(TAG, "touched the screen (full height: " + screenMaxHeight + ")" + " x: " + x + " y: " + y);
-        }
+        //save the finger coordinate
+        double fingerCoordindateX = event.getX();
 
+        //make spaceship move
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                this.fingerDistanceDownX = (int)x;
+                this.fingerDownX = (int)fingerCoordindateX;
                 break;
             case MotionEvent.ACTION_MOVE:
-                this.fingerDistanceMoveX = (int)x;
-                if (this.fingerDistanceMoveX-this.fingerDistanceDownX>0) {
-                    this.aircraftCoordinateX = this.aircraftCoordinateX+(this.fingerDistanceMoveX-this.fingerDistanceDownX);
-                } else {
-                    this.aircraftCoordinateX = this.aircraftCoordinateX-(Math.abs(this.fingerDistanceMoveX-this.fingerDistanceDownX));
+                this.distance = (int)fingerCoordindateX - fingerDownX;
+                this.fingerDownX = (int)fingerCoordindateX;
+
+                //move spaceship only if it stays between borders of screen
+                if (this.aircraftCoordinateX+this.distance>0 && this.aircraftCoordinateX+this.distance<getWidth()-aircraft.getWidth()) {
+                    this.aircraftCoordinateX = this.aircraftCoordinateX + this.distance;
+
+                    //logs the moves
+                    if (this.distance>0)
+                        Log.i(TAG, "spaceship moves " + this.distance + " to right");
+                    else if (this.distance<0)
+                        Log.i(TAG, "spaceship moves " + Math.abs(this.distance) + " to Left");
                 }
-                if (this.aircraftCoordinateX<0) {
-                    this.aircraftCoordinateX=0;
-                    
-                }
-                if (this.aircraftCoordinateX > getWidth()-100) {
-                    this.aircraftCoordinateX = getWidth()-100;
-                }
-                Log.e(TAG, "MOVE: fingerDistanceMoveX: " + this.fingerDistanceMoveX + " aircraftCoordinateX:" + this.aircraftCoordinateX + " aircraftCoordinateY:" + this.aircraftCoordinateY);
+
+                //update the screen with the new location of the spaceship
                 invalidate();
                 break;
         }
