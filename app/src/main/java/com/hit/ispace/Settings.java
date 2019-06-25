@@ -21,5 +21,6 @@ public abstract class Settings {
     public static class RequestCodes{
         public static final int GAME_ENDED = 1;
         public static final int LEVEL_NOT_EXIST = 2;
+        public static final int START_GAME = 3;
     }
 }

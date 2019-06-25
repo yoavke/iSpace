@@ -18,7 +18,7 @@ public class LevelActivity extends AppCompatActivity {
         //get the view of the level
         LevelView levelView = findViewById(R.id.levelview);
 
-        int levelType = getIntent().getIntExtra("levelType", 0);
+        int levelType = 1;
 
         //check if the level type chosen exists
         switch (levelType) {
@@ -27,19 +27,18 @@ public class LevelActivity extends AppCompatActivity {
                 //instantiate level here so we dont instantiate it for level that doesn't exists
                 level = new Level(levelType);
                 levelView.startLevel(level);
+                break;
             default:
                 Log.e(TAG, "No such level type");
 
                 //finish activity with relevant request_code
-                finishActivity(Settings.RequestCodes.LEVEL_NOT_EXIST);
-
+                setResult(RESULT_CANCELED);
+                finish();
+                break;
         }
 
-
-        //loop until the game ends
-        while (!level.isLevelEnded()) {}
-
         //finish activity with relevant request_code
-        finishActivity(Settings.RequestCodes.GAME_ENDED);
+        setResult(RESULT_OK);
+        finish();
     }
 }

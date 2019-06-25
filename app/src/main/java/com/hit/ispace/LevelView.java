@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class LevelView extends View {
 
@@ -20,6 +21,8 @@ public class LevelView extends View {
 
     //Level vars
     private Bitmap aircraft;
+
+    private Level level;
 
     //the screen height
     private int screenMaxHeight=0;
@@ -78,7 +81,7 @@ public class LevelView extends View {
 
                 //move spaceship only if it stays between borders of screen
                 if (this.aircraftCoordinateX+this.move >0 && this.aircraftCoordinateX+this.move <getWidth()-aircraft.getWidth()) {
-                    this.aircraftCoordinateX = this.aircraftCoordinateX + this.move;
+                    this.aircraftCoordinateX = this.aircraftCoordinateX - this.move;
 
                     //logs the moves
                     if (this.move >0)
@@ -96,6 +99,10 @@ public class LevelView extends View {
     }
 
     public void startLevel(Level level) {
+        this.level = level;
         Log.i(TAG, "Started playing level #" +level.getLevelNumber());
+
+        //start animating obstacles and coins.
+        //game will end when one obstacle hits the spaceship
     }
 }
