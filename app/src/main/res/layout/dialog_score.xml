@@ -36,7 +36,7 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/icon_man-on-the-moon"/>
+                android:src="@drawable/icon_man_on_the_moon"/>
         </LinearLayout>
 
         <TextView

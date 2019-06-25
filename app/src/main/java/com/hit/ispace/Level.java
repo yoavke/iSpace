@@ -6,50 +6,60 @@ import java.util.ArrayList;
 
 public class Level {
     private static final String TAG = Level.class.getSimpleName();
-    int levelNumber;
-    int distance;
-    double speed;
-    ArrayList<Obstacle> obstacleCollection;
+    private int levelNumber;
+    private double speed;
+    private boolean levelEnded;
+    private ArrayList<Obstacle> obstacleTypes;
 
     public Level(int levelNumber) {
+        this.levelEnded = false;
         this.levelNumber = levelNumber;
-        switch (this.levelNumber) {
+        obstacleTypes = new ArrayList<>();
+
+        switch (this.getLevelNumber()) {
             case 1:
-                Log.i(TAG, "Level 1 - no obstacles");
-                this.speed = Settings.Speed.SLOW;
-                this.distance = 100;
+                Log.i(TAG, "Game - Free Style");
+                this.speed = Settings.Speed.REGULAR;
+                obstacleTypes.add(new Bomb());
+                obstacleTypes.add(new Rock());
+                obstacleTypes.add(new SuperRock());
                 break;
             case 2:
-                Log.i(TAG, "Level 2 - rocks");
-                obstacleCollection.add(new Rock());
-                this.speed = Settings.Speed.SLOW;
-                this.distance = 250;
+                Log.i(TAG, "Game - Getting Sick");
+                obstacleTypes.add(new Rock());
+                this.speed = Settings.Speed.REGULAR;
+                obstacleTypes.add(new Bomb());
+                obstacleTypes.add(new Rock());
+                obstacleTypes.add(new SuperRock());
                 break;
             case 3:
-                Log.i(TAG, "Level 3 - rocks and bombs");
-                obstacleCollection.add(new Rock());
-                obstacleCollection.add(new Bomb());
-                this.speed = Settings.Speed.REGULAR;
-                this.distance = 500;
-                break;
-            case 4:
-                Log.i(TAG, "Level 4");
-                obstacleCollection.add(new Rock());
-                obstacleCollection.add(new Bomb());
-                obstacleCollection.add(new SuprerRock());
-                this.speed = Settings.Speed.FAST;
-                this.distance = 1000;
-                break;
-            case 5:
-                Log.i(TAG, "Level 5");
-                obstacleCollection.add(new Rock());
-                obstacleCollection.add(new Bomb());
-                obstacleCollection.add(new SuprerRock());
-                this.speed = Settings.Speed.FAST;
-                this.distance = 2000;
+                Log.i(TAG, "Game - COMING SOON!");
+                obstacleTypes.add(new Bomb());
+                obstacleTypes.add(new Rock());
+                obstacleTypes.add(new SuperRock());
                 break;
             default:
-                Log.i(TAG, "DEFAULT LEVER WHAT TO DO?");
+                Log.e(TAG, "Level not exists");
         }
+    }
+
+    public int getLevelNumber() {
+        return levelNumber;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public ArrayList<Obstacle> getObstacleTypes() {
+        return obstacleTypes;
+    }
+
+    public boolean isLevelEnded() {
+        return levelEnded;
+    }
+
+    public void setLevelEnded(boolean levelEnded) {
+        this.levelEnded = levelEnded;
     }
 }
