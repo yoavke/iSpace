@@ -11,12 +11,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class LevelView extends View {
 
     //TAG
     private static final String TAG = LevelView.class.getSimpleName();
 
-    //Bitmap of the spaceship
+    //Level vars
     private Bitmap aircraft;
 
     //the screen height
@@ -26,9 +28,10 @@ public class LevelView extends View {
     private int aircraftCoordinateX=-1;
     private int aircraftCoordinateY=-1;
 
+
     //coordinates of finger
     private int fingerDownX;
-    private int distance;
+    private int move;
 
     public LevelView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -70,18 +73,18 @@ public class LevelView extends View {
                 this.fingerDownX = (int)fingerCoordindateX;
                 break;
             case MotionEvent.ACTION_MOVE:
-                this.distance = (int)fingerCoordindateX - fingerDownX;
+                this.move = (int)fingerCoordindateX - fingerDownX;
                 this.fingerDownX = (int)fingerCoordindateX;
 
                 //move spaceship only if it stays between borders of screen
-                if (this.aircraftCoordinateX+this.distance>0 && this.aircraftCoordinateX+this.distance<getWidth()-aircraft.getWidth()) {
-                    this.aircraftCoordinateX = this.aircraftCoordinateX + this.distance;
+                if (this.aircraftCoordinateX+this.move >0 && this.aircraftCoordinateX+this.move <getWidth()-aircraft.getWidth()) {
+                    this.aircraftCoordinateX = this.aircraftCoordinateX + this.move;
 
                     //logs the moves
-                    if (this.distance>0)
-                        Log.i(TAG, "spaceship moves " + this.distance + " to right");
-                    else if (this.distance<0)
-                        Log.i(TAG, "spaceship moves " + Math.abs(this.distance) + " to Left");
+                    if (this.move >0)
+                        Log.i(TAG, "spaceship moves " + this.move + " to right");
+                    else if (this.move <0)
+                        Log.i(TAG, "spaceship moves " + Math.abs(this.move) + " to Left");
                 }
 
                 //update the screen with the new location of the spaceship
@@ -90,5 +93,9 @@ public class LevelView extends View {
         }
 
         return true;
+    }
+
+    public void startLevel(Level level) {
+        Log.i(TAG, "Started playing level #" +level.getLevelNumber());
     }
 }

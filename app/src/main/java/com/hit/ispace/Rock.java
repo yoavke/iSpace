@@ -11,8 +11,10 @@ public class Rock extends Obstacle implements IDestroyable{
     }
 
     @Override
-    public void destroy() {
+    public boolean destroy() {
         //TODO make the destruction of all destroyable objects
         Log.i(TAG, "Destroying all destroyable objects");
+
+        return this.isDestroyable;
     }
 }

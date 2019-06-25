@@ -1,5 +1,6 @@
 package com.hit.ispace;
 
 public interface IDestroyable {
-    public void destroy();
+    boolean isDestroyable=true;
+    boolean destroy();
 }
