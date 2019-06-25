@@ -102,7 +102,7 @@
             android:layout_marginTop="6dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/icon_settings" />
+            android:background="@drawable/icon_repeat" />
 
         <Button
             android:id="@+id/btn_sharing_in_whatsaps"
@@ -113,7 +113,7 @@
             android:layout_marginTop="6dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/icon_score" />
+            android:background="@drawable/icon_share" />
 
 
         <Button
@@ -125,7 +125,7 @@
             android:layout_marginTop="6dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/icon_shop"/>
+            android:background="@drawable/icon_home"/>
     </LinearLayout>
 
 </LinearLayout>
