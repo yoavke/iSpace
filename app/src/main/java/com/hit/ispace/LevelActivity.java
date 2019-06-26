@@ -18,7 +18,7 @@ public class LevelActivity extends AppCompatActivity {
         //get the view of the level
         LevelView levelView = findViewById(R.id.levelview);
 
-        int levelType = 1;
+        int levelType = getIntent().getIntExtra("levelType", 0);
 
         //check if the level type chosen exists
         switch (levelType) {
@@ -39,6 +39,6 @@ public class LevelActivity extends AppCompatActivity {
 
         //finish activity with relevant request_code
         setResult(RESULT_OK);
-        finish();
+//        finish();
     }
 }

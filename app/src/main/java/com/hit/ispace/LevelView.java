@@ -11,9 +11,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-
 public class LevelView extends View {
 
     //TAG
@@ -34,7 +31,6 @@ public class LevelView extends View {
 
     //coordinates of finger
     private int fingerDownX;
-    private int move;
 
     public LevelView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -70,25 +66,18 @@ public class LevelView extends View {
         //save the finger coordinate
         double fingerCoordindateX = event.getX();
 
+        int move;
+
         //make spaceship move
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 this.fingerDownX = (int)fingerCoordindateX;
                 break;
             case MotionEvent.ACTION_MOVE:
-                this.move = (int)fingerCoordindateX - fingerDownX;
+                move = (int)fingerCoordindateX - fingerDownX;
                 this.fingerDownX = (int)fingerCoordindateX;
 
-                //move spaceship only if it stays between borders of screen
-                if (this.aircraftCoordinateX+this.move >0 && this.aircraftCoordinateX+this.move <getWidth()-aircraft.getWidth()) {
-                    this.aircraftCoordinateX = this.aircraftCoordinateX - this.move;
-
-                    //logs the moves
-                    if (this.move >0)
-                        Log.i(TAG, "spaceship moves " + this.move + " to right");
-                    else if (this.move <0)
-                        Log.i(TAG, "spaceship moves " + Math.abs(this.move) + " to Left");
-                }
+                moveSpaceShip(move);
 
                 //update the screen with the new location of the spaceship
                 invalidate();
@@ -98,9 +87,51 @@ public class LevelView extends View {
         return true;
     }
 
+    private void moveSpaceShip(int move) {
+        switch (level.getLevelType())
+        {
+            case Settings.LevelTypes.FREE_STYLE:
+                if (this.aircraftCoordinateX+move >= 0 && this.aircraftCoordinateX+move <= getWidth()-aircraft.getWidth()) {
+                    this.aircraftCoordinateX = this.aircraftCoordinateX + move;
+
+                    //logs the moves
+                    if (move > 0)
+                        Log.i(TAG, "spaceship moves " + move + " to right");
+                    else if (move < 0)
+                        Log.i(TAG, "spaceship moves " + Math.abs(move) + " to Left");
+                }
+                //move spaceship only if it stays between borders of screen
+                else if (this.aircraftCoordinateX+move < 0) {
+                    this.aircraftCoordinateX = 0;
+                } else if (this.aircraftCoordinateX+move > getWidth()-aircraft.getWidth()) {
+                    this.aircraftCoordinateX = getWidth()-aircraft.getWidth();
+                }
+                break;
+            case Settings.LevelTypes.GETTING_SICK:
+                if (this.aircraftCoordinateX-move >= 0 && this.aircraftCoordinateX-move <= getWidth()-aircraft.getWidth()) {
+                    this.aircraftCoordinateX = this.aircraftCoordinateX - move;
+
+                    //logs the moves
+                    if (move >0)
+                        Log.i(TAG, "spaceship moves " + move + " to left");
+                    else if (move <0)
+                        Log.i(TAG, "spaceship moves " + Math.abs(move) + " to right");
+                }
+                //move spaceship only if it stays between borders of screen
+                else if (this.aircraftCoordinateX+move < 0) {
+                    this.aircraftCoordinateX = 0;
+                } else if (this.aircraftCoordinateX+move > getWidth()-aircraft.getWidth()) {
+                    this.aircraftCoordinateX = getWidth()-aircraft.getWidth();
+                }
+                break;
+            default:
+                Log.e(TAG, "no such level type!");
+        }
+    }
+
     public void startLevel(Level level) {
         this.level = level;
-        Log.i(TAG, "Started playing level #" +level.getLevelNumber());
+        Log.i(TAG, "Started playing level #" +level.getLevelType());
 
         //start animating obstacles and coins.
         //game will end when one obstacle hits the spaceship

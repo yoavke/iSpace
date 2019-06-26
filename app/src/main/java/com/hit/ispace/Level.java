@@ -6,17 +6,17 @@ import java.util.ArrayList;
 
 public class Level {
     private static final String TAG = Level.class.getSimpleName();
-    private int levelNumber;
+    private int levelType;
     private double speed;
     private boolean levelEnded;
     private ArrayList<Obstacle> obstacleTypes;
 
-    public Level(int levelNumber) {
+    public Level(int levelType) {
         this.levelEnded = false;
-        this.levelNumber = levelNumber;
+        this.levelType = levelType;
         obstacleTypes = new ArrayList<>();
 
-        switch (this.getLevelNumber()) {
+        switch (this.getLevelType()) {
             case 1:
                 Log.i(TAG, "Game - Free Style");
                 this.speed = Settings.Speed.REGULAR;
@@ -43,8 +43,8 @@ public class Level {
         }
     }
 
-    public int getLevelNumber() {
-        return levelNumber;
+    public int getLevelType() {
+        return levelType;
     }
 
     public double getSpeed() {
