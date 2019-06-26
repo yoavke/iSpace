@@ -88,10 +88,13 @@ public class LevelView extends View {
     }
 
     private void moveSpaceShip(int move) {
+        //the spaceship moving depends on level type
         switch (level.getLevelType())
         {
+            //free style - moving in natural way - left goes left and right goes right
             case Settings.LevelTypes.FREE_STYLE:
                 if (this.aircraftCoordinateX+move >= 0 && this.aircraftCoordinateX+move <= getWidth()-aircraft.getWidth()) {
+                    //set the new coordinate of spaceship
                     this.aircraftCoordinateX = this.aircraftCoordinateX + move;
 
                     //logs the moves
@@ -107,8 +110,10 @@ public class LevelView extends View {
                     this.aircraftCoordinateX = getWidth()-aircraft.getWidth();
                 }
                 break;
+            //getting sick - moving in the wrong direction - left goes right and vice versa
             case Settings.LevelTypes.GETTING_SICK:
                 if (this.aircraftCoordinateX-move >= 0 && this.aircraftCoordinateX-move <= getWidth()-aircraft.getWidth()) {
+                    //set the new coordinate of spaceship
                     this.aircraftCoordinateX = this.aircraftCoordinateX - move;
 
                     //logs the moves
