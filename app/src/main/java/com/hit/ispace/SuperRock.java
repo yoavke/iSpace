@@ -16,6 +16,11 @@ public class SuperRock extends Obstacle implements IDestroyable{
     }
 
     @Override
+    public void printPower() {
+        System.out.println("I'm a superrock. I cannot get destroyed");
+    }
+
+    @Override
     public boolean destroy() {
         return this.isDestroyable;
     }

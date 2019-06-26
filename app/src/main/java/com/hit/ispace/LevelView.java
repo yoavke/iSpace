@@ -64,18 +64,18 @@ public class LevelView extends View {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         //save the finger coordinate
-        double fingerCoordindateX = event.getX();
+        double fingerCoordinateX = event.getX();
 
         int move;
 
         //make spaceship move
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                this.fingerDownX = (int)fingerCoordindateX;
+                this.fingerDownX = (int)fingerCoordinateX;
                 break;
             case MotionEvent.ACTION_MOVE:
-                move = (int)fingerCoordindateX - fingerDownX;
-                this.fingerDownX = (int)fingerCoordindateX;
+                move = (int)fingerCoordinateX - fingerDownX;
+                this.fingerDownX = (int)fingerCoordinateX;
 
                 moveSpaceShip(move);
 
