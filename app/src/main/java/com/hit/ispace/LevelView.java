@@ -10,7 +10,6 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 public class LevelView extends View {
 
@@ -91,7 +90,7 @@ public class LevelView extends View {
         switch (level.getLevelType())
         {
             //free style - moving in natural way - left goes left and right goes right
-            case Settings.LevelTypes.FREE_STYLE:
+            case CSettings.LevelTypes.FREE_STYLE:
                 //if spaceship will remain in border of game after moving, make the move
                 if (this.level.spaceship.getLeftTop().getX()+move >= 0 && this.level.spaceship.getLeftTop().getX()+move <= getWidth()-level.spaceship.getSpaceshipBitmap().getWidth()) {
 
@@ -113,7 +112,7 @@ public class LevelView extends View {
                 else if (this.level.spaceship.getLeftTop().getX()+move < 0) {
                     //set the new coordinate of spaceship. setting the X coordinate, Y remain the same
                     this.level.spaceship.getLeftTop().setX(0);
-                    this.level.spaceship.getRightBottom().setX(Settings.Spaceship.SIZE);
+                    this.level.spaceship.getRightBottom().setX(CSettings.Spaceship.SIZE);
 
                     Log.e(TAG, "REMOVETHIS: Coordinates: TOP LEFT(" + this.level.spaceship.getLeftTop().getX() + "," + this.level.spaceship.getLeftTop().getY() + ") BOTTOM RIGHT(" + this.level.spaceship.getRightBottom().getX() + "," + this.level.spaceship.getRightBottom().getY() +")");
 
@@ -129,7 +128,7 @@ public class LevelView extends View {
                 }
                 break;
             //getting sick - moving in the wrong direction - left goes right and vice versa
-            case Settings.LevelTypes.GETTING_SICK:
+            case CSettings.LevelTypes.GETTING_SICK:
                 //if spaceship will remain in border of game after moving, make the move
                 if (this.level.spaceship.getLeftTop().getX() - move >= 0 && this.level.spaceship.getLeftTop().getX() - move <= getWidth()-level.spaceship.getSpaceshipBitmap().getWidth()) {
 
@@ -152,7 +151,7 @@ public class LevelView extends View {
                 else if (this.level.spaceship.getLeftTop().getX()+move < 0) {
                     //set the new coordinate of spaceship. setting the X coordinate, Y remain the same
                     this.level.spaceship.getLeftTop().setX(0);
-                    this.level.spaceship.getRightBottom().setX(Settings.Spaceship.SIZE);
+                    this.level.spaceship.getRightBottom().setX(CSettings.Spaceship.SIZE);
 
                     Log.e(TAG, "REMOVETHIS: Coordinates: TOP LEFT(" + this.level.spaceship.getLeftTop().getX() + "," + this.level.spaceship.getLeftTop().getY() + ") BOTTOM RIGHT(" + this.level.spaceship.getRightBottom().getX() + "," + this.level.spaceship.getRightBottom().getY() +")");
 

@@ -29,7 +29,7 @@ xmlns:tools="http://schemas.android.com/tools"
             android:gravity="center">
 
                 <Button
-                    android:id="@+id/btn_one_player"
+                    android:id="@+id/btn_play"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:text="@string/one_player"

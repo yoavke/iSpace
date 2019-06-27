@@ -11,8 +11,8 @@ public class Spaceship implements IElement {
     int SpaceshipHeight;
 
     public Spaceship() {
-        this.spaceshipWidth = Settings.Spaceship.SIZE;
-        this.SpaceshipHeight = Settings.Spaceship.SIZE;
+        this.spaceshipWidth = CSettings.Spaceship.SIZE;
+        this.SpaceshipHeight = CSettings.Spaceship.SIZE;
     }
 
     @Override

@@ -21,7 +21,7 @@ public class Level {
         switch (this.getLevelType()) {
             case 1:
                 Log.i(TAG, "Game - Free Style");
-                this.speed = Settings.Speed.REGULAR;
+                this.speed = CSettings.Speed.REGULAR;
                 obstacleTypes.add(new Bomb());
                 obstacleTypes.add(new Rock());
                 obstacleTypes.add(new SuperRock());
@@ -29,7 +29,7 @@ public class Level {
             case 2:
                 Log.i(TAG, "Game - Getting Sick");
                 obstacleTypes.add(new Rock());
-                this.speed = Settings.Speed.REGULAR;
+                this.speed = CSettings.Speed.REGULAR;
                 obstacleTypes.add(new Bomb());
                 obstacleTypes.add(new Rock());
                 obstacleTypes.add(new SuperRock());

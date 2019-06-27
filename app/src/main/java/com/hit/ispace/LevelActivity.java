@@ -25,8 +25,8 @@ public class LevelActivity extends AppCompatActivity {
 
         //check if the level type chosen exists
         switch (levelType) {
-            case Settings.LevelTypes.FREE_STYLE:
-            case Settings.LevelTypes.GETTING_SICK:
+            case CSettings.LevelTypes.FREE_STYLE:
+            case CSettings.LevelTypes.GETTING_SICK:
                 //instantiate level here so we dont instantiate it for level that doesn't exists
                 level = new Level(levelType);
                 levelView.startLevel(level);

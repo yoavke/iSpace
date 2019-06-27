@@ -10,7 +10,7 @@ public class Rock extends Obstacle implements IDestroyable{
     Point bottomRight;
 
     public Rock() {
-        this.destroyAnimation = Settings.Animation.ROCK_ANIMATION;
+        this.destroyAnimation = CSettings.Animation.ROCK_ANIMATION;
     }
 
     @Override
