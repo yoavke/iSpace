@@ -10,7 +10,7 @@ public class Level {
     private double speed;
     private boolean levelEnded;
     protected Spaceship spaceship;
-    private ArrayList<Obstacle> obstacleTypes;
+    private ArrayList<String> obstacleTypes;
 
     public Level(int levelType) {
         this.levelEnded = false;
@@ -18,27 +18,21 @@ public class Level {
         obstacleTypes = new ArrayList<>();
         this.spaceship = new Spaceship();
 
+        for (CSettings.Obstacles obs : CSettings.Obstacles.values()) {
+            obstacleTypes.add(obs.name());
+        }
+
         switch (this.getLevelType()) {
             case 1:
                 Log.i(TAG, "Game - Free Style");
                 this.speed = CSettings.Speed.REGULAR;
-                obstacleTypes.add(new Bomb());
-                obstacleTypes.add(new Rock());
-                obstacleTypes.add(new SuperRock());
                 break;
             case 2:
                 Log.i(TAG, "Game - Getting Sick");
-                obstacleTypes.add(new Rock());
                 this.speed = CSettings.Speed.REGULAR;
-                obstacleTypes.add(new Bomb());
-                obstacleTypes.add(new Rock());
-                obstacleTypes.add(new SuperRock());
                 break;
             case 3:
                 Log.i(TAG, "Game - COMING SOON!");
-                obstacleTypes.add(new Bomb());
-                obstacleTypes.add(new Rock());
-                obstacleTypes.add(new SuperRock());
                 break;
             default:
                 Log.e(TAG, "Level not exists");
@@ -53,7 +47,7 @@ public class Level {
         return speed;
     }
 
-    public ArrayList<Obstacle> getObstacleTypes() {
+    public ArrayList<String> getObstacleTypes() {
         return obstacleTypes;
     }
 

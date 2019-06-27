@@ -27,4 +27,8 @@ public abstract class CSettings {
     public static class Spaceship{
         public static final int SIZE = 100;
     }
+
+    public enum Obstacles{
+        BOMB,ROCK,SUPERROCK
+    }
 }

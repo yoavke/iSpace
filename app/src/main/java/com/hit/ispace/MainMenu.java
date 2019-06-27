@@ -21,11 +21,16 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     private Button btnInfo;
     public SharedPreferences settings ;
 
+    private DatabaseHelper myDb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         initView();
+
+        myDb = new DatabaseHelper(this);
+
     }
 
     private String readSetting(String key) {
