@@ -41,6 +41,8 @@ public class LevelView extends View {
     public LevelView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         Log.i(TAG, "LevelView created");
+
+
     }
 
     @Override

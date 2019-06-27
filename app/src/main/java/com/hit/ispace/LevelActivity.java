@@ -18,6 +18,9 @@ public class LevelActivity extends AppCompatActivity {
         //get the view of the level
         LevelView levelView = findViewById(R.id.levelview);
 
+        //set the background of the level view
+        levelView.setBackgroundColor(getResources().getColor(R.color.blackColor));
+
         int levelType = 1; //getIntent().getIntExtra("levelType", 0);
 
         //check if the level type chosen exists
