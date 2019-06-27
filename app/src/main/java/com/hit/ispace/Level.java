@@ -9,12 +9,14 @@ public class Level {
     private int levelType;
     private double speed;
     private boolean levelEnded;
+    protected Spaceship spaceship;
     private ArrayList<Obstacle> obstacleTypes;
 
     public Level(int levelType) {
         this.levelEnded = false;
         this.levelType = levelType;
         obstacleTypes = new ArrayList<>();
+        this.spaceship = new Spaceship();
 
         switch (this.getLevelType()) {
             case 1:

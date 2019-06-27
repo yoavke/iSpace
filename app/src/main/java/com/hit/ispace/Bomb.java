@@ -5,11 +5,8 @@ import android.util.Log;
 public class Bomb extends Obstacle implements IDestroyable {
 
     private static final String TAG = Bomb.class.getSimpleName();
-
-    @Override
-    public void printPower() {
-        System.out.println("I'm a bomb");
-    }
+    Point topLeft;
+    Point bottomRight;
 
     public Bomb() {
         this.destroyAnimation = Settings.Animation.BOMB_ANIMATION;
@@ -21,5 +18,21 @@ public class Bomb extends Obstacle implements IDestroyable {
         Log.i(TAG, "Destroying all destroyable objects");
 
         return this.isDestroyable;
+    }
+
+    @Override
+    public void setCoordinates(Point topLeft, Point bottomRight) {
+        this.topLeft = topLeft;
+        this.bottomRight = bottomRight;
+    }
+
+    @Override
+    public Point getLeftTop() {
+        return this.topLeft;
+    }
+
+    @Override
+    public Point getRightBottom() {
+        return this.bottomRight;
     }
 }

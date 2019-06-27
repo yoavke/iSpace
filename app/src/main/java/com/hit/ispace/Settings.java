@@ -23,4 +23,8 @@ public abstract class Settings {
         public static final int LEVEL_NOT_EXIST = 2;
         public static final int START_GAME = 3;
     }
+
+    public static class Spaceship{
+        public static final int SIZE = 100;
+    }
 }
