@@ -6,52 +6,48 @@ import java.util.ArrayList;
 
 public class Level {
     private static final String TAG = Level.class.getSimpleName();
-    private int levelNumber;
+    private int levelType;
     private double speed;
     private boolean levelEnded;
-    private ArrayList<Obstacle> obstacleTypes;
+    protected Spaceship spaceship;
+    private ArrayList<String> obstacleTypes;
 
-    public Level(int levelNumber) {
+    public Level(int levelType) {
         this.levelEnded = false;
-        this.levelNumber = levelNumber;
+        this.levelType = levelType;
         obstacleTypes = new ArrayList<>();
+        this.spaceship = new Spaceship();
 
-        switch (this.getLevelNumber()) {
+        for (CSettings.Obstacles obs : CSettings.Obstacles.values()) {
+            obstacleTypes.add(obs.name());
+        }
+
+        switch (this.getLevelType()) {
             case 1:
                 Log.i(TAG, "Game - Free Style");
-                this.speed = Settings.Speed.REGULAR;
-                obstacleTypes.add(new Bomb());
-                obstacleTypes.add(new Rock());
-                obstacleTypes.add(new SuperRock());
+                this.speed = CSettings.Speed.REGULAR;
                 break;
             case 2:
                 Log.i(TAG, "Game - Getting Sick");
-                obstacleTypes.add(new Rock());
-                this.speed = Settings.Speed.REGULAR;
-                obstacleTypes.add(new Bomb());
-                obstacleTypes.add(new Rock());
-                obstacleTypes.add(new SuperRock());
+                this.speed = CSettings.Speed.REGULAR;
                 break;
             case 3:
                 Log.i(TAG, "Game - COMING SOON!");
-                obstacleTypes.add(new Bomb());
-                obstacleTypes.add(new Rock());
-                obstacleTypes.add(new SuperRock());
                 break;
             default:
                 Log.e(TAG, "Level not exists");
         }
     }
 
-    public int getLevelNumber() {
-        return levelNumber;
+    public int getLevelType() {
+        return levelType;
     }
 
     public double getSpeed() {
         return speed;
     }
 
-    public ArrayList<Obstacle> getObstacleTypes() {
+    public ArrayList<String> getObstacleTypes() {
         return obstacleTypes;
     }
 

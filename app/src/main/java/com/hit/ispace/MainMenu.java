@@ -21,11 +21,16 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     private Button btnInfo;
     public SharedPreferences settings ;
 
+    private DatabaseHelper myDb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         initView();
+
+        myDb = new DatabaseHelper(this);
+
     }
 
     private String readSetting(String key) {
@@ -40,7 +45,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
 
         logoIspace = findViewById(R.id.logo_img);
-        btnStart = findViewById(R.id.btn_one_player);
+        btnStart = findViewById(R.id.btn_play);
         btnSettings = findViewById(R.id.btn_settings);
         btnScore = findViewById(R.id.btn_score);
         btnShop = findViewById(R.id.btn_shop);
@@ -49,7 +54,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
         // Set animation for buttons
         StartSmartAnimation.startAnimation(findViewById(R.id.logo_img) , AnimationType.BounceInDown, 3000 , 0 , true );
-        StartSmartAnimation.startAnimation(findViewById(R.id.btn_one_player) , AnimationType.ZoomInDown, 3000 , 0 , true );
+        StartSmartAnimation.startAnimation(findViewById(R.id.btn_play) , AnimationType.ZoomInDown, 3000 , 0 , true );
         StartSmartAnimation.startAnimation(findViewById(R.id.btn_settings) , AnimationType.BounceInLeft, 3000 , 0 , true );
         StartSmartAnimation.startAnimation(findViewById(R.id.btn_score) , AnimationType.BounceInLeft, 3000 , 0 , true );
         StartSmartAnimation.startAnimation(findViewById(R.id.btn_shop) , AnimationType.BounceInRight, 3000 , 0 , true );
@@ -74,12 +79,12 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_one_player:
-                startActivity(new Intent(this, LevelView.class));
+            case R.id.btn_play:
+                startActivity(new Intent(this, LevelActivity.class));
                 break;
 
             case R.id.btn_settings:
-                startActivity(new Intent(this, Settings.class));
+                startActivity(new Intent(this, CSettings.class));
                 break;
 
             case R.id.btn_score:
