@@ -12,4 +12,7 @@
     <string name="score">Score</string>
     <string name="text_user_score">Your score is :</string>
     <string name="save">SAVE</string>
+    <string name="free_style">Free Style</string>
+    <string name="faster">Faster</string>
+    <string name="getting_sick">Getting Sick</string>
 </resources>

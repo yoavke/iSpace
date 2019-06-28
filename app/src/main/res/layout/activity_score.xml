@@ -31,21 +31,125 @@
             android:textStyle="bold"
             android:textAllCaps="true"
             />
-
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="370dp"
-        android:layout_height="match_parent"
-        android:background="@drawable/layout_ripple"
-        android:backgroundTint="@color/clearColor"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_gravity="center"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/title_high_score"
-        >
-    </android.support.v7.widget.RecyclerView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view_free_style"
+                android:layout_width="370dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                card_view:cardCornerRadius="10dp"
+                android:backgroundTint="@color/colorLayout">
+
+            <TextView
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/free_style"
+                android:textSize="20sp"
+                android:textColor="@color/blackColor"
+                android:textStyle="bold"
+                android:fontFamily="casual" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/free_style_score"
+                android:layout_width="370dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/layout_ripple"
+                android:backgroundTint="@color/clearColor"
+                android:layout_marginTop="1sp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/title_high_score">
+            </android.support.v7.widget.RecyclerView>
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view_faster"
+                android:layout_width="370dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="10dp"
+                android:backgroundTint="@color/colorLayout">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/faster"
+                    android:textSize="20sp"
+                    android:textColor="@color/blackColor"
+                    android:textStyle="bold"
+                    android:fontFamily="casual" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/faster_score"
+                android:layout_width="370dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/layout_ripple"
+                android:backgroundTint="@color/clearColor"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="1dp"
+                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/title_high_score">
+            </android.support.v7.widget.RecyclerView>
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/card_view_getting_sick"
+                android:layout_width="370dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                card_view:cardCornerRadius="10dp"
+                android:backgroundTint="@color/colorLayout">
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/getting_sick"
+                    android:textSize="20sp"
+                    android:textColor="@color/blackColor"
+                    android:textStyle="bold"
+                    android:fontFamily="casual" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/getting_sick_score"
+                android:layout_width="370dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/layout_ripple"
+                android:backgroundTint="@color/clearColor"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="1dp"
+                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/title_high_score">
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
 
 </RelativeLayout>
