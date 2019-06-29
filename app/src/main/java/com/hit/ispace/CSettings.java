@@ -24,11 +24,17 @@ public abstract class CSettings {
         public static final int START_GAME = 3;
     }
 
-    public static class Spaceship{
-        public static final int SIZE = 100;
+    public static class Dimension {
+        public static final int SPACESHIP_SIZE = 100;
+        public static final int ELEMENT_SIZE = 130;
     }
 
-    public enum Obstacles{
-        BOMB,ROCK,SUPERROCK
+    public enum FlyingElements{
+        COIN,
+        GOODBOMB,
+        BOMB,
+        ROCK,
+        SUPERROCK,
+        SPACE
     }
 }

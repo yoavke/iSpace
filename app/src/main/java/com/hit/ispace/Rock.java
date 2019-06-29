@@ -13,6 +13,11 @@ public class Rock extends Obstacle implements IDestroyable{
         this.destroyAnimation = CSettings.Animation.ROCK_ANIMATION;
     }
 
+    public Rock(Point topLeft, Point bottomRight) {
+        this.topLeft = topLeft;
+        this.bottomRight = bottomRight;
+    }
+
     @Override
     public boolean destroy() {
         //TODO make the destruction of all destroyable objects

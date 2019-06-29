@@ -14,8 +14,9 @@ public class SuperRock extends Obstacle implements IDestroyable{
     //TODO image to point to the path of the image
     String image = "";
 
-    public SuperRock() {
-        Log.i(TAG,"SuperRock created");
+    public SuperRock(Point topLeft, Point bottomRight) {
+        this.topLeft = topLeft;
+        this.bottomRight = bottomRight;
     }
 
     @Override

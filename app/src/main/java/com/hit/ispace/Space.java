@@ -1,10 +1,10 @@
 package com.hit.ispace;
 
-public class Coin implements IElement {
+public class Space implements IElement {
     Point topLeft;
     Point bottomRight;
 
-    public Coin(Point topLeft, Point bottomRight) {
+    public Space(Point topLeft, Point bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
     }

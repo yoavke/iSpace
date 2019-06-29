@@ -11,28 +11,18 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class LevelView extends View {
 
     //TAG
     private static final String TAG = LevelView.class.getSimpleName();
 
-    //Level vars
-    private Bitmap aircraft;
-
     private Level level=null;
 
     private int screenWidth=0;
     private int screenHeight=0;
-
-    //the screen height
-    private int screenMaxHeight=0;
-
-    //coordinates of the spaceship
-    private Point aircraftCoordinateTopLeft = new Point(-1,-1);
-    private Point aircraftCoordinateBottomRight = new Point(-1,-1);
-    private int aircraftCoordinateX=-1;
-    private int aircraftCoordinateY=-1;
-
 
     //coordinates of finger
     private int fingerDownX;
@@ -40,7 +30,6 @@ public class LevelView extends View {
     public LevelView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         Log.i(TAG, "LevelView created");
-
 
     }
 
@@ -112,7 +101,7 @@ public class LevelView extends View {
                 else if (this.level.spaceship.getLeftTop().getX()+move < 0) {
                     //set the new coordinate of spaceship. setting the X coordinate, Y remain the same
                     this.level.spaceship.getLeftTop().setX(0);
-                    this.level.spaceship.getRightBottom().setX(CSettings.Spaceship.SIZE);
+                    this.level.spaceship.getRightBottom().setX(CSettings.Dimension.SPACESHIP_SIZE);
 
                     Log.e(TAG, "REMOVETHIS: Coordinates: TOP LEFT(" + this.level.spaceship.getLeftTop().getX() + "," + this.level.spaceship.getLeftTop().getY() + ") BOTTOM RIGHT(" + this.level.spaceship.getRightBottom().getX() + "," + this.level.spaceship.getRightBottom().getY() +")");
 
@@ -151,7 +140,7 @@ public class LevelView extends View {
                 else if (this.level.spaceship.getLeftTop().getX()+move < 0) {
                     //set the new coordinate of spaceship. setting the X coordinate, Y remain the same
                     this.level.spaceship.getLeftTop().setX(0);
-                    this.level.spaceship.getRightBottom().setX(CSettings.Spaceship.SIZE);
+                    this.level.spaceship.getRightBottom().setX(CSettings.Dimension.SPACESHIP_SIZE);
 
                     Log.e(TAG, "REMOVETHIS: Coordinates: TOP LEFT(" + this.level.spaceship.getLeftTop().getX() + "," + this.level.spaceship.getLeftTop().getY() + ") BOTTOM RIGHT(" + this.level.spaceship.getRightBottom().getX() + "," + this.level.spaceship.getRightBottom().getY() +")");
 
@@ -182,7 +171,7 @@ public class LevelView extends View {
         this.screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
         Point topLeft = new Point((this.screenWidth / 2) - (this.level.spaceship.getSpaceshipBitmap().getWidth() / 2),this.screenHeight-200);
-        //TODO change hardcoded 100 to class variable in Spaceship class
+        //TODO change hardcoded 100 to class variable in Dimension class
         Point bottomRight = new Point(topLeft.getX()+100, topLeft.getY()+100);
         // initialize avatar on the screen when start the level
         this.level.spaceship.setCoordinates(topLeft,bottomRight);
@@ -192,6 +181,10 @@ public class LevelView extends View {
         Log.i(TAG, "Started playing level #" +level.getLevelType());
 
         //start animating obstacles and coins.
+        Timer timer = new Timer();
+        timer.schedule(this.level.elementFactory, 1500, 3000);
+        invalidate();
+
         //game will end when one obstacle hits the spaceship
     }
 }

@@ -8,8 +8,10 @@ public class Bomb extends Obstacle implements IDestroyable {
     Point topLeft;
     Point bottomRight;
 
-    public Bomb() {
-        this.destroyAnimation = CSettings.Animation.BOMB_ANIMATION;
+
+    public Bomb(Point topLeft, Point bottomRight) {
+        this.topLeft = topLeft;
+        this.bottomRight = bottomRight;
     }
 
     @Override

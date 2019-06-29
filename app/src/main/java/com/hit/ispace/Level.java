@@ -11,16 +11,19 @@ public class Level {
     private boolean levelEnded;
     protected Spaceship spaceship;
     private ArrayList<String> obstacleTypes;
+    protected ElementFactory elementFactory;
 
     public Level(int levelType) {
         this.levelEnded = false;
         this.levelType = levelType;
-        obstacleTypes = new ArrayList<>();
+        this.obstacleTypes = new ArrayList<>();
         this.spaceship = new Spaceship();
 
-        for (CSettings.Obstacles obs : CSettings.Obstacles.values()) {
+        for (CSettings.FlyingElements obs : CSettings.FlyingElements.values()) {
             obstacleTypes.add(obs.name());
         }
+
+        this.elementFactory = new ElementFactory(obstacleTypes);
 
         switch (this.getLevelType()) {
             case 1:
