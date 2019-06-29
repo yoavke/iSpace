@@ -14,6 +14,10 @@ public final class ElementFactory extends TimerTask {
     private ArrayList<String> obstacleTypes;
     private ArrayList<IElement> elemList = new ArrayList<>();
 
+    public ArrayList<IElement> getElemList() {
+        return elemList;
+    }
+
     public ElementFactory(ArrayList<String> obstacleTypes) {
         this.obstacleTypes = obstacleTypes;
     }

@@ -9,6 +9,11 @@ public class Rock extends Obstacle implements IDestroyable{
     Point topLeft;
     Point bottomRight;
 
+    @Override
+    public String sayMyName() {
+        return "Rock";
+    }
+
     public Rock() {
         this.destroyAnimation = CSettings.Animation.ROCK_ANIMATION;
     }

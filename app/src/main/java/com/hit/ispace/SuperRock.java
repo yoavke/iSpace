@@ -6,6 +6,11 @@ public class SuperRock extends Obstacle implements IDestroyable{
 
     private static final String TAG = SuperRock.class.getSimpleName();
 
+    @Override
+    public String sayMyName() {
+        return "SuperRock";
+    }
+
     Point topLeft;
     Point bottomRight;
 
@@ -25,7 +30,7 @@ public class SuperRock extends Obstacle implements IDestroyable{
     }
 
     @Override
-    public void setCoordinates(Point topLeft, Point BottomRight) {
+    public void setCoordinates(Point topLeft, Point bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
     }

@@ -4,6 +4,11 @@ public class Goodbomb implements IElement {
     Point topLeft;
     Point bottomRight;
 
+    @Override
+    public String sayMyName() {
+        return "GoodBomb";
+    }
+
     public Goodbomb(Point topLeft, Point bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;

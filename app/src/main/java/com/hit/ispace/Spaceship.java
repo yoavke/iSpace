@@ -31,6 +31,11 @@ public class Spaceship implements IElement {
         return this.bottomRight;
     }
 
+    @Override
+    public String sayMyName() {
+        return "Spaceship";
+    }
+
     public Bitmap getSpaceshipBitmap() {
         return spaceshipBitmap;
     }

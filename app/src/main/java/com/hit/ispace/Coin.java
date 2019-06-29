@@ -4,6 +4,11 @@ public class Coin implements IElement {
     Point topLeft;
     Point bottomRight;
 
+    @Override
+    public String sayMyName() {
+        return "Coin";
+    }
+
     public Coin(Point topLeft, Point bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;

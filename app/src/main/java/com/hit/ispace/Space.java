@@ -4,6 +4,11 @@ public class Space implements IElement {
     Point topLeft;
     Point bottomRight;
 
+    @Override
+    public String sayMyName() {
+        return "Just space";
+    }
+
     public Space(Point topLeft, Point bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;

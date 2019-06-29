@@ -9,6 +9,11 @@ public class Bomb extends Obstacle implements IDestroyable {
     Point bottomRight;
 
 
+    @Override
+    public String sayMyName() {
+        return "Bomb";
+    }
+
     public Bomb(Point topLeft, Point bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;

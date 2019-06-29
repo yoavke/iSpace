@@ -182,7 +182,21 @@ public class LevelView extends View {
 
         //start animating obstacles and coins.
         Timer timer = new Timer();
+        Timer timer2 = new Timer();
+        TimerTask animator = new TimerTask() {
+            @Override
+            public void run() {
+                for (IElement elem : LevelView.this.level.elementFactory.getElemList()) {
+                    Point newTopLeft = new Point(elem.getLeftTop().getX(),elem.getLeftTop().getY()+1);
+                    Point newBottomRight = new Point(elem.getRightBottom().getX(),elem.getRightBottom().getY()+1);
+
+                    elem.setCoordinates(newTopLeft,newBottomRight);
+                    Log.e(TAG, "Animated " + elem.sayMyName() + " new coordinates: ("+elem.getLeftTop().getX()+","+elem.getLeftTop().getY()+")("+elem.getRightBottom().getX()+","+elem.getRightBottom().getY()+")");
+                }
+            }
+        };
         timer.schedule(this.level.elementFactory, 1500, 3000);
+        timer2.schedule(animator,1500,300);
         invalidate();
 
         //game will end when one obstacle hits the spaceship

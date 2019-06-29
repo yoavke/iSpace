@@ -5,4 +5,5 @@ public interface IElement {
     void setCoordinates(Point topLeft, Point BottomRight);
     Point getLeftTop();
     Point getRightBottom();
+    String sayMyName();
 }
