@@ -1,13 +1,25 @@
 package com.hit.ispace;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 public class Rock extends Obstacle implements IDestroyable{
 
     private static final String TAG = Obstacle.class.getSimpleName();
 
-    Point topLeft;
-    Point bottomRight;
+    private Point topLeft;
+    private Point bottomRight;
+    private Bitmap bitmapSrc;
+
+    @Override
+    public void setBitmapSrc(Bitmap bitmap) {
+        this.bitmapSrc = bitmap;
+    }
+
+    @Override
+    public Bitmap getBitmapSrc() {
+        return this.bitmapSrc;
+    }
 
     @Override
     public String sayMyName() {

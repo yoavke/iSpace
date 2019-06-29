@@ -1,8 +1,22 @@
 package com.hit.ispace;
 
+import android.graphics.Bitmap;
+
 public class Coin implements IElement {
     Point topLeft;
+
+    @Override
+    public void setBitmapSrc(Bitmap bitmap) {
+        this.bitmapSrc = bitmap;
+    }
+
+    @Override
+    public Bitmap getBitmapSrc() {
+        return this.bitmapSrc;
+    }
+
     Point bottomRight;
+    Bitmap bitmapSrc;
 
     @Override
     public String sayMyName() {

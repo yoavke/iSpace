@@ -1,13 +1,15 @@
 package com.hit.ispace;
 
+import android.graphics.Bitmap;
 import android.util.Log;
 
 public class Bomb extends Obstacle implements IDestroyable {
 
     private static final String TAG = Bomb.class.getSimpleName();
-    Point topLeft;
-    Point bottomRight;
+    private Point topLeft;
+    private Point bottomRight;
 
+    private Bitmap bitmapSrc;
 
     @Override
     public String sayMyName() {
@@ -17,6 +19,16 @@ public class Bomb extends Obstacle implements IDestroyable {
     public Bomb(Point topLeft, Point bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
+    }
+
+    @Override
+    public void setBitmapSrc(Bitmap bitmap) {
+        this.bitmapSrc = bitmap;
+    }
+
+    @Override
+    public Bitmap getBitmapSrc() {
+        return this.bitmapSrc;
     }
 
     @Override

@@ -1,12 +1,25 @@
 package com.hit.ispace;
 
+import android.graphics.Bitmap;
+
 public class Goodbomb implements IElement {
-    Point topLeft;
-    Point bottomRight;
+    private Point topLeft;
+    private Point bottomRight;
+    private Bitmap bitmapSrc;
 
     @Override
     public String sayMyName() {
         return "GoodBomb";
+    }
+
+    @Override
+    public void setBitmapSrc(Bitmap bitmap) {
+        this.bitmapSrc = bitmap;
+    }
+
+    @Override
+    public Bitmap getBitmapSrc() {
+        return this.bitmapSrc;
     }
 
     public Goodbomb(Point topLeft, Point bottomRight) {

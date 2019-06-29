@@ -44,7 +44,14 @@ public class LevelView extends View {
 
         //draw the avatar on the screen in the right coordinate after touching the screen
         if(level!=null) {
-            canvas.drawBitmap(this.level.spaceship.getSpaceshipBitmap(), this.level.spaceship.getLeftTop().getX(), this.level.spaceship.getLeftTop().getY(), null);
+            canvas.drawBitmap(this.level.spaceship.getBitmapSrc(), this.level.spaceship.getLeftTop().getX(), this.level.spaceship.getLeftTop().getY(), null);
+            for (IElement elem : this.level.elementFactory.getElemList()) {
+                try {
+                    canvas.drawBitmap(elem.getBitmapSrc(), elem.getLeftTop().getX(), elem.getLeftTop().getY(), null);
+                } catch (Exception e) {
+                    //
+                }
+            }
         }
     }
 
@@ -81,7 +88,7 @@ public class LevelView extends View {
             //free style - moving in natural way - left goes left and right goes right
             case CSettings.LevelTypes.FREE_STYLE:
                 //if spaceship will remain in border of game after moving, make the move
-                if (this.level.spaceship.getLeftTop().getX()+move >= 0 && this.level.spaceship.getLeftTop().getX()+move <= getWidth()-level.spaceship.getSpaceshipBitmap().getWidth()) {
+                if (this.level.spaceship.getLeftTop().getX()+move >= 0 && this.level.spaceship.getLeftTop().getX()+move <= getWidth()-level.spaceship.getBitmapSrc().getWidth()) {
 
                     //set the new coordinate of spaceship
                     this.level.spaceship.getLeftTop().setX(this.level.spaceship.getLeftTop().getX() + move);
@@ -106,9 +113,9 @@ public class LevelView extends View {
                     Log.e(TAG, "REMOVETHIS: Coordinates: TOP LEFT(" + this.level.spaceship.getLeftTop().getX() + "," + this.level.spaceship.getLeftTop().getY() + ") BOTTOM RIGHT(" + this.level.spaceship.getRightBottom().getX() + "," + this.level.spaceship.getRightBottom().getY() +")");
 
 
-                } else if (this.level.spaceship.getLeftTop().getX()+move > getWidth()-this.level.spaceship.getSpaceshipBitmap().getWidth()) {
+                } else if (this.level.spaceship.getLeftTop().getX()+move > getWidth()-this.level.spaceship.getBitmapSrc().getWidth()) {
 
-                    this.level.spaceship.getLeftTop().setX(getWidth()-this.level.spaceship.getSpaceshipBitmap().getWidth());
+                    this.level.spaceship.getLeftTop().setX(getWidth()-this.level.spaceship.getBitmapSrc().getWidth());
                     this.level.spaceship.getRightBottom().setX(this.level.spaceship.getLeftTop().getX()+100);
 
                     Log.e(TAG, "REMOVETHIS: Coordinates: TOP LEFT(" + this.level.spaceship.getLeftTop().getX() + "," + this.level.spaceship.getLeftTop().getY() + ") BOTTOM RIGHT(" + this.level.spaceship.getRightBottom().getX() + "," + this.level.spaceship.getRightBottom().getY() +")");
@@ -119,7 +126,7 @@ public class LevelView extends View {
             //getting sick - moving in the wrong direction - left goes right and vice versa
             case CSettings.LevelTypes.GETTING_SICK:
                 //if spaceship will remain in border of game after moving, make the move
-                if (this.level.spaceship.getLeftTop().getX() - move >= 0 && this.level.spaceship.getLeftTop().getX() - move <= getWidth()-level.spaceship.getSpaceshipBitmap().getWidth()) {
+                if (this.level.spaceship.getLeftTop().getX() - move >= 0 && this.level.spaceship.getLeftTop().getX() - move <= getWidth()-level.spaceship.getBitmapSrc().getWidth()) {
 
                     //set the new coordinate of spaceship
                     this.level.spaceship.getLeftTop().setX(this.level.spaceship.getLeftTop().getX() - move);
@@ -145,9 +152,9 @@ public class LevelView extends View {
                     Log.e(TAG, "REMOVETHIS: Coordinates: TOP LEFT(" + this.level.spaceship.getLeftTop().getX() + "," + this.level.spaceship.getLeftTop().getY() + ") BOTTOM RIGHT(" + this.level.spaceship.getRightBottom().getX() + "," + this.level.spaceship.getRightBottom().getY() +")");
 
 
-                } else if (this.level.spaceship.getLeftTop().getX()+move > getWidth()-this.level.spaceship.getSpaceshipBitmap().getWidth()) {
+                } else if (this.level.spaceship.getLeftTop().getX()+move > getWidth()-this.level.spaceship.getBitmapSrc().getWidth()) {
 
-                    this.level.spaceship.getLeftTop().setX(getWidth()-this.level.spaceship.getSpaceshipBitmap().getWidth());
+                    this.level.spaceship.getLeftTop().setX(getWidth()-this.level.spaceship.getBitmapSrc().getWidth());
                     this.level.spaceship.getRightBottom().setX(this.level.spaceship.getLeftTop().getX()+100);
 
                     Log.e(TAG, "REMOVETHIS: Coordinates: TOP LEFT(" + this.level.spaceship.getLeftTop().getX() + "," + this.level.spaceship.getLeftTop().getY() + ") BOTTOM RIGHT(" + this.level.spaceship.getRightBottom().getX() + "," + this.level.spaceship.getRightBottom().getY() +")");
@@ -164,13 +171,13 @@ public class LevelView extends View {
         Log.i(TAG, "Painting spaceship on the screen");
         invalidate();
         //TODO: Select the aircraft from user's shop and change hardcoded 100 to class variable
-        this.level.spaceship.setSpaceshipBitmap(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.rocket_ship),100, 100, false));
+        this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.rocket_ship),100, 100, false));
 
         //TODO remove 2 lines of code of width and height
         this.screenWidth  = Resources.getSystem().getDisplayMetrics().widthPixels;
         this.screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-        Point topLeft = new Point((this.screenWidth / 2) - (this.level.spaceship.getSpaceshipBitmap().getWidth() / 2),this.screenHeight-200);
+        Point topLeft = new Point((this.screenWidth / 2) - (this.level.spaceship.getBitmapSrc().getWidth() / 2),this.screenHeight-200);
         //TODO change hardcoded 100 to class variable in Dimension class
         Point bottomRight = new Point(topLeft.getX()+100, topLeft.getY()+100);
         // initialize avatar on the screen when start the level
@@ -187,16 +194,18 @@ public class LevelView extends View {
             @Override
             public void run() {
                 for (IElement elem : LevelView.this.level.elementFactory.getElemList()) {
-                    Point newTopLeft = new Point(elem.getLeftTop().getX(),elem.getLeftTop().getY()+1);
-                    Point newBottomRight = new Point(elem.getRightBottom().getX(),elem.getRightBottom().getY()+1);
+                    Point newTopLeft = new Point(elem.getLeftTop().getX(),elem.getLeftTop().getY()+5);
+                    Point newBottomRight = new Point(elem.getRightBottom().getX(),elem.getRightBottom().getY()+5);
 
-                    elem.setCoordinates(newTopLeft,newBottomRight);
+                    elem.setCoordinates(newTopLeft, newBottomRight);
+                    elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.rocket_ship),130, 130, false));
                     Log.e(TAG, "Animated " + elem.sayMyName() + " new coordinates: ("+elem.getLeftTop().getX()+","+elem.getLeftTop().getY()+")("+elem.getRightBottom().getX()+","+elem.getRightBottom().getY()+")");
                 }
+                postInvalidate();
             }
         };
         timer.schedule(this.level.elementFactory, 1500, 3000);
-        timer2.schedule(animator,1500,300);
+        timer2.schedule(animator,1500,10);
         invalidate();
 
         //game will end when one obstacle hits the spaceship

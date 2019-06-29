@@ -6,7 +6,7 @@ public class Spaceship implements IElement {
 
     Point topLeft;
     Point bottomRight;
-    Bitmap spaceshipBitmap;
+    Bitmap bitmapSrc;
     int spaceshipWidth;
     int SpaceshipHeight;
 
@@ -36,12 +36,12 @@ public class Spaceship implements IElement {
         return "Spaceship";
     }
 
-    public Bitmap getSpaceshipBitmap() {
-        return spaceshipBitmap;
+    public Bitmap getBitmapSrc() {
+        return bitmapSrc;
     }
 
-    public void setSpaceshipBitmap(Bitmap spaceshipBitmap) {
-        this.spaceshipBitmap = spaceshipBitmap;
+    public void setBitmapSrc(Bitmap bitmapSrc) {
+        this.bitmapSrc = bitmapSrc;
     }
 
     public int getSpaceshipWidth() {
