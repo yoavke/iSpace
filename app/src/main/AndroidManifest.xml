@@ -19,6 +19,22 @@
         <activity android:name=".LevelActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".HighScore"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".SettingMusic"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".AddScore"
+            android:screenOrientation="portrait">
+        </activity>
+        <service android:name=".BackgroundMusic"
+            android:exported="false">
+        <intent-filter>
+            <action android:name="package_name.action_start_music" />
+            <action android:name="package_name.action_stop" />
+        </intent-filter>
+        </service>
     </application>
 
 </manifest>

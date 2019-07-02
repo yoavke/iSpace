@@ -69,7 +69,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
         // Checks whether the last time the user played background music
         if (readSetting("music").equals("true")) {
-            Intent serviceIntent = new Intent(this, MusicService.class);
+            Intent serviceIntent = new Intent(this, BackgroundMusic.class);
             startService(serviceIntent);
         }
 
@@ -84,11 +84,11 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 break;
 
             case R.id.btn_settings:
-                startActivity(new Intent(this, CSettings.class));
+                startActivity(new Intent(this, SettingMusic.class));
                 break;
 
             case R.id.btn_score:
-                startActivity(new Intent(this, AddScore.class));
+                startActivity(new Intent(this, HighScore.class));
                 break;
 
             case R.id.btn_shop:
@@ -134,8 +134,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onPause() {
         super.onPause();
-        //MusicService.pause++;
-        Intent serviceIntent = new Intent(MainMenu.this, MusicService.class);
+        BackgroundMusic.pause++;
+        Intent serviceIntent = new Intent(MainMenu.this, BackgroundMusic.class);
         startService(serviceIntent);
 
     }
@@ -143,8 +143,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onResume() {
         super.onResume();
-        //MusicService.pause--;
-        Intent serviceIntent = new Intent(MainMenu.this, MusicService.class);
+        BackgroundMusic.pause--;
+        Intent serviceIntent = new Intent(MainMenu.this, BackgroundMusic.class);
         startService(serviceIntent);
     }
 }

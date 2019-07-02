@@ -2,6 +2,7 @@ package com.hit.ispace;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.ContactsContract;
@@ -81,4 +82,38 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
     }
+
+    /**
+     * Returns top 5 on Free Style game
+     * @return
+     */
+    public Cursor getTopFreeStyle(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT name,record FROM records where level=1 ORDER BY record DESC limit 5";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+    /**
+     * Returns top 5 on Faster game
+     * @return
+     */
+    public Cursor getTopFaster(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT name,record FROM records where level=2 ORDER BY record DESC limit 5";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
+    /**
+     * Returns top 5 on Getting Sick game
+     * @return
+     */
+    public Cursor getTopGettingSick(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT name,record FROM records where level=3 ORDER BY record DESC limit 5";
+        Cursor data = db.rawQuery(query, null);
+        return data;
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.hit.ispace;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -60,5 +61,22 @@ public class AddScore extends AppCompatActivity {
      */
     private void toastMessage(String message){
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        BackgroundMusic.pause++;
+        Intent serviceIntent = new Intent(AddScore.this, BackgroundMusic.class);
+        startService(serviceIntent);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        BackgroundMusic.pause--;
+        Intent serviceIntent = new Intent(AddScore.this, BackgroundMusic.class);
+        startService(serviceIntent);
     }
 }
