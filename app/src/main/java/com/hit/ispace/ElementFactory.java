@@ -5,8 +5,9 @@ import android.graphics.BitmapFactory;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.TimerTask;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-public final class ElementFactory extends TimerTask {
+public final class ElementFactory implements Runnable{
 
     private static final String TAG = ElementFactory.class.getSimpleName();
 
@@ -14,20 +15,14 @@ public final class ElementFactory extends TimerTask {
     private static final int SCREEN_DIVIDOR = 6;
 
     private ArrayList<String> obstacleTypes;
-    private ArrayList<IElement> elemList = new ArrayList<>();
+    private CopyOnWriteArrayList<IElement> elemList = new CopyOnWriteArrayList<>();
 
-    public ArrayList<IElement> getElemList() {
+    public CopyOnWriteArrayList<IElement> getElemList() {
         return elemList;
     }
 
     public ElementFactory(ArrayList<String> obstacleTypes) {
         this.obstacleTypes = obstacleTypes;
-    }
-
-    //will be called every few seconds by Timer
-    @Override
-    public void run() {
-        this.createNewElements();
     }
 
     //called by run method
@@ -229,4 +224,8 @@ public final class ElementFactory extends TimerTask {
     }
 
 
+    @Override
+    public void run() {
+        this.createNewElements();
+    }
 }
