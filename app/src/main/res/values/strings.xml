@@ -10,7 +10,8 @@
     <string name="high_score">High Score</string>
     <string name="user_name">Name</string>
     <string name="score">Score</string>
-    <string name="text_user_score">Your score is :</string>
+    <string name="text_user_score">Your score is:</string>
+    <string name="text_user_high_score">New High Score !!!</string>
     <string name="save">SAVE</string>
     <string name="free_style">Free Style</string>
     <string name="faster">Faster</string>

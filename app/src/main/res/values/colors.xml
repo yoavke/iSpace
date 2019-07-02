@@ -9,5 +9,6 @@
     <color name="blackColor">#000000</color>
     <color name="clearColor">#c5ffffff</color>
     <color name="grayColor">#9E9D9D</color>
+    <color name="specialColor">#D6463F</color>
 
 </resources>
