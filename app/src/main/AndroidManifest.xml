@@ -19,7 +19,6 @@
         <activity android:name=".LevelActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-
     </application>
 
 </manifest>

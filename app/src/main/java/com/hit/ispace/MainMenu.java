@@ -88,7 +88,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 break;
 
             case R.id.btn_score:
-                startActivity(new Intent(this, HighScore.class));
+                startActivity(new Intent(this, AddScore.class));
                 break;
 
             case R.id.btn_shop:

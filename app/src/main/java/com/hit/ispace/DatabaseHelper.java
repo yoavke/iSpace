@@ -1,8 +1,12 @@
 package com.hit.ispace;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -56,5 +60,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " +TABLE_NAME_LEVELS);
         onCreate(db);
+    }
+
+    public boolean addData(String level , String name , String score ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(RECORDS_COL_2, level);
+        contentValues.put(RECORDS_COL_4, name);
+        contentValues.put(RECORDS_COL_3, score);
+
+        Log.d(TAG, "addData: Adding " + level +"," +  name + ","+ score + " to " + TABLE_NAME_RECORDS);
+
+        long result = db.insert(TABLE_NAME_RECORDS, null, contentValues);
+
+        //if date as inserted incorrectly it will return -1
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

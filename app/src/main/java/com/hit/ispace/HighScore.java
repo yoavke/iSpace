@@ -1,4 +1,12 @@
 package com.hit.ispace;
 
-public class HighScore {
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+
+public class HighScore extends AppCompatActivity {
+
+    DatabaseHelper mDatabaseHelper;
+    private RecyclerView recyclerGettingSick,recyclerFaster,recyclerFreeStyle;
+
+
 }
