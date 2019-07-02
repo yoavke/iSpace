@@ -1,6 +1,5 @@
 package com.hit.ispace;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,10 +28,10 @@ public class AddScore extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String newLevel = editTextLevel.getText().toString();
+                int newLevel = Integer.parseInt(editTextLevel.getText().toString());
                 String newUser = editTextUser.getText().toString();
-                String newScore = editTextScore.getText().toString();
-                if ((editTextLevel.length() != 0)&&(editTextUser.length() != 0)&&(editTextScore.length() != 0))   {
+                int newScore = Integer.parseInt(editTextScore.getText().toString());
+                if ((newLevel != 0)&&(newUser.length() != 0)&&(newScore != 0))   {
                     AddData(newLevel,newUser,newScore);
                     editTextLevel.setText("");
                     editTextUser.setText("");
@@ -45,8 +44,8 @@ public class AddScore extends AppCompatActivity {
         });
     }
 
-    public void AddData(String level, String name, String score) {
-        boolean insertData = mDatabaseHelper.addData(level,name,score);
+    public void AddData(int level, String name, int score) {
+        boolean insertData = mDatabaseHelper.addNewRecord(level,name,score);
 
         if (insertData) {
             toastMessage("Data Successfully Inserted!");

@@ -209,7 +209,13 @@ public class LevelView extends View {
             public void run() {
                 Log.e(TAG, "creating elements in different thread than UI");
                 LevelView.this.level.elementFactory.createNewElements();
-                createElementHandler.postDelayed(this, 10000);
+
+                for (IElement elem : LevelView.this.level.elementFactory.getElemList()) {
+                    if (elem.getBitmapSrc() == null)
+                        elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.rocket_ship),130, 130, false));
+                }
+
+                createElementHandler.postDelayed(this, 100000);
             }
         }, 500);
         this.animateElementHandler.postDelayed(new Runnable() {
@@ -220,10 +226,9 @@ public class LevelView extends View {
                     Point newBottomRight = new Point(elem.getRightBottom().getX(),elem.getRightBottom().getY()+2);
 
                     elem.setCoordinates(newTopLeft, newBottomRight);
-                    elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.rocket_ship),130, 130, false));
                 }
                 postInvalidate();
-                animateElementHandler.postDelayed(this, 5);
+                animateElementHandler.postDelayed(this, 1);
 
             }
         }, 1000);

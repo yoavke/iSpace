@@ -4,11 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import static android.support.constraint.Constraints.TAG;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+
 
     //database name
     private static final String DATABASE_NAME = "ispace.db";
@@ -43,7 +45,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
 
-        SQLiteDatabase db = this.getWritableDatabase();
     }
 
     @Override
@@ -62,14 +63,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addData(String level , String name , String score ) {
+    public boolean addNewRecord(int level , String name , int score ) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(RECORDS_COL_2, level);
         contentValues.put(RECORDS_COL_4, name);
         contentValues.put(RECORDS_COL_3, score);
 
-        Log.d(TAG, "addData: Adding " + level +"," +  name + ","+ score + " to " + TABLE_NAME_RECORDS);
+        Log.d(TAG, "addNewRecord: Adding " + level +"," +  name + ","+ score + " to " + TABLE_NAME_RECORDS);
 
         long result = db.insert(TABLE_NAME_RECORDS, null, contentValues);
 
