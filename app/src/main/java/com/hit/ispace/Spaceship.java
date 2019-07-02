@@ -4,15 +4,27 @@ import android.graphics.Bitmap;
 
 public class Spaceship implements IElement {
 
-    Point topLeft;
-    Point bottomRight;
-    Bitmap bitmapSrc;
-    int spaceshipWidth;
-    int SpaceshipHeight;
+    private Point topLeft;
+    private Point bottomRight;
+    private Bitmap bitmapSrc;
+    private int spaceshipWidth;
+    private int SpaceshipHeight;
+    private boolean hit;
+
+    @Override
+    public void setHit() {
+        this.hit=true;
+    }
+
+    @Override
+    public boolean getHit() {
+        return this.hit;
+    }
 
     public Spaceship() {
         this.spaceshipWidth = CSettings.Dimension.SPACESHIP_SIZE;
         this.SpaceshipHeight = CSettings.Dimension.SPACESHIP_SIZE;
+        this.hit = false;
     }
 
     @Override

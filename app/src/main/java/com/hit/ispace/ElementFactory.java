@@ -46,7 +46,7 @@ public final class ElementFactory implements Runnable{
                     //no elements in list:
                     if (elemList.isEmpty() || (listSize % 6 == 0)) {
                         topX = 25;
-                        topY = 100;
+                        topY = CSettings.Margin.TOP;
                         bottomX = topX + CSettings.Dimension.ELEMENT_SIZE;
                         bottomY = topY + CSettings.Dimension.ELEMENT_SIZE;
 
@@ -75,7 +75,7 @@ public final class ElementFactory implements Runnable{
                     //no elements in list:
                     if (elemList.isEmpty() || (listSize % 6 == 0)) {
                         topX = 25;
-                        topY = 100;
+                        topY = CSettings.Margin.TOP;
                         bottomX = topX + CSettings.Dimension.ELEMENT_SIZE;
                         bottomY = topY + CSettings.Dimension.ELEMENT_SIZE;
 
@@ -104,7 +104,7 @@ public final class ElementFactory implements Runnable{
                     //no elements in list:
                     if (elemList.isEmpty() || (listSize % 6 == 0)) {
                         topX = 25;
-                        topY = 100;
+                        topY = CSettings.Margin.TOP;
                         bottomX = topX + CSettings.Dimension.ELEMENT_SIZE;
                         bottomY = topY + CSettings.Dimension.ELEMENT_SIZE;
 
@@ -133,7 +133,7 @@ public final class ElementFactory implements Runnable{
                     //no elements in list:
                     if (elemList.isEmpty() || (listSize % 6 == 0)) {
                         topX = 25;
-                        topY = 100;
+                        topY = CSettings.Margin.TOP;
                         bottomX = topX + CSettings.Dimension.ELEMENT_SIZE;
                         bottomY = topY + CSettings.Dimension.ELEMENT_SIZE;
 
@@ -163,7 +163,7 @@ public final class ElementFactory implements Runnable{
                     //no elements in list:
                     if (elemList.isEmpty() || (listSize % 6 == 0)) {
                         topX = 25;
-                        topY = 100;
+                        topY = CSettings.Margin.TOP;
                         bottomX = topX + CSettings.Dimension.ELEMENT_SIZE;
                         bottomY = topY + CSettings.Dimension.ELEMENT_SIZE;
 
@@ -192,7 +192,7 @@ public final class ElementFactory implements Runnable{
                     //no elements in list:
                     if (elemList.isEmpty() || (listSize % 6 == 0)) {
                         topX = 25;
-                        topY = 100;
+                        topY = CSettings.Margin.TOP;
                         bottomX = topX + CSettings.Dimension.ELEMENT_SIZE;
                         bottomY = topY + CSettings.Dimension.ELEMENT_SIZE;
 

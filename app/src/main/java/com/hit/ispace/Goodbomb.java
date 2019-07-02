@@ -6,6 +6,17 @@ public class Goodbomb implements IElement {
     private Point topLeft;
     private Point bottomRight;
     private Bitmap bitmapSrc;
+    private boolean hit;
+
+    @Override
+    public void setHit() {
+        this.hit=true;
+    }
+
+    @Override
+    public boolean getHit() {
+        return this.hit;
+    }
 
     @Override
     public String sayMyName() {
@@ -25,6 +36,7 @@ public class Goodbomb implements IElement {
     public Goodbomb(Point topLeft, Point bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
+        this.hit = false;
     }
 
     @Override

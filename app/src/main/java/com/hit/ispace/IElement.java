@@ -10,4 +10,6 @@ public interface IElement {
     String sayMyName();
     void setBitmapSrc(Bitmap bitmap);
     Bitmap getBitmapSrc();
+    void setHit();
+    boolean getHit();
 }

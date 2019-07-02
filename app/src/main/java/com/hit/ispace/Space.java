@@ -6,6 +6,8 @@ public class Space implements IElement {
     private Point topLeft;
     private Point bottomRight;
 
+    private boolean hit;
+
     @Override
     public void setBitmapSrc(Bitmap bitmap) {
         this.bitmapSrc = bitmap;
@@ -19,13 +21,24 @@ public class Space implements IElement {
     private Bitmap bitmapSrc;
 
     @Override
+    public void setHit() {
+        this.hit = true;
+    }
+
+    @Override
+    public boolean getHit() {
+        return this.hit;
+    }
+
+    @Override
     public String sayMyName() {
-        return "Just space";
+        return "Space";
     }
 
     public Space(Point topLeft, Point bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
+        this.hit=false;
     }
 
     @Override
