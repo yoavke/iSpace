@@ -5,14 +5,15 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Iterator;
 
 public class LevelView extends View {
 
@@ -20,23 +21,31 @@ public class LevelView extends View {
     private static final String TAG = LevelView.class.getSimpleName();
 
     private Level level=null;
-
     private int screenWidth=0;
     private int screenHeight=0;
-
-    //coordinates of finger
     private int fingerDownX;
+
+    HandlerThread createElementThread;
+    HandlerThread animateElementThread;
+
+    Handler createElementHandler, animateElementHandler;
 
     public LevelView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         Log.i(TAG, "LevelView created");
 
+        this.createElementThread = new HandlerThread("create elements thread");
+        this.animateElementThread = new HandlerThread("animate elements thread");
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        //TODO: remove this counter. only for debugging
+        int counter=1;
+
+        // first time - initialize the screen width & height
         if (this.screenWidth==0) {
             this.screenWidth = getWidth();
             this.screenHeight = getHeight();
@@ -45,7 +54,11 @@ public class LevelView extends View {
         //draw the avatar on the screen in the right coordinate after touching the screen
         if(level!=null) {
             canvas.drawBitmap(this.level.spaceship.getBitmapSrc(), this.level.spaceship.getLeftTop().getX(), this.level.spaceship.getLeftTop().getY(), null);
-            for (IElement elem : this.level.elementFactory.getElemList()) {
+
+            Iterator iter = this.level.elementFactory.getElemList().iterator();
+            IElement elem;
+            while (iter.hasNext()) {
+                elem = (IElement)iter.next();
                 try {
                     canvas.drawBitmap(elem.getBitmapSrc(), elem.getLeftTop().getX(), elem.getLeftTop().getY(), null);
                 } catch (Exception e) {
@@ -60,20 +73,21 @@ public class LevelView extends View {
         //save the finger coordinate
         double fingerCoordinateX = event.getX();
 
+        // hold the number of pixels the spaceship needs to move (on the X axis)
         int move;
 
         //make spaceship move
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                // save the location where the finger hit first
                 this.fingerDownX = (int)fingerCoordinateX;
                 break;
             case MotionEvent.ACTION_MOVE:
+                // use the saved location to move the spaceship around the canvas
                 move = (int)fingerCoordinateX - fingerDownX;
                 this.fingerDownX = (int)fingerCoordinateX;
 
                 moveSpaceShip(move);
-
-                //update the screen with the new location of the spaceship
                 invalidate();
                 break;
         }
@@ -169,7 +183,6 @@ public class LevelView extends View {
     public void startLevel(Level level) {
         this.level = level;
         Log.i(TAG, "Painting spaceship on the screen");
-        invalidate();
         //TODO: Select the aircraft from user's shop and change hardcoded 100 to class variable
         this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.rocket_ship),100, 100, false));
 
@@ -177,37 +190,44 @@ public class LevelView extends View {
         this.screenWidth  = Resources.getSystem().getDisplayMetrics().widthPixels;
         this.screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-        Point topLeft = new Point((this.screenWidth / 2) - (this.level.spaceship.getBitmapSrc().getWidth() / 2),this.screenHeight-200);
         //TODO change hardcoded 100 to class variable in Dimension class
-        Point bottomRight = new Point(topLeft.getX()+100, topLeft.getY()+100);
         // initialize avatar on the screen when start the level
+        Point topLeft = new Point((this.screenWidth / 2) - (this.level.spaceship.getBitmapSrc().getWidth() / 2),this.screenHeight-(100*2));
+        Point bottomRight = new Point(topLeft.getX()+100, topLeft.getY()+100);
         this.level.spaceship.setCoordinates(topLeft,bottomRight);
-
         invalidate();
 
-        Log.i(TAG, "Started playing level #" +level.getLevelType());
+        //start threads
+        createElementThread.start();
+        animateElementThread.start();
 
-        //start animating obstacles and coins.
-        Timer timer = new Timer();
-        Timer timer2 = new Timer();
-        TimerTask animator = new TimerTask() {
+        this.createElementHandler = new Handler(createElementThread.getLooper());
+        this.animateElementHandler = new Handler(animateElementThread.getLooper());
+
+        this.createElementHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Log.e(TAG, "creating elements in different thread than UI");
+                LevelView.this.level.elementFactory.createNewElements();
+                createElementHandler.postDelayed(this, 10000);
+            }
+        }, 500);
+        this.animateElementHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 for (IElement elem : LevelView.this.level.elementFactory.getElemList()) {
-                    Point newTopLeft = new Point(elem.getLeftTop().getX(),elem.getLeftTop().getY()+5);
-                    Point newBottomRight = new Point(elem.getRightBottom().getX(),elem.getRightBottom().getY()+5);
+                    Point newTopLeft = new Point(elem.getLeftTop().getX(),elem.getLeftTop().getY()+2);
+                    Point newBottomRight = new Point(elem.getRightBottom().getX(),elem.getRightBottom().getY()+2);
 
                     elem.setCoordinates(newTopLeft, newBottomRight);
                     elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.rocket_ship),130, 130, false));
-                    Log.e(TAG, "Animated " + elem.sayMyName() + " new coordinates: ("+elem.getLeftTop().getX()+","+elem.getLeftTop().getY()+")("+elem.getRightBottom().getX()+","+elem.getRightBottom().getY()+")");
                 }
                 postInvalidate();
-            }
-        };
-        timer.schedule(this.level.elementFactory, 1500, 3000);
-        timer2.schedule(animator,1500,10);
-        invalidate();
+                animateElementHandler.postDelayed(this, 5);
 
-        //game will end when one obstacle hits the spaceship
+            }
+        }, 1000);
+
+        Log.i(TAG, "Started playing level #" +level.getLevelType());
     }
 }
