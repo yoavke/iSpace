@@ -11,14 +11,27 @@ public class Bomb extends Obstacle implements IDestroyable {
 
     private Bitmap bitmapSrc;
 
+    private boolean hit;
+
     @Override
     public String sayMyName() {
         return "Bomb";
     }
 
+    @Override
+    public void setHit() {
+        this.hit = true;
+    }
+
+    @Override
+    public boolean getHit() {
+        return this.hit;
+    }
+
     public Bomb(Point topLeft, Point bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
+        this.hit = false;
     }
 
     @Override

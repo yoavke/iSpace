@@ -12,6 +12,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.Iterator;
 
@@ -108,8 +109,6 @@ public class LevelView extends View {
                     this.level.spaceship.getLeftTop().setX(this.level.spaceship.getLeftTop().getX() + move);
                     this.level.spaceship.getRightBottom().setX(this.level.spaceship.getLeftTop().getX() + this.level.spaceship.getSpaceshipWidth());
 
-                    Log.e(TAG, "REMOVETHIS: Coordinates: TOP LEFT(" + this.level.spaceship.getLeftTop().getX() + "," + this.level.spaceship.getLeftTop().getY() + ") BOTTOM RIGHT(" + this.level.spaceship.getRightBottom().getX() + "," + this.level.spaceship.getRightBottom().getY() +")");
-
                     //logs the moves
                     if (move > 0)
                         Log.i(TAG, "spaceship moves " + move + " to right");
@@ -124,16 +123,10 @@ public class LevelView extends View {
                     this.level.spaceship.getLeftTop().setX(0);
                     this.level.spaceship.getRightBottom().setX(CSettings.Dimension.SPACESHIP_SIZE);
 
-                    Log.e(TAG, "REMOVETHIS: Coordinates: TOP LEFT(" + this.level.spaceship.getLeftTop().getX() + "," + this.level.spaceship.getLeftTop().getY() + ") BOTTOM RIGHT(" + this.level.spaceship.getRightBottom().getX() + "," + this.level.spaceship.getRightBottom().getY() +")");
-
-
                 } else if (this.level.spaceship.getLeftTop().getX()+move > getWidth()-this.level.spaceship.getBitmapSrc().getWidth()) {
 
                     this.level.spaceship.getLeftTop().setX(getWidth()-this.level.spaceship.getBitmapSrc().getWidth());
                     this.level.spaceship.getRightBottom().setX(this.level.spaceship.getLeftTop().getX()+100);
-
-                    Log.e(TAG, "REMOVETHIS: Coordinates: TOP LEFT(" + this.level.spaceship.getLeftTop().getX() + "," + this.level.spaceship.getLeftTop().getY() + ") BOTTOM RIGHT(" + this.level.spaceship.getRightBottom().getX() + "," + this.level.spaceship.getRightBottom().getY() +")");
-
 
                 }
                 break;
@@ -146,9 +139,6 @@ public class LevelView extends View {
                     this.level.spaceship.getLeftTop().setX(this.level.spaceship.getLeftTop().getX() - move);
                     this.level.spaceship.getRightBottom().setX(this.level.spaceship.getLeftTop().getX() - (move + this.level.spaceship.getSpaceshipWidth()));
 
-                    Log.e(TAG, "REMOVETHIS: Coordinates: TOP LEFT(" + this.level.spaceship.getLeftTop().getX() + "," + this.level.spaceship.getLeftTop().getY() + ") BOTTOM RIGHT(" + this.level.spaceship.getRightBottom().getX() + "," + this.level.spaceship.getRightBottom().getY() +")");
-
-
                     //logs the moves
                     if (move > 0)
                         Log.i(TAG, "spaceship moves " + move + " to right");
@@ -163,16 +153,10 @@ public class LevelView extends View {
                     this.level.spaceship.getLeftTop().setX(0);
                     this.level.spaceship.getRightBottom().setX(CSettings.Dimension.SPACESHIP_SIZE);
 
-                    Log.e(TAG, "REMOVETHIS: Coordinates: TOP LEFT(" + this.level.spaceship.getLeftTop().getX() + "," + this.level.spaceship.getLeftTop().getY() + ") BOTTOM RIGHT(" + this.level.spaceship.getRightBottom().getX() + "," + this.level.spaceship.getRightBottom().getY() +")");
-
-
                 } else if (this.level.spaceship.getLeftTop().getX()+move > getWidth()-this.level.spaceship.getBitmapSrc().getWidth()) {
 
                     this.level.spaceship.getLeftTop().setX(getWidth()-this.level.spaceship.getBitmapSrc().getWidth());
                     this.level.spaceship.getRightBottom().setX(this.level.spaceship.getLeftTop().getX()+100);
-
-                    Log.e(TAG, "REMOVETHIS: Coordinates: TOP LEFT(" + this.level.spaceship.getLeftTop().getX() + "," + this.level.spaceship.getLeftTop().getY() + ") BOTTOM RIGHT(" + this.level.spaceship.getRightBottom().getX() + "," + this.level.spaceship.getRightBottom().getY() +")");
-
                 }
                 break;
             default:
@@ -182,7 +166,7 @@ public class LevelView extends View {
 
     public void startLevel(Level level) {
         this.level = level;
-        Log.i(TAG, "Painting spaceship on the screen");
+        Log.d(TAG, "Painting spaceship on the screen");
         //TODO: Select the aircraft from user's shop and change hardcoded 100 to class variable
         this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.rocket_ship),100, 100, false));
 
@@ -207,17 +191,43 @@ public class LevelView extends View {
         this.createElementHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.e(TAG, "creating elements in different thread than UI");
                 LevelView.this.level.elementFactory.createNewElements();
 
                 for (IElement elem : LevelView.this.level.elementFactory.getElemList()) {
-                    if (elem.getBitmapSrc() == null)
-                        elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.rocket_ship),130, 130, false));
+                    if (elem.getBitmapSrc() == null) {
+                        switch (elem.sayMyName()) {
+                            case "Bomb":
+                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_bad_bomb), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
+                                break;
+                            case "Coin":
+                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_coin), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
+                                break;
+                            case "GoodBomb":
+                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_good_bomb), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
+                                break;
+                            case "Rock":
+                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_asteroid), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
+                                break;
+                            case "SuperRock":
+                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_asteroid_block), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
+                                break;
+                            case "Space":
+                                break;
+                        }
+                    }
+
+                    // remove elements from data structure
+                    if (elem.getLeftTop().getY()>LevelView.this.screenHeight) {
+                        Log.i(TAG, "element " + elem.sayMyName() + " has been removed!");
+                        LevelView.this.level.elementFactory.setCollectedSize();
+                        LevelView.this.level.elementFactory.getElemList().remove((IElement)elem);
+                    }
                 }
 
-                createElementHandler.postDelayed(this, 100000);
+                createElementHandler.postDelayed(this, 3000);
             }
         }, 500);
+
         this.animateElementHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -225,10 +235,23 @@ public class LevelView extends View {
                     Point newTopLeft = new Point(elem.getLeftTop().getX(),elem.getLeftTop().getY()+2);
                     Point newBottomRight = new Point(elem.getRightBottom().getX(),elem.getRightBottom().getY()+2);
 
+                    if (((LevelView.this.level.spaceship.getLeftTop().getX() >= newTopLeft.getX() && LevelView.this.level.spaceship.getLeftTop().getX() <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getLeftTop().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getLeftTop().getY() <= newBottomRight.getY())) || ((LevelView.this.level.spaceship.getRightBottom().getX() >= newTopLeft.getX() && LevelView.this.level.spaceship.getRightBottom().getX() <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getRightBottom().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getRightBottom().getY() <= newBottomRight.getY())))
+                    {
+                        if (elem.getHit()==false) {
+                            elem.setHit();
+                            LevelView.this.level.elementFactory.setCollectedSize();
+                            if (elem.sayMyName().equals("Coin")) {
+                                LevelView.this.level.incrementNumCoinsEarned();
+                                Log.i(TAG, "1 coin added. total of "+LevelView.this.level.getNumCoinsEarned()+" coins");
+                            }
+                            Log.i(TAG, "Hit " + elem.sayMyName());
+                            LevelView.this.level.elementFactory.getElemList().remove(elem);
+                        }
+                    }
                     elem.setCoordinates(newTopLeft, newBottomRight);
                 }
                 postInvalidate();
-                animateElementHandler.postDelayed(this, 1);
+                animateElementHandler.postDelayed(this, 10);
 
             }
         }, 1000);

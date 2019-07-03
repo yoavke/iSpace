@@ -3,7 +3,10 @@ package com.hit.ispace;
 import android.graphics.Bitmap;
 
 public class Coin implements IElement {
-    Point topLeft;
+    private Point topLeft;
+    private Point bottomRight;
+    private boolean hit;
+    Bitmap bitmapSrc;
 
     @Override
     public void setBitmapSrc(Bitmap bitmap) {
@@ -11,12 +14,20 @@ public class Coin implements IElement {
     }
 
     @Override
+    public void setHit() {
+        this.hit=true;
+    }
+
+    @Override
+    public boolean getHit() {
+        return this.hit;
+    }
+
+    @Override
     public Bitmap getBitmapSrc() {
         return this.bitmapSrc;
     }
 
-    Point bottomRight;
-    Bitmap bitmapSrc;
 
     @Override
     public String sayMyName() {

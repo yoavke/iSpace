@@ -12,12 +12,14 @@ public class Level {
     protected Spaceship spaceship;
     private ArrayList<String> obstacleTypes;
     protected ElementFactory elementFactory;
+    private int numCoinsEarned;
 
     public Level(int levelType) {
         this.levelEnded = false;
         this.levelType = levelType;
         this.obstacleTypes = new ArrayList<>();
         this.spaceship = new Spaceship();
+        this.numCoinsEarned = 0;
 
         for (CSettings.FlyingElements obs : CSettings.FlyingElements.values()) {
             obstacleTypes.add(obs.name());
@@ -40,6 +42,14 @@ public class Level {
             default:
                 Log.e(TAG, "Level not exists");
         }
+    }
+
+    public int getNumCoinsEarned() {
+        return numCoinsEarned;
+    }
+
+    public void incrementNumCoinsEarned() {
+        this.numCoinsEarned++;
     }
 
     public int getLevelType() {

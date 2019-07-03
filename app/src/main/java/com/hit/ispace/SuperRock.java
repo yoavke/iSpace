@@ -10,8 +10,18 @@ public class SuperRock extends Obstacle implements IDestroyable{
     private Point topLeft;
     private Point bottomRight;
     private boolean isDestroyable = false;
-
+    private boolean hit;
     private Bitmap bitmapSrc;
+
+    @Override
+    public void setHit() {
+        this.hit=true;
+    }
+
+    @Override
+    public boolean getHit() {
+        return this.hit;
+    }
 
     @Override
     public void setBitmapSrc(Bitmap bitmap) {
@@ -26,6 +36,7 @@ public class SuperRock extends Obstacle implements IDestroyable{
     public SuperRock(Point topLeft, Point bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
+        this.hit = false;
     }
 
     @Override
