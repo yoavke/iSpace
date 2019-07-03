@@ -59,16 +59,15 @@ public class HighScore extends AppCompatActivity {
         recyclerFreeStyleView.setLayoutManager(new LinearLayoutManager(this));
         recyclerFasterView.setLayoutManager(new LinearLayoutManager(this));
         recyclerGettingSickView.setLayoutManager(new LinearLayoutManager(this));
-        settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
-        lastScore = getIntent().getIntExtra("isInTable", 0);
-        isPlayed = getIntent().getBooleanExtra("isPlayed", false);
         adapter = new HighScoreAdapter(mDatabaseHelper.getTopFreeStyle());
         recyclerFreeStyleView.setAdapter(adapter);
         adapter = new HighScoreAdapter(mDatabaseHelper.getTopFaster());
         recyclerFasterView.setAdapter(adapter);
         adapter = new HighScoreAdapter(mDatabaseHelper.getTopGettingSick());
         recyclerGettingSickView.setAdapter(adapter);
-
+        settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
+        lastScore = getIntent().getIntExtra("isInTable", 0);
+        isPlayed = getIntent().getBooleanExtra("isPlayed", false);
     }
 
     public String readSetting (String key)
@@ -127,5 +126,4 @@ public class HighScore extends AppCompatActivity {
             Intent serviceIntent = new Intent(HighScore.this, BackgroundMusic.class);
             startService(serviceIntent);
     }
-
 }

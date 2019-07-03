@@ -7,6 +7,9 @@
     <color name="whiteColor">#FFFFFF</color>
     <color name="colorLayout">#c5ffffff</color>
     <color name="blackColor">#000000</color>
+    <color name="pinkColor">#C8F35C7F</color>
+    <color name="perpelColor">#A49C27B0</color>
+    <color name="pinkDarkColor">#AEE91E63</color>
     <color name="clearColor">#c5ffffff</color>
     <color name="grayColor">#9E9D9D</color>
     <color name="specialColor">#D6463F</color>
