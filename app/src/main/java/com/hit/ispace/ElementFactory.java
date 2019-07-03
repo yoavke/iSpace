@@ -17,26 +17,38 @@ public final class ElementFactory implements Runnable{
     private ArrayList<String> obstacleTypes;
     private CopyOnWriteArrayList<IElement> elemList = new CopyOnWriteArrayList<>();
 
+    //logical size of the list (since the beginning, even if we remove elements)
+    //even when element is destroyed, we dont decrease the size
+    //if we depend of the list.size() or decrease listSize, we'll get a bug of % 6
+    private int listSize;
+    private int collectedSize;
+
     public CopyOnWriteArrayList<IElement> getElemList() {
         return elemList;
     }
 
+    public int getCollectedSize() {
+        return collectedSize;
+    }
+
+    public void setCollectedSize() {
+        this.collectedSize++;
+    }
+
     public ElementFactory(ArrayList<String> obstacleTypes) {
         this.obstacleTypes = obstacleTypes;
+        this.listSize = 0;
+        this.collectedSize = 0;
     }
 
     //called by run method
     public void createNewElements() {
         int i;  // loop counter
-        int listSize; // number of elements in the list
         int topX, topY, bottomX, bottomY; // (x,y) for the points
         Point topLeft, bottomRight; // the points of the elements
         IElement tempElem; //a temporary element
 
         for (i=0; i<6; i++) {
-            //used to know if need to create new row of elements (points at top of the screen)
-            listSize = elemList.size();
-
             //select a random element
             CSettings.FlyingElements flyingElem = CSettings.FlyingElements.values()[(int) (Math.random() * CSettings.FlyingElements.values().length)];
 
@@ -58,8 +70,8 @@ public final class ElementFactory implements Runnable{
                         Log.e(TAG, "FACTORY: Space element created at ("+topLeft.getX()+","+topLeft.getY()+") & ("+bottomRight.getX()+","+bottomRight.getY()+")");
                         //list is not empty
                     } else {
-                        topX = elemList.get(listSize-1).getRightBottom().getX()+50;
-                        topY = elemList.get(listSize-1).getLeftTop().getY();
+                        topX = elemList.get(listSize-this.getCollectedSize()-1).getRightBottom().getX()+50;
+                        topY = elemList.get(listSize-this.getCollectedSize()-1).getLeftTop().getY();
                         bottomX = topX + CSettings.Dimension.ELEMENT_SIZE;
                         bottomY = topY + CSettings.Dimension.ELEMENT_SIZE;
 
@@ -87,8 +99,8 @@ public final class ElementFactory implements Runnable{
                         Log.e(TAG, "FACTORY: Coin element created at ("+topLeft.getX()+","+topLeft.getY()+") & ("+bottomRight.getX()+","+bottomRight.getY()+")");
                         //list is not empty
                     } else {
-                        topX = elemList.get(listSize-1).getRightBottom().getX()+50;
-                        topY = elemList.get(listSize-1).getLeftTop().getY();
+                        topX = elemList.get(listSize-this.getCollectedSize()-1).getRightBottom().getX()+50;
+                        topY = elemList.get(listSize-this.getCollectedSize()-1).getLeftTop().getY();
                         bottomX = topX + CSettings.Dimension.ELEMENT_SIZE;
                         bottomY = topY + CSettings.Dimension.ELEMENT_SIZE;
 
@@ -116,8 +128,8 @@ public final class ElementFactory implements Runnable{
                         Log.e(TAG, "FACTORY: GoodBomb element created at ("+topLeft.getX()+","+topLeft.getY()+") & ("+bottomRight.getX()+","+bottomRight.getY()+")");
                         //list is not empty
                     } else {
-                        topX = elemList.get(listSize-1).getRightBottom().getX()+50;
-                        topY = elemList.get(listSize-1).getLeftTop().getY();
+                        topX = elemList.get(listSize-this.getCollectedSize()-1).getRightBottom().getX()+50;
+                        topY = elemList.get(listSize-this.getCollectedSize()-1).getLeftTop().getY();
                         bottomX = topX + CSettings.Dimension.ELEMENT_SIZE;
                         bottomY = topY + CSettings.Dimension.ELEMENT_SIZE;
 
@@ -146,8 +158,8 @@ public final class ElementFactory implements Runnable{
 
                         //list is not empty
                     } else {
-                        topX = elemList.get(listSize-1).getRightBottom().getX()+50;
-                        topY = elemList.get(listSize-1).getLeftTop().getY();
+                        topX = elemList.get(listSize-this.getCollectedSize()-1).getRightBottom().getX()+50;
+                        topY = elemList.get(listSize-this.getCollectedSize()-1).getLeftTop().getY();
                         bottomX = topX + CSettings.Dimension.ELEMENT_SIZE;
                         bottomY = topY + CSettings.Dimension.ELEMENT_SIZE;
 
@@ -175,8 +187,8 @@ public final class ElementFactory implements Runnable{
                         Log.e(TAG, "FACTORY: SuperRock element created at ("+topLeft.getX()+","+topLeft.getY()+") & ("+bottomRight.getX()+","+bottomRight.getY()+")");
                         //list is not empty
                     } else {
-                        topX = elemList.get(listSize-1).getRightBottom().getX()+50;
-                        topY = elemList.get(listSize-1).getLeftTop().getY();
+                        topX = elemList.get(listSize-this.getCollectedSize()-1).getRightBottom().getX()+50;
+                        topY = elemList.get(listSize-this.getCollectedSize()-1).getLeftTop().getY();
                         bottomX = topX + CSettings.Dimension.ELEMENT_SIZE;
                         bottomY = topY + CSettings.Dimension.ELEMENT_SIZE;
 
@@ -204,8 +216,8 @@ public final class ElementFactory implements Runnable{
                         Log.e(TAG, "FACTORY: Bomb element created at ("+topLeft.getX()+","+topLeft.getY()+") & ("+bottomRight.getX()+","+bottomRight.getY()+")");
                         //list is not empty
                     } else {
-                        topX = elemList.get(listSize-1).getRightBottom().getX()+50;
-                        topY = elemList.get(listSize-1).getLeftTop().getY();
+                        topX = elemList.get(listSize-this.getCollectedSize()-1).getRightBottom().getX()+50;
+                        topY = elemList.get(listSize-this.getCollectedSize()-1).getLeftTop().getY();
                         bottomX = topX + CSettings.Dimension.ELEMENT_SIZE;
                         bottomY = topY + CSettings.Dimension.ELEMENT_SIZE;
 
@@ -220,6 +232,9 @@ public final class ElementFactory implements Runnable{
                 default:
                     Log.e(TAG, "No such element");
             }
+
+            //new element created - increase size of list
+            this.listSize++;
         }
     }
 

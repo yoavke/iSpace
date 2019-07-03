@@ -219,6 +219,7 @@ public class LevelView extends View {
                     // remove elements from data structure
                     if (elem.getLeftTop().getY()>LevelView.this.screenHeight) {
                         Log.i(TAG, "element " + elem.sayMyName() + " has been removed!");
+                        LevelView.this.level.elementFactory.setCollectedSize();
                         LevelView.this.level.elementFactory.getElemList().remove((IElement)elem);
                     }
                 }
@@ -236,9 +237,15 @@ public class LevelView extends View {
 
                     if (((LevelView.this.level.spaceship.getLeftTop().getX() >= newTopLeft.getX() && LevelView.this.level.spaceship.getLeftTop().getX() <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getLeftTop().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getLeftTop().getY() <= newBottomRight.getY())) || ((LevelView.this.level.spaceship.getRightBottom().getX() >= newTopLeft.getX() && LevelView.this.level.spaceship.getRightBottom().getX() <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getRightBottom().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getRightBottom().getY() <= newBottomRight.getY())))
                     {
-                        if (!elem.sayMyName().equals("Space") && elem.getHit()==false) {
+                        if (elem.getHit()==false) {
                             elem.setHit();
+                            LevelView.this.level.elementFactory.setCollectedSize();
+                            if (elem.sayMyName().equals("Coin")) {
+                                LevelView.this.level.incrementNumCoinsEarned();
+                                Log.i(TAG, "1 coin added. total of "+LevelView.this.level.getNumCoinsEarned()+" coins");
+                            }
                             Log.i(TAG, "Hit " + elem.sayMyName());
+                            LevelView.this.level.elementFactory.getElemList().remove(elem);
                         }
                     }
                     elem.setCoordinates(newTopLeft, newBottomRight);
