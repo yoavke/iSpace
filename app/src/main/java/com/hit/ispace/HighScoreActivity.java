@@ -1,33 +1,16 @@
 package com.hit.ispace;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-import android.widget.Adapter;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class HighScore extends AppCompatActivity {
+public class HighScoreActivity extends AppCompatActivity {
 
     DatabaseHelper mDatabaseHelper;
     private RecyclerView recyclerFreeStyleView,recyclerFasterView,recyclerGettingSickView;
@@ -113,7 +96,7 @@ public class HighScore extends AppCompatActivity {
             super.onPause();
 
             BackgroundMusic.pause++;
-            Intent serviceIntent = new Intent(HighScore.this, BackgroundMusic.class);
+            Intent serviceIntent = new Intent(HighScoreActivity.this, BackgroundMusic.class);
             startService(serviceIntent);
 
         }
@@ -123,7 +106,7 @@ public class HighScore extends AppCompatActivity {
             super.onResume();
 
             BackgroundMusic.pause--;
-            Intent serviceIntent = new Intent(HighScore.this, BackgroundMusic.class);
+            Intent serviceIntent = new Intent(HighScoreActivity.this, BackgroundMusic.class);
             startService(serviceIntent);
     }
 }

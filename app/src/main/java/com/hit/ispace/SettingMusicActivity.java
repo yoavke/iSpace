@@ -1,16 +1,14 @@
 package com.hit.ispace;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ImageView;
 import com.suke.widget.SwitchButton;
 
 
-public class SettingMusic extends AppCompatActivity {
+public class SettingMusicActivity extends AppCompatActivity {
 
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
@@ -20,7 +18,7 @@ public class SettingMusic extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_settings);
+        setContentView(R.layout.activity_settings_music);
 
         settings = getSharedPreferences("PREFERENCES",MODE_PRIVATE);
         editor = settings.edit();
@@ -64,13 +62,13 @@ public class SettingMusic extends AppCompatActivity {
                 if(isChecked)
                 {
                     editSetting("music", "true");
-                    Intent serviceIntent = new Intent(SettingMusic.this, BackgroundMusic.class);
+                    Intent serviceIntent = new Intent(SettingMusicActivity.this, BackgroundMusic.class);
                     startService(serviceIntent);
                 }
                 else
                 {
                     editSetting("music", "false");
-                    Intent serviceIntent = new Intent(SettingMusic.this, BackgroundMusic.class);
+                    Intent serviceIntent = new Intent(SettingMusicActivity.this, BackgroundMusic.class);
                     stopService(serviceIntent);
                 }
             }
@@ -116,7 +114,7 @@ public class SettingMusic extends AppCompatActivity {
         super.onPause();
 
         BackgroundMusic.pause++;
-        Intent serviceIntent = new Intent(SettingMusic.this, BackgroundMusic.class);
+        Intent serviceIntent = new Intent(SettingMusicActivity.this, BackgroundMusic.class);
         startService(serviceIntent);
 
     }
@@ -126,7 +124,7 @@ public class SettingMusic extends AppCompatActivity {
         super.onResume();
 
         BackgroundMusic.pause--;
-        Intent serviceIntent = new Intent(SettingMusic.this, BackgroundMusic.class);
+        Intent serviceIntent = new Intent(SettingMusicActivity.this, BackgroundMusic.class);
         startService(serviceIntent);
     }
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".HighScore"
+    tools:context=".HighScoreActivity"
     android:background="@drawable/background_score"
     android:padding="16dp">
 

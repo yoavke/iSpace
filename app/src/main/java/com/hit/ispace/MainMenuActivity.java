@@ -3,21 +3,17 @@ package com.hit.ispace;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.geniusforapp.fancydialog.FancyAlertDialog;
 import com.podcopic.animationlib.library.AnimationType;
 import com.podcopic.animationlib.library.StartSmartAnimation;
-import com.shashank.sony.fancydialoglib.Animation;
-import com.shashank.sony.fancydialoglib.FancyAlertDialogListener;
-import com.shashank.sony.fancydialoglib.Icon;
 
-public class MainMenu extends AppCompatActivity implements View.OnClickListener {
+
+public class MainMenuActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView logoIspace;
     private Button btnStart;
@@ -90,17 +86,18 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                 break;
 
             case R.id.btn_settings:
-                startActivity(new Intent(this, SettingMusic.class));
+                startActivity(new Intent(this, SettingMusicActivity.class));
                 break;
 
             case R.id.btn_score:
-                startActivity(new Intent(this, HighScore.class));
+                startActivity(new Intent(this, HighScoreActivity.class));
                 break;
 
             case R.id.btn_shop:
                 startActivity(new Intent(this, Shop.class));
                 break;
-
+            case R.id.btn_info:
+                InfoClick(v);
             default:
                 break;
         }
@@ -108,16 +105,11 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
     // Set information button
     public void InfoClick(View view) {
-
-        com.geniusforapp.fancydialog.FancyAlertDialog.Builder alert = new com.geniusforapp.fancydialog.FancyAlertDialog.Builder(MainMenu.this)
-                .setimageResource(R.drawable.icon_milky_way)
+        com.geniusforapp.fancydialog.FancyAlertDialog.Builder alert = new com.geniusforapp.fancydialog.FancyAlertDialog.Builder(MainMenuActivity.this)
+                .setimageResource(R.drawable.icon_app)
                 .setTextTitle(getString(R.string.app_name))
-
                 .setBody(getString(R.string.info))
                 .setNegativeColor(R.color.redColor)
-
-
-
                 .setPositiveButtonText(getString(R.string.ok))
                 .setPositiveColor(R.color.colorPrimary)
                 .setOnPositiveClicked(new com.geniusforapp.fancydialog.FancyAlertDialog.OnPositiveClicked() {
@@ -141,7 +133,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     protected void onPause() {
         super.onPause();
         BackgroundMusic.pause++;
-        Intent serviceIntent = new Intent(MainMenu.this, BackgroundMusic.class);
+        Intent serviceIntent = new Intent(MainMenuActivity.this, BackgroundMusic.class);
         startService(serviceIntent);
 
     }
@@ -150,7 +142,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     protected void onResume() {
         super.onResume();
         BackgroundMusic.pause--;
-        Intent serviceIntent = new Intent(MainMenu.this, BackgroundMusic.class);
+        Intent serviceIntent = new Intent(MainMenuActivity.this, BackgroundMusic.class);
         startService(serviceIntent);
     }
 }
