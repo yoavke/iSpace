@@ -8,10 +8,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.ContactsContract;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.support.constraint.Constraints.TAG;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    private SQLiteDatabase db;
 
     //database name
     private static final String DATABASE_NAME = "ispace.db";
@@ -87,33 +91,64 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Returns top 5 on Free Style game
      * @return
      */
-    public Cursor getTopFreeStyle(){
-        SQLiteDatabase db = this.getWritableDatabase();
+    public List<UserScore> getTopFreeStyle()
+    {
+        List<UserScore> userScoreList = new ArrayList<>();
+        db = getReadableDatabase();
         String query = "SELECT name,record FROM records where level=1 ORDER BY record DESC limit 5";
         Cursor data = db.rawQuery(query, null);
-        return data;
+        if (data.moveToFirst()) {
+            do {
+                UserScore userScore = new UserScore();
+                userScore.setName(data.getString(data.getColumnIndex("name")));
+                userScore.setScore(data.getInt(data.getColumnIndex("record")));
+                userScoreList.add(userScore);
+            } while (data.moveToNext());
+        }
+        data.close();
+        return userScoreList;
     }
 
     /**
      * Returns top 5 on Faster game
      * @return
      */
-    public Cursor getTopFaster(){
-        SQLiteDatabase db = this.getWritableDatabase();
+    public List<UserScore> getTopFaster(){
+        List<UserScore> userScoreList = new ArrayList<>();
+        db = getReadableDatabase();
         String query = "SELECT name,record FROM records where level=2 ORDER BY record DESC limit 5";
         Cursor data = db.rawQuery(query, null);
-        return data;
+        if (data.moveToFirst()) {
+            do {
+                UserScore userScore = new UserScore();
+                userScore.setName(data.getString(data.getColumnIndex("name")));
+                userScore.setScore(data.getInt(data.getColumnIndex("record")));
+                userScoreList.add(userScore);
+            } while (data.moveToNext());
+        }
+        data.close();
+        return userScoreList;
     }
 
     /**
      * Returns top 5 on Getting Sick game
      * @return
      */
-    public Cursor getTopGettingSick(){
-        SQLiteDatabase db = this.getWritableDatabase();
+    public List<UserScore> getTopGettingSick(){
+        List<UserScore> userScoreList = new ArrayList<>();
+        db = getReadableDatabase();
         String query = "SELECT name,record FROM records where level=3 ORDER BY record DESC limit 5";
         Cursor data = db.rawQuery(query, null);
-        return data;
+        if (data.moveToFirst()) {
+            do {
+                UserScore userScore = new UserScore();
+                userScore.setName(data.getString(data.getColumnIndex("name")));
+                userScore.setScore(data.getInt(data.getColumnIndex("record")));
+                userScoreList.add(userScore);
+            } while (data.moveToNext());
+        }
+        data.close();
+        return userScoreList;
     }
 
 }

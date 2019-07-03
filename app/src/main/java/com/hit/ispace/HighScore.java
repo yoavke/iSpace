@@ -30,7 +30,7 @@ import java.util.List;
 public class HighScore extends AppCompatActivity {
 
     DatabaseHelper mDatabaseHelper;
-    private RecyclerView recyclerFreeStyleView;
+    private RecyclerView recyclerFreeStyleView,recyclerFasterView,recyclerGettingSickView;
     private HighScoreAdapter adapter;
     private SharedPreferences settings;
     private RelativeLayout container;
@@ -50,41 +50,47 @@ public class HighScore extends AppCompatActivity {
     private void iniwtView() {
 
         recyclerFreeStyleView = findViewById(R.id.recycler_free_style_score);
+        recyclerFasterView = findViewById(R.id.recycler_faster_score);
+        recyclerGettingSickView = findViewById(R.id.recycler_getting_sick_score);
         recyclerFreeStyleView.setHasFixedSize(true);
+        recyclerFasterView.setHasFixedSize(true);
+        recyclerGettingSickView.setHasFixedSize(true);
         container = findViewById(R.id.container_high_score_activity);
         recyclerFreeStyleView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerFasterView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerGettingSickView.setLayoutManager(new LinearLayoutManager(this));
         settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
         lastScore = getIntent().getIntExtra("isInTable", 0);
         isPlayed = getIntent().getBooleanExtra("isPlayed", false);
+        adapter = new HighScoreAdapter(mDatabaseHelper.getTopFreeStyle());
+        recyclerFreeStyleView.setAdapter(adapter);
+        adapter = new HighScoreAdapter(mDatabaseHelper.getTopFaster());
+        recyclerFasterView.setAdapter(adapter);
+        adapter = new HighScoreAdapter(mDatabaseHelper.getTopGettingSick());
+        recyclerGettingSickView.setAdapter(adapter);
+
     }
 
-//Display High Scores
-        private void displayHighScores (List < UserScore > highScores)
-        {
-            adapter = new HighScoreAdapter(highScores);
-            recyclerFreeStyleView.setAdapter(adapter);
-        }
-
-        public String readSetting (String key)
-        {
-            String value;
-            value = settings.getString(key, "");
-            return value;
-        }
+    public String readSetting (String key)
+    {
+        String value;
+        value = settings.getString(key, "");
+        return value;
+    }
 
 
-        // Play the Sound
-        private void playSound ( int idOfSound){
+    // Play the Sound
+    private void playSound ( int idOfSound){
 
-            if (readSetting("sound").equals("true")) {
-                try {
-                    MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), idOfSound);
-                    if (mediaPlayer != null) {
-                        mediaPlayer.start();
-                    }
+        if (readSetting("sound").equals("true")) {
+            try {
+                MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), idOfSound);
+                if (mediaPlayer != null) {
+                    mediaPlayer.start();
+                }
 
-                    assert mediaPlayer != null;
-                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                assert mediaPlayer != null;
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                         @Override
                         public void onCompletion(@NonNull MediaPlayer mp) {
                             if (mp.isPlaying()) {
@@ -120,7 +126,6 @@ public class HighScore extends AppCompatActivity {
             BackgroundMusic.pause--;
             Intent serviceIntent = new Intent(HighScore.this, BackgroundMusic.class);
             startService(serviceIntent);
-        }
-
-
     }
+
+}
