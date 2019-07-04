@@ -38,18 +38,18 @@
 
                 <TextView
                     android:id="@+id/price_space_ship"
-                    android:layout_width="120dp"
+                    android:layout_width="128dp"
                     android:layout_height="50dp"
-                    android:text="5000"
                     android:layout_centerHorizontal="true"
-                    android:gravity="center"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:textColor="#000"
                     android:layout_marginBottom="5dp"
-                    android:autoSizeTextType="uniform"
+                    android:autoSizeMaxTextSize="80sp"
                     android:autoSizeMinTextSize="8sp"
-                    android:autoSizeMaxTextSize="80sp"/>
+                    android:autoSizeTextType="uniform"
+                    android:gravity="center"
+                    android:text="5000"
+                    android:textColor="#000" />
 
                 <ImageView
                     android:id="@+id/icon_animation_coin"

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.support.constraint.Constraints.TAG;
+import static java.sql.Types.NULL;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -60,7 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + TABLE_NAME_LEVELS + " ("+LEVELS_COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+LEVELS_COL_2+" TEXT, "+LEVELS_COL_3+" INTEGER)");
         db.execSQL("create table " + TABLE_NAME_RECORDS + " ("+RECORDS_COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+RECORDS_COL_2+" INTEGER, "+RECORDS_COL_3+" INTEGER, "+RECORDS_COL_4+" TEXT)");
         db.execSQL("create table " + TABLE_NAME_BANK + " ("+BANK_COL_1+" INTEGER, "+BANK_COL_2+" INTEGER)");
-        db.execSQL("create table " + TABLE_NAME_SPACE_SHIPS + " ("+SPACESHIPS_COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+SPACESHIPS_COL_2+" TEXT, "+SPACESHIPS_COL_3+" TEXT, "+SPACESHIPS_COL_4+" INTEGER,"+SPACESHIPS_COL_5+" INTEGER )");
+        db.execSQL("create table " + TABLE_NAME_SPACE_SHIPS + " ("+SPACESHIPS_COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+SPACESHIPS_COL_2+" TEXT, "+SPACESHIPS_COL_3+" INTEGER, "+SPACESHIPS_COL_4+" INTEGER,"+SPACESHIPS_COL_5+" INTEGER )");
         db.execSQL("INSERT INTO levels(level,speed) VALUES('Free Style',1)");
         db.execSQL("INSERT INTO levels(level,speed) VALUES('Getting Sick',2)");
         db.execSQL("INSERT INTO bank(coins_total,coins_now) VALUES(8000,0)");
@@ -197,13 +198,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 SpaceShipShop spaceShipShop = new SpaceShipShop();
                 spaceShipShop.setId(data.getInt(data.getColumnIndex("id")));
                 spaceShipShop.setName_ship(data.getString(data.getColumnIndex("name")));
-                spaceShipShop.setSrc_path(data.getString(data.getColumnIndex("src_path")));
+                spaceShipShop.setSrc_path(data.getInt(data.getColumnIndex("src_path")));
                 spaceShipShop.setLocked(data.getInt(data.getColumnIndex("locked")));
+                spaceShipShop.setPrice(data.getInt(data.getColumnIndex("price")));
                 spaceShipList.add(spaceShipShop);
             } while (data.moveToNext());
         }
         data.close();
         return spaceShipList;
+    }
+
+    public int getTotalCoins(){
+        int total_coins = NULL ;
+        this.db = getReadableDatabase();
+        String query = "SELECT coins_total FROM bank";
+        Cursor data = this.db.rawQuery(query, null);
+        data.moveToFirst();
+        int coins_total = data.getInt(data.getColumnIndex("coins_total"));
+        data.close();
+        return coins_total;
+    }
+
+    public boolean buySpaceShip(int cost_of_product)
+    {
+        int total_coins = NULL , new_total_coins;
+        this.db = getReadableDatabase();
+        String query = "SELECT coins_total FROM bank";
+        Cursor data = this.db.rawQuery(query, null);
+        data.moveToFirst();
+        int coins_total = data.getInt(data.getColumnIndex("coins_total"));
+        new_total_coins = total_coins - cost_of_product ;
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(BANK_COL_1 , new_total_coins);
+
+        Log.i(TAG, "buySpaceShip: Update coins " + new_total_coins + " to " + TABLE_NAME_RECORDS);
+
+        long result = this.db.update(TABLE_NAME_BANK, contentValues,null, null);
+
+        //if date as update incorrectly it will return -1
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
 }

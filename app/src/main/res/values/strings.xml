@@ -20,4 +20,7 @@
     <string name="msg_yes">Yes</string>
     <string name="msg_no">No</string>
     <string name="space_shop">Space Shop</string>
+    <string name="level">Level:</string>
+    <string name="info_about_coins">You have :</string>
+    <string name="are_you_sure_buy">You\'re sure you want to buy ?</string>
 </resources>

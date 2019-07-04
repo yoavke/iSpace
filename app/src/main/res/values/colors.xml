@@ -13,5 +13,7 @@
     <color name="clearColor">#c5ffffff</color>
     <color name="grayColor">#9E9D9D</color>
     <color name="specialColor">#D6463F</color>
+    <color name="empty_back">#77E9E2E2</color>
+    <color name="greenColor">#67C76B</color>
 
 </resources>

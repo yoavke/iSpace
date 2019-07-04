@@ -1,7 +1,11 @@
 package com.hit.ispace;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,16 +14,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder> {
 
     private List<SpaceShipShop> spaceShip;
     private Context mContext;
+    Dialog myDialog;
+    TextView name_space , price_space ;
 
-    public ShopAdapter(List<SpaceShipShop> spaceShip) {
+    public ShopAdapter(Context context , List<SpaceShipShop> spaceShip) {
         this.spaceShip = spaceShip;
+        mContext = context;
     }
 
     //Inflate layout in view holder
@@ -34,9 +47,28 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
     //Set display values of view objects.
     @Override
     public void onBindViewHolder(@NonNull ShopAdapter.ShopViewHolder holder, int i) {
-        SpaceShipShop space = spaceShip.get(i);
-        holder.price.setText(String.format("%02d" ,space.getPrice()));
-        //holder.imageSpaceShip.setImageDrawable(space.getSrc_path());
+        final SpaceShipShop space = spaceShip.get(i);
+        holder.price.setText(String.format("%d" ,space.getPrice()));
+        Glide.with(mContext)
+                .asBitmap()
+                .load(R.drawable.spaceship_5)
+                .into(holder.imageSpaceShip);
+
+        myDialog = new Dialog(mContext);
+        myDialog.setContentView(R.layout.dialog_shop);
+        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        holder.imageSpaceShip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                name_space = (TextView) myDialog.findViewById(R.id.name_space_ship);
+                price_space = (TextView) myDialog.findViewById(R.id.price_of_space_ship);
+                name_space.setText(space.getName_ship());
+                price_space.setText(String.valueOf(space.getPrice()) + "$");
+                //Toast.makeText(mContext, space.getName_ship(), Toast.LENGTH_SHORT).show();
+                myDialog.show();
+            }
+        });
     }
 
     @Override
@@ -51,12 +83,12 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
 
     class ShopViewHolder extends RecyclerView.ViewHolder
     {
-        private ImageView imageSpaceShip;
+        private CircleImageView imageSpaceShip;
         private TextView price;
 
         public ShopViewHolder(@NonNull View itemView) {
             super(itemView);
-            //imageSpaceShip = itemView.findViewById(R.id.image_space_ship);
+            imageSpaceShip = itemView.findViewById(R.id.image_space_ship);
             price = itemView.findViewById(R.id.price_space_ship);
         }
     }
