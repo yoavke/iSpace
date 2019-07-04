@@ -5,7 +5,7 @@
     <string name="setting_sound">Sound</string>
     <string name="setting_music">Music</string>
     <string name="ok">Ok</string>
-    <string name="info">Info</string>
+    <string name="info">Swipe your finger to guide a space in the galaxy to avoid asteroids and collect coins. \nTry to collect many coins as possible.Get additional bombs and challenge your friends with the best high score!\n\nHave Fun !!!</string>
     <string name="game_over">Game Over</string>
     <string name="high_score">High Score</string>
     <string name="user_name">Name</string>
