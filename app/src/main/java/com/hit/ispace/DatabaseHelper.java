@@ -87,6 +87,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public boolean updateCoin(int coins) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT coins_total FROM bank";
+        Cursor data = db.rawQuery(query, null);
+        ContentValues contentValues = new ContentValues();
+        int coins_total = data.getInt(data.getColumnIndex("coins_total"));
+        int new_coins = coins_total+coins;
+        contentValues.put(BANK_COL_1 , new_coins);
+
+        Log.i(TAG, "updateCoin: Update coins " + new_coins + " to " + TABLE_NAME_RECORDS);
+        long result = db.update(TABLE_NAME_BANK, contentValues, "id=1", null);
+
+        //if date as update incorrectly it will return -1
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     /**
      * Returns top 5 on Free Style game
      * @return
