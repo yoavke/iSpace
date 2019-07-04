@@ -50,6 +50,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
 
+        this.db = getWritableDatabase();
+
     }
 
     @Override
@@ -60,6 +62,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + TABLE_NAME_SPACE_SHIPS + " ("+SPACESHIPS_COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+SPACESHIPS_COL_2+" TEXT, "+SPACESHIPS_COL_3+" TEXT, "+SPACESHIPS_COL_4+" INTEGER)");
         db.execSQL("INSERT INTO levels(level,speed) VALUES('Free Style',1)");
         db.execSQL("INSERT INTO levels(level,speed) VALUES('Getting Sick',2)");
+        db.execSQL("INSERT INTO bank(coins_total,coins_now) VALUES(0,0)");
     }
 
     @Override
@@ -69,7 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean addNewRecord(int level , String name , int score ) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        this.db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(RECORDS_COL_2, level);
         contentValues.put(RECORDS_COL_4, name);
@@ -77,7 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Log.d(TAG, "addNewRecord: Adding " + level +"," +  name + ","+ score + " to " + TABLE_NAME_RECORDS);
 
-        long result = db.insert(TABLE_NAME_RECORDS, null, contentValues);
+        long result = this.db.insert(TABLE_NAME_RECORDS, null, contentValues);
 
         //if date as inserted incorrectly it will return -1
         if (result == -1) {
@@ -88,16 +91,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean updateCoin(int coins) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT coins_total FROM bank";
-        Cursor data = db.rawQuery(query, null);
-        ContentValues contentValues = new ContentValues();
-        int coins_total = data.getInt(data.getColumnIndex("coins_total"));
+        this.db = this.getWritableDatabase();
+        String query = "SELECT * FROM bank";
+        Cursor data = this.db.rawQuery(query, null);
+        data.moveToFirst();
+        int coins_total = data.getInt(data.getColumnIndex("coins_now"));
         int new_coins = coins_total+coins;
+
+        ContentValues contentValues = new ContentValues();
         contentValues.put(BANK_COL_1 , new_coins);
 
         Log.i(TAG, "updateCoin: Update coins " + new_coins + " to " + TABLE_NAME_RECORDS);
-        long result = db.update(TABLE_NAME_BANK, contentValues, "id=1", null);
+
+        long result = this.db.update(TABLE_NAME_BANK, contentValues,null, null);
 
         //if date as update incorrectly it will return -1
         if (result == -1) {
@@ -115,9 +121,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<UserScore> getTopFreeStyle()
     {
         List<UserScore> userScoreList = new ArrayList<>();
-        db = getReadableDatabase();
+        this.db = getReadableDatabase();
         String query = "SELECT name,record FROM records where level=1 ORDER BY record DESC limit 5";
-        Cursor data = db.rawQuery(query, null);
+        Cursor data = this.db.rawQuery(query, null);
         if (data.moveToFirst()) {
             do {
                 UserScore userScore = new UserScore();
@@ -136,9 +142,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public List<UserScore> getTopFaster(){
         List<UserScore> userScoreList = new ArrayList<>();
-        db = getReadableDatabase();
+        this.db = getReadableDatabase();
         String query = "SELECT name,record FROM records where level=2 ORDER BY record DESC limit 5";
-        Cursor data = db.rawQuery(query, null);
+        Cursor data = this.db.rawQuery(query, null);
         if (data.moveToFirst()) {
             do {
                 UserScore userScore = new UserScore();
@@ -157,9 +163,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public List<UserScore> getTopGettingSick(){
         List<UserScore> userScoreList = new ArrayList<>();
-        db = getReadableDatabase();
+        this.db = getReadableDatabase();
         String query = "SELECT name,record FROM records where level=3 ORDER BY record DESC limit 5";
-        Cursor data = db.rawQuery(query, null);
+        Cursor data = this.db.rawQuery(query, null);
         if (data.moveToFirst()) {
             do {
                 UserScore userScore = new UserScore();

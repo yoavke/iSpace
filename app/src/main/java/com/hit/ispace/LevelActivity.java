@@ -71,6 +71,8 @@ public class LevelActivity extends AppCompatActivity {
     public void finishGame(int coinsEarned) {
         //TODO add coins to the bank database
         Log.d(TAG, "coins earned in game: " +coinsEarned);
+        DatabaseHelper db = new DatabaseHelper(this);
+        db.updateCoin(coinsEarned);
 
         //finish activity with relevant request_code
         //set intent for data (coins earned will be sent to called activity

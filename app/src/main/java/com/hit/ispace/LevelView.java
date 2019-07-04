@@ -14,7 +14,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class LevelView extends View {
 
@@ -220,7 +222,7 @@ public class LevelView extends View {
 
                     // remove elements from data structure
                     if (elem.getLeftTop().getY()>LevelView.this.screenHeight) {
-                        Log.i(TAG, "element " + elem.sayMyName() + " has been removed!");
+                        Log.i(TAG, "element " + elem.sayMyName() + " has been removed! " + elem.getLeftTop().getY());
                         LevelView.this.level.elementFactory.setCollectedSize();
                         LevelView.this.level.elementFactory.getElemList().remove((IElement)elem);
                     }
@@ -233,7 +235,8 @@ public class LevelView extends View {
         this.animateElementHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                for (IElement elem : LevelView.this.level.elementFactory.getElemList()) {
+                CopyOnWriteArrayList<IElement> templist = LevelView.this.level.elementFactory.getElemList();
+                for (IElement elem : templist) {
                     Point newTopLeft = new Point(elem.getLeftTop().getX(),elem.getLeftTop().getY()+2);
                     Point newBottomRight = new Point(elem.getRightBottom().getX(),elem.getRightBottom().getY()+2);
 
@@ -242,23 +245,37 @@ public class LevelView extends View {
                         if (elem.getHit()==false) {
                             elem.setHit();
                             LevelView.this.level.elementFactory.setCollectedSize();
-                            if (elem.sayMyName().equals("Coin")) {
-                                LevelView.this.level.incrementNumCoinsEarned();
-                                Log.i(TAG, "1 coin added. total of "+LevelView.this.level.getNumCoinsEarned()+" coins");
-                            } else if (elem.sayMyName().equals("SuperRock")) {
-                                Log.i(TAG, "SuperRock hit!!!!!!");
-                                LevelView.this.setGameEnded(true);
+                            switch (elem.sayMyName()) {
+                                case "Coin":
+                                    LevelView.this.level.incrementNumCoinsEarned();
+                                    Log.i(TAG, "1 coin added. total of "+LevelView.this.level.getNumCoinsEarned()+" coins");
+                                    break;
+                                case "SuperRock":
+                                    Log.i(TAG, "SuperRock hit!!!!!!");
+                                    LevelView.this.setGameEnded(true);
+                                    break;
+                                case "GoodBomb":
+                                    Log.i(TAG, "GoodBomb hit!!!!!!");
+                                    CopyOnWriteArrayList<IElement> list = LevelView.this.level.elementFactory.getElemList();
+                                    int indexToRemove = (int)(Math.random()*list.size());
+                                    LevelView.this.level.elementFactory.setCollectedSize();
+                                    Log.w(TAG,  LevelView.this.level.elementFactory.getElemList().get(indexToRemove).sayMyName() + " destroyed and its id was " + indexToRemove);
+                                    LevelView.this.level.elementFactory.getElemList().remove(indexToRemove);
+                                    break;
                             }
+
                             Log.i(TAG, "Hit " + elem.sayMyName());
                             LevelView.this.level.elementFactory.getElemList().remove(elem);
                         }
                     }
                     elem.setCoordinates(newTopLeft, newBottomRight);
+                    Log.w(TAG, "new y: " + elem.getLeftTop().getY() + templist.size());
                 }
                 postInvalidate();
-                animateElementHandler.postDelayed(this, 10);
+                animateElementHandler.postDelayed(this, 5);
 
             }
+
         }, 1000);
 
         Log.i(TAG, "Started playing level #" +level.getLevelType());
