@@ -16,7 +16,7 @@ import com.podcopic.animationlib.library.StartSmartAnimation;
 public class MainMenuActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView logoIspace;
-    private Button btnStart;
+    private Button btnFreeStyle,btnFaster,btnGettingSick;
     private Button btnSettings;
     private Button btnScore;
     private Button btnShop;
@@ -47,7 +47,9 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
 
         logoIspace = findViewById(R.id.logo_img);
-        btnStart = findViewById(R.id.btn_play);
+        btnFreeStyle = findViewById(R.id.btn_freestyle);
+        btnFaster = findViewById(R.id.btn_faster);
+        btnGettingSick = findViewById(R.id.btn_getting_sick);
         btnSettings = findViewById(R.id.btn_settings);
         btnScore = findViewById(R.id.btn_score);
         btnShop = findViewById(R.id.btn_shop);
@@ -56,14 +58,18 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
 
         // Set animation for buttons
         StartSmartAnimation.startAnimation(findViewById(R.id.logo_img) , AnimationType.BounceInDown, 3000 , 0 , true );
-        StartSmartAnimation.startAnimation(findViewById(R.id.btn_play) , AnimationType.ZoomInDown, 3000 , 0 , true );
+        StartSmartAnimation.startAnimation(findViewById(R.id.btn_freestyle) , AnimationType.ZoomInDown, 3000 , 0 , true );
+        StartSmartAnimation.startAnimation(findViewById(R.id.btn_faster) , AnimationType.ZoomInLeft, 3000 , 0 , true );
+        StartSmartAnimation.startAnimation(findViewById(R.id.btn_getting_sick) , AnimationType.ZoomInRight, 3000 , 0 , true );
         StartSmartAnimation.startAnimation(findViewById(R.id.btn_settings) , AnimationType.BounceInLeft, 3000 , 0 , true );
         StartSmartAnimation.startAnimation(findViewById(R.id.btn_score) , AnimationType.BounceInLeft, 3000 , 0 , true );
         StartSmartAnimation.startAnimation(findViewById(R.id.btn_shop) , AnimationType.BounceInRight, 3000 , 0 , true );
         StartSmartAnimation.startAnimation(findViewById(R.id.btn_info) , AnimationType.BounceInRight, 3000 , 0 , true );
 
 
-        btnStart.setOnClickListener(this);
+        btnFreeStyle.setOnClickListener(this);
+        btnFaster.setOnClickListener(this);
+        btnGettingSick.setOnClickListener(this);
         btnSettings.setOnClickListener(this);
         btnShop.setOnClickListener(this);
         btnScore.setOnClickListener(this);
@@ -81,7 +87,15 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_play:
+            case R.id.btn_freestyle:
+                startActivity(new Intent(this, LevelActivity.class));
+                break;
+
+            case R.id.btn_faster:
+                startActivity(new Intent(this, LevelActivity.class));
+                break;
+
+            case R.id.btn_getting_sick:
                 startActivity(new Intent(this, LevelActivity.class));
                 break;
 
@@ -94,7 +108,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.btn_shop:
-                startActivity(new Intent(this, Shop.class));
+                startActivity(new Intent(this, ShopActivity.class));
                 break;
             case R.id.btn_info:
                 InfoClick(v);

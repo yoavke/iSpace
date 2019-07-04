@@ -81,8 +81,7 @@
                 android:layout_marginTop="1sp"
                 android:layout_marginBottom="20dp"
                 android:layout_gravity="center"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/title_high_score">
+                android:layout_centerHorizontal="true">
             </android.support.v7.widget.RecyclerView>
 
             <android.support.v7.widget.CardView
@@ -115,8 +114,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="1dp"
                 android:layout_gravity="center"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/title_high_score">
+                android:layout_centerHorizontal="true">
             </android.support.v7.widget.RecyclerView>
 
             <android.support.v7.widget.CardView
@@ -149,8 +147,7 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="1dp"
                 android:layout_gravity="center"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/title_high_score">
+                android:layout_centerHorizontal="true">
             </android.support.v7.widget.RecyclerView>
 
         </LinearLayout>

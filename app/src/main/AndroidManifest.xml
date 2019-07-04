@@ -38,6 +38,10 @@
             <action android:name="package_name.action_stop" />
         </intent-filter>
         </service>
+        <activity android:name=".ShopActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

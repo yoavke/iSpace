@@ -17,7 +17,7 @@ public class HighScoreActivity extends AppCompatActivity {
     private HighScoreAdapter adapter;
     private SharedPreferences settings;
     private RelativeLayout container;
-    private int lastScore;
+    //private int lastScore;
     private boolean isPlayed;
 
 
@@ -49,7 +49,7 @@ public class HighScoreActivity extends AppCompatActivity {
         adapter = new HighScoreAdapter(mDatabaseHelper.getTopGettingSick());
         recyclerGettingSickView.setAdapter(adapter);
         settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
-        lastScore = getIntent().getIntExtra("isInTable", 0);
+        //lastScore = getIntent().getIntExtra("isInTable", 0);
         isPlayed = getIntent().getBooleanExtra("isPlayed", false);
     }
 

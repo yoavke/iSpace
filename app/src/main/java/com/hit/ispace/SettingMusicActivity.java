@@ -2,6 +2,7 @@ package com.hit.ispace;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
@@ -19,6 +20,10 @@ public class SettingMusicActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_music);
+
+        ImageView imageView = findViewById(R.id.animation_ufo_view);
+        AnimationDrawable animationDrawable = (AnimationDrawable)imageView.getDrawable();
+        animationDrawable.start();
 
         settings = getSharedPreferences("PREFERENCES",MODE_PRIVATE);
         editor = settings.edit();
