@@ -25,16 +25,18 @@ public class LevelView extends View {
     private int screenWidth=0;
     private int screenHeight=0;
     private int fingerDownX;
+    private boolean gameEnded;
 
-    HandlerThread createElementThread;
-    HandlerThread animateElementThread;
+    protected HandlerThread createElementThread;
+    protected HandlerThread animateElementThread;
 
-    Handler createElementHandler, animateElementHandler;
+    protected Handler createElementHandler, animateElementHandler;
 
     public LevelView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         Log.i(TAG, "LevelView created");
 
+        this.gameEnded = false;
         this.createElementThread = new HandlerThread("create elements thread");
         this.animateElementThread = new HandlerThread("animate elements thread");
     }
@@ -206,10 +208,10 @@ public class LevelView extends View {
                                 elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_good_bomb), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
                                 break;
                             case "Rock":
-                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_asteroid), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
+                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_asteroid_block), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
                                 break;
                             case "SuperRock":
-                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_asteroid_block), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
+                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_asteroid), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
                                 break;
                             case "Space":
                                 break;
@@ -243,6 +245,9 @@ public class LevelView extends View {
                             if (elem.sayMyName().equals("Coin")) {
                                 LevelView.this.level.incrementNumCoinsEarned();
                                 Log.i(TAG, "1 coin added. total of "+LevelView.this.level.getNumCoinsEarned()+" coins");
+                            } else if (elem.sayMyName().equals("SuperRock")) {
+                                Log.i(TAG, "SuperRock hit!!!!!!");
+                                LevelView.this.setGameEnded(true);
                             }
                             Log.i(TAG, "Hit " + elem.sayMyName());
                             LevelView.this.level.elementFactory.getElemList().remove(elem);
@@ -257,5 +262,13 @@ public class LevelView extends View {
         }, 1000);
 
         Log.i(TAG, "Started playing level #" +level.getLevelType());
+    }
+
+    public boolean isGameEnded() {
+        return gameEnded;
+    }
+
+    public void setGameEnded(boolean gameEnded) {
+        this.gameEnded = gameEnded;
     }
 }
