@@ -186,9 +186,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public List<SpaceShipShop> getAllSpaceShip(){
         List<SpaceShipShop> spaceShipList = new ArrayList<>();
-        this.db = getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT * FROM spaceships";
-        Cursor data = this.db.rawQuery(query, null);
+        Cursor data = db.rawQuery(query, null);
         if (data.moveToFirst()) {
             do {
                 SpaceShipShop spaceShipShop = new SpaceShipShop();
@@ -206,9 +206,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public int getTotalCoins(){
         int total_coins = NULL ;
-        this.db = getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT coins_total FROM bank";
-        Cursor data = this.db.rawQuery(query, null);
+        Cursor data = db.rawQuery(query, null);
         data.moveToFirst();
         int coins_total = data.getInt(data.getColumnIndex("coins_total"));
         data.close();
@@ -218,9 +218,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public boolean buySpaceShip(int cost_of_product)
     {
         int total_coins = NULL , new_total_coins;
-        this.db = getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT coins_total FROM bank";
-        Cursor data = this.db.rawQuery(query, null);
+        Cursor data = db.rawQuery(query, null);
         data.moveToFirst();
         int coins_total = data.getInt(data.getColumnIndex("coins_total"));
         new_total_coins = total_coins - cost_of_product ;
@@ -229,7 +229,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Log.i(TAG, "buySpaceShip: Update coins " + new_total_coins + " to " + TABLE_NAME_RECORDS);
 
-        long result = this.db.update(TABLE_NAME_BANK, contentValues,null, null);
+        long result = db.update(TABLE_NAME_BANK, contentValues,null, null);
 
         //if date as update incorrectly it will return -1
         if (result == -1) {
