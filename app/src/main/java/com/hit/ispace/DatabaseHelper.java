@@ -68,7 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(1,'Space Ship 1','R.drawable.spaceship1',1,500)");
         db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(2,'Space Ship 2','R.drawable.spaceship2',1,1000)");
         db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(3,'Space Ship 3','R.drawable.spaceship3',1,2000)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(4,'Space Ship 4','R.drawable.spaceship4',1,3000)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(4,'Space Ship 4','R.drawable.spaceship4',0,3000)");
         db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(5,'Space Ship 5','R.drawable.spaceship5',1,4000)");
         db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(6,'Space Ship 6','R.drawable.spaceship6',1,5000)");
     }
