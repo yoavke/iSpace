@@ -54,19 +54,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-//        db.execSQL("create table " + TABLE_NAME_LEVELS + " ("+LEVELS_COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+LEVELS_COL_2+" TEXT, "+LEVELS_COL_3+" INTEGER)");
-//        db.execSQL("create table " + TABLE_NAME_RECORDS + " ("+RECORDS_COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+RECORDS_COL_2+" INTEGER, "+RECORDS_COL_3+" INTEGER, "+RECORDS_COL_4+" TEXT)");
-//        db.execSQL("create table " + TABLE_NAME_BANK + " ("+BANK_COL_1+" INTEGER, "+BANK_COL_2+" INTEGER)");
-//        db.execSQL("create table " + TABLE_NAME_SPACE_SHIPS + " ("+SPACESHIPS_COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+SPACESHIPS_COL_2+" TEXT, "+SPACESHIPS_COL_3+" INTEGER, "+SPACESHIPS_COL_4+" INTEGER,"+SPACESHIPS_COL_5+" INTEGER )");
-//        db.execSQL("INSERT INTO levels(level,speed) VALUES('Free Style',1)");
-//        db.execSQL("INSERT INTO levels(level,speed) VALUES('Getting Sick',2)");
-//        db.execSQL("INSERT INTO bank(coins_total,coins_now) VALUES(8000,0)");
-//        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(1,'Space Ship 1','R.drawable.spaceship1',1,500)");
-//        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(2,'Space Ship 2','R.drawable.spaceship2',1,1000)");
-//        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(3,'Space Ship 3','R.drawable.spaceship3',1,2000)");
-//        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(4,'Space Ship 4','R.drawable.spaceship4',1,3000)");
-//        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(5,'Space Ship 5','R.drawable.spaceship5',1,4000)");
-//        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(6,'Space Ship 6','R.drawable.spaceship6',1,5000)");
+        db.execSQL("create table " + TABLE_NAME_LEVELS + " ("+LEVELS_COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+LEVELS_COL_2+" TEXT, "+LEVELS_COL_3+" INTEGER)");
+        db.execSQL("create table " + TABLE_NAME_RECORDS + " ("+RECORDS_COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+RECORDS_COL_2+" INTEGER, "+RECORDS_COL_3+" INTEGER, "+RECORDS_COL_4+" TEXT)");
+        db.execSQL("create table " + TABLE_NAME_BANK + " ("+BANK_COL_1+" INTEGER, "+BANK_COL_2+" INTEGER)");
+        db.execSQL("create table " + TABLE_NAME_SPACE_SHIPS + " ("+SPACESHIPS_COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+SPACESHIPS_COL_2+" TEXT, "+SPACESHIPS_COL_3+" INTEGER, "+SPACESHIPS_COL_4+" INTEGER,"+SPACESHIPS_COL_5+" INTEGER )");
+        db.execSQL("INSERT INTO levels(level,speed) VALUES('Free Style',1)");
+        db.execSQL("INSERT INTO levels(level,speed) VALUES('Getting Sick',2)");
+        db.execSQL("INSERT INTO bank(coins_total,coins_now) VALUES(8000,0)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(1,'Space Ship 1','R.drawable.spaceship1',1,500)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(2,'Space Ship 2','R.drawable.spaceship2',1,1000)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(3,'Space Ship 3','R.drawable.spaceship3',1,2000)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(4,'Space Ship 4','R.drawable.spaceship4',1,3000)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(5,'Space Ship 5','R.drawable.spaceship5',1,4000)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(6,'Space Ship 6','R.drawable.spaceship6',1,5000)");
     }
 
     @Override
@@ -100,8 +100,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM bank";
         Cursor data = db.rawQuery(query, null);
-        data.moveToLast();
-        int coins_total = data.getInt(data.getColumnIndex("coins_now"));
+        int num_affected = data.getCount();
+        data.moveToNext();
+        int coins_total = data.getInt(data.getColumnIndex(BANK_COL_1));
         int new_coins = coins_total+coins;
 
         ContentValues contentValues = new ContentValues();
