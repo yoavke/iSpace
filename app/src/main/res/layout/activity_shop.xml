@@ -1,6 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HighScoreActivity"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:background="@drawable/background"
+    android:id="@+id/container_shop_activity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:id="@+id/title_high_score">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/space_shop"
+            android:textColor="@color/whiteColor"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            />
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="40dp">
+
+                <TextView
+                    android:id="@+id/text_coins"
+                    android:layout_width="318dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/info_about_coins"
+                    android:textSize="20sp"
+                    android:textColor="@color/whiteColor"
+                    android:textStyle="bold"
+                    android:fontFamily="casual"/>
+
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_margin="20dp">
+
+                <TextView
+                    android:id="@+id/coins_value"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="00"
+                    android:textSize="25sp"
+                    android:textColor="@color/whiteColor"
+                    android:textStyle="bold"
+                    android:fontFamily="casual"/>
+
+                <ImageView
+                    android:id="@+id/icon_animation_coin"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_coin"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_space_ship"
+                android:layout_width="280dp"
+                android:layout_height="280dp"
+                android:background="@drawable/layout_ripple"
+                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/title_high_score">
+            </android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -12,7 +12,6 @@ import java.util.List;
 
 public class HighScoreAdapter extends RecyclerView.Adapter<HighScoreAdapter.HighScoreViewHolder>
 {
-
     private List<UserScore> highScores;
 
     public HighScoreAdapter( List<UserScore> highScores) {
@@ -23,7 +22,6 @@ public class HighScoreAdapter extends RecyclerView.Adapter<HighScoreAdapter.High
     @NonNull
     @Override
     public HighScoreViewHolder onCreateViewHolder(@NonNull ViewGroup parant, int i) {
-
         View view = LayoutInflater.from(parant.getContext()).inflate(R.layout.pattern_high_score, parant, false);
         HighScoreViewHolder highScoreViewHolder = new HighScoreViewHolder(view);
         return highScoreViewHolder;

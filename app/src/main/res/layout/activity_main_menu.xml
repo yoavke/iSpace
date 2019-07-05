@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".MainMenuActivity"
+    tools:context=".MainMenu"
     android:orientation="vertical">
 
     <ImageView
@@ -20,7 +20,7 @@ xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,16 +28,46 @@ xmlns:tools="http://schemas.android.com/tools"
             android:orientation="vertical"
             android:gravity="center">
 
+            <Button
+                android:id="@+id/btn_freestyle"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:text="@string/free_style"
+                android:textSize="15sp"
+                android:fontFamily="casual"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:background="@drawable/icon_sunny"
+                android:textColor="@color/blackColor"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
                 <Button
-                    android:id="@+id/btn_play"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:text="@string/one_player"
+                    android:id="@+id/btn_faster"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginRight="60dp"
+                    android:text="@string/faster"
                     android:textSize="20sp"
-                    android:gravity="center"
-                    android:background="@drawable/icon_sunny"
-                    android:textColor="@color/blackColor"
-                    />
+                    android:fontFamily="casual"
+                    android:textStyle="bold"
+                    android:background="@drawable/icon_faster"
+                    android:textColor="@color/blackColor"/>
+
+                <Button
+                    android:id="@+id/btn_getting_sick"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="20dp"
+                    android:text="@string/getting_sick"
+                    android:textSize="18sp"
+                    android:fontFamily="casual"
+                    android:textStyle="bold"
+                    android:background="@drawable/icon_getting_sick"
+                    android:textColor="@color/blackColor" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -89,7 +119,8 @@ xmlns:tools="http://schemas.android.com/tools"
                 android:layout_marginTop="6dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/icon_info" />
+                android:background="@drawable/icon_info"
+                android:onClick="InfoClick"/>
 
         </LinearLayout>
     </LinearLayout>
