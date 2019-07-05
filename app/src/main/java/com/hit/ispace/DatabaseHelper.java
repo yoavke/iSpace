@@ -15,8 +15,6 @@ import static android.support.constraint.Constraints.TAG;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private SQLiteDatabase db;
-
     //database name
     private static final String DATABASE_NAME = "ispace.db";
 
@@ -50,8 +48,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
 
-        this.db = getWritableDatabase();
-
     }
 
     @Override
@@ -72,7 +68,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean addNewRecord(int level , String name , int score ) {
-        this.db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(RECORDS_COL_2, level);
         contentValues.put(RECORDS_COL_4, name);
@@ -80,7 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Log.d(TAG, "addNewRecord: Adding " + level +"," +  name + ","+ score + " to " + TABLE_NAME_RECORDS);
 
-        long result = this.db.insert(TABLE_NAME_RECORDS, null, contentValues);
+        long result = db.insert(TABLE_NAME_RECORDS, null, contentValues);
 
         //if date as inserted incorrectly it will return -1
         if (result == -1) {
@@ -91,9 +87,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public boolean updateCoin(int coins) {
-        this.db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM bank";
-        Cursor data = this.db.rawQuery(query, null);
+        Cursor data = db.rawQuery(query, null);
         data.moveToFirst();
         int coins_total = data.getInt(data.getColumnIndex("coins_now"));
         int new_coins = coins_total+coins;
@@ -103,7 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Log.i(TAG, "updateCoin: Update coins " + new_coins + " to " + TABLE_NAME_RECORDS);
 
-        long result = this.db.update(TABLE_NAME_BANK, contentValues,null, null);
+        long result = db.update(TABLE_NAME_BANK, contentValues,null, null);
 
         //if date as update incorrectly it will return -1
         if (result == -1) {
@@ -121,9 +117,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<UserScore> getTopFreeStyle()
     {
         List<UserScore> userScoreList = new ArrayList<>();
-        this.db = getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT name,record FROM records where level=1 ORDER BY record DESC limit 5";
-        Cursor data = this.db.rawQuery(query, null);
+        Cursor data = db.rawQuery(query, null);
         if (data.moveToFirst()) {
             do {
                 UserScore userScore = new UserScore();
@@ -142,9 +138,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public List<UserScore> getTopFaster(){
         List<UserScore> userScoreList = new ArrayList<>();
-        this.db = getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT name,record FROM records where level=2 ORDER BY record DESC limit 5";
-        Cursor data = this.db.rawQuery(query, null);
+        Cursor data = db.rawQuery(query, null);
         if (data.moveToFirst()) {
             do {
                 UserScore userScore = new UserScore();
@@ -163,9 +159,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public List<UserScore> getTopGettingSick(){
         List<UserScore> userScoreList = new ArrayList<>();
-        this.db = getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT name,record FROM records where level=3 ORDER BY record DESC limit 5";
-        Cursor data = this.db.rawQuery(query, null);
+        Cursor data = db.rawQuery(query, null);
         if (data.moveToFirst()) {
             do {
                 UserScore userScore = new UserScore();

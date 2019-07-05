@@ -28,6 +28,9 @@ public class LevelView extends View {
     private int screenHeight=0;
     private int fingerDownX;
     private boolean gameEnded;
+    private long startTime;
+    private long checkTime;
+    private int speed;
 
     protected HandlerThread createElementThread;
     protected HandlerThread animateElementThread;
@@ -39,6 +42,7 @@ public class LevelView extends View {
         Log.i(TAG, "LevelView created");
 
         this.gameEnded = false;
+        this.speed = 4;
         this.createElementThread = new HandlerThread("create elements thread");
         this.animateElementThread = new HandlerThread("animate elements thread");
     }
@@ -185,6 +189,9 @@ public class LevelView extends View {
         this.level.spaceship.setCoordinates(topLeft,bottomRight);
         invalidate();
 
+        //start timer
+        this.startTime = System.currentTimeMillis();
+
         //start threads
         createElementThread.start();
         animateElementThread.start();
@@ -219,28 +226,35 @@ public class LevelView extends View {
                                 break;
                         }
                     }
-
-                    // remove elements from data structure
-                    if (elem.getLeftTop().getY()>LevelView.this.screenHeight) {
-                        Log.i(TAG, "element " + elem.sayMyName() + " has been removed! " + elem.getLeftTop().getY());
-                        LevelView.this.level.elementFactory.setCollectedSize();
-                        LevelView.this.level.elementFactory.getElemList().remove((IElement)elem);
-                    }
                 }
 
-                createElementHandler.postDelayed(this, 3000);
+                createElementHandler.postDelayed(this, 700*LevelView.this.speed);
             }
         }, 500);
 
         this.animateElementHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
+                LevelView.this.checkTime = System.currentTimeMillis();
+                long km = (LevelView.this.checkTime-LevelView.this.startTime);
+
+                if (km>=5000 && km<15000) {
+                    LevelView.this.speed = 3;
+                    Log.e(TAG, "increase speed to 3");
+                } else if (km>=15000) {
+                    Log.e(TAG, "increase speed to 2");
+                    LevelView.this.speed = 2;
+                }
+                    Log.e(TAG,"km: " + km);
                 CopyOnWriteArrayList<IElement> templist = LevelView.this.level.elementFactory.getElemList();
                 for (IElement elem : templist) {
-                    Point newTopLeft = new Point(elem.getLeftTop().getX(),elem.getLeftTop().getY()+2);
-                    Point newBottomRight = new Point(elem.getRightBottom().getX(),elem.getRightBottom().getY()+2);
+                    Point newTopLeft = new Point(elem.getLeftTop().getX(),elem.getLeftTop().getY()+1);
+                    Point newBottomRight = new Point(elem.getRightBottom().getX(),elem.getRightBottom().getY()+1);
 
-                    if (((LevelView.this.level.spaceship.getLeftTop().getX() >= newTopLeft.getX() && LevelView.this.level.spaceship.getLeftTop().getX() <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getLeftTop().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getLeftTop().getY() <= newBottomRight.getY())) || ((LevelView.this.level.spaceship.getRightBottom().getX() >= newTopLeft.getX() && LevelView.this.level.spaceship.getRightBottom().getX() <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getRightBottom().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getRightBottom().getY() <= newBottomRight.getY())))
+                    if (((LevelView.this.level.spaceship.getLeftTop().getX() >= newTopLeft.getX() && LevelView.this.level.spaceship.getLeftTop().getX() <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getLeftTop().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getLeftTop().getY() <= newBottomRight.getY()))
+                            || ((LevelView.this.level.spaceship.getRightBottom().getX() >= newTopLeft.getX() && LevelView.this.level.spaceship.getRightBottom().getX() <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getRightBottom().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getRightBottom().getY() <= newBottomRight.getY()))
+                            || ((LevelView.this.level.spaceship.getLeftTop().getX()+CSettings.Dimension.SPACESHIP_SIZE >= newTopLeft.getX() && LevelView.this.level.spaceship.getLeftTop().getX()+CSettings.Dimension.SPACESHIP_SIZE <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getLeftTop().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getLeftTop().getY() <= newBottomRight.getY())))
                     {
                         if (elem.getHit()==false) {
                             elem.setHit();
@@ -266,13 +280,22 @@ public class LevelView extends View {
 
                             Log.i(TAG, "Hit " + elem.sayMyName());
                             LevelView.this.level.elementFactory.getElemList().remove(elem);
+                            postInvalidate();
                         }
                     }
                     elem.setCoordinates(newTopLeft, newBottomRight);
-                    Log.w(TAG, "new y: " + elem.getLeftTop().getY() + templist.size());
+                    Log.w(TAG, "new y: " + elem.getLeftTop().getY() + " size: " + templist.size());
+
+                    // remove elements from data structure
+                    if (elem.getLeftTop().getY()>LevelView.this.screenHeight) {
+                        Log.i(TAG, "element " + elem.sayMyName() + " has been removed! " + elem.getLeftTop().getY());
+                        LevelView.this.level.elementFactory.setCollectedSize();
+                        LevelView.this.level.elementFactory.getElemList().remove((IElement)elem);
+                        postInvalidate();
+                    }
                 }
                 postInvalidate();
-                animateElementHandler.postDelayed(this, 5);
+                animateElementHandler.postDelayed(this, LevelView.this.speed);
 
             }
 

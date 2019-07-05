@@ -48,9 +48,45 @@ public final class ElementFactory implements Runnable{
         Point topLeft, bottomRight; // the points of the elements
         IElement tempElem; //a temporary element
 
+        // we force creating at least one space in a row
+        int randomInitSpace = (int)(Math.random()*6);
+        CSettings.FlyingElements flyingElem;
+
         for (i=0; i<6; i++) {
-            //select a random element
-            CSettings.FlyingElements flyingElem = CSettings.FlyingElements.values()[(int) (Math.random() * CSettings.FlyingElements.values().length)];
+
+            if (i==randomInitSpace) {
+                //the "at least" one space
+                Log.i(TAG, "creating the 'at least' one space");
+                flyingElem = CSettings.FlyingElements.SPACE;
+            } else {
+                //select a random element
+                int selectedByPriority = (int)(Math.random()*100);
+
+                //10% space
+                if (selectedByPriority>=0 && selectedByPriority<=9) {
+                    flyingElem = CSettings.FlyingElements.SPACE;
+                }
+                //10% goodbomb
+                else if (selectedByPriority>=10 && selectedByPriority<=19) {
+                    flyingElem = CSettings.FlyingElements.GOODBOMB;
+                }
+                //20% bomb
+                else if (selectedByPriority>=20 && selectedByPriority<=39) {
+                    flyingElem = CSettings.FlyingElements.BOMB;
+                }
+                //20% rock
+                else if (selectedByPriority>=40 && selectedByPriority<=59) {
+                    flyingElem = CSettings.FlyingElements.ROCK;
+                }
+                //20% superrock
+                else if (selectedByPriority>=60 && selectedByPriority<=79) {
+                    flyingElem = CSettings.FlyingElements.SUPERROCK;
+                }
+                //20% coin
+                else {
+                    flyingElem = CSettings.FlyingElements.COIN;
+                }
+            }
 
             //create the randomized element
             switch (flyingElem) {

@@ -51,8 +51,6 @@ public class LevelActivity extends AppCompatActivity {
         this.waitEndGameHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.d(TAG, "game still playing");
-
                 if (levelView.isGameEnded()) {
                     //stopping threads
                     levelView.animateElementThread.quit();
@@ -62,9 +60,9 @@ public class LevelActivity extends AppCompatActivity {
                     //end the game
                     finishGame(level.getNumCoinsEarned());
                 }
-                waitEndGameHandler.postDelayed(this, 20);
+                waitEndGameHandler.postDelayed(this, 10);
             }
-        }, 20);
+        }, 1000);
 
     }
 
