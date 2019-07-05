@@ -123,6 +123,9 @@ public class LevelView extends View {
                     else if (move < 0)
                         Log.i(TAG, "spaceship moves " + Math.abs(move) + " to Left");
 
+                    Log.i(TAG, "GETTING SICK: leftTop("+this.level.spaceship.getLeftTop().getX()+","+this.level.spaceship.getLeftTop().getY()+") rightBottom("+this.level.spaceship.getRightBottom().getX()+","+this.level.spaceship.getRightBottom().getY()+")");
+
+
                 }
                 //force spaceship stay in border of game
 
@@ -145,13 +148,17 @@ public class LevelView extends View {
 
                     //set the new coordinate of spaceship
                     this.level.spaceship.getLeftTop().setX(this.level.spaceship.getLeftTop().getX() - move);
-                    this.level.spaceship.getRightBottom().setX(this.level.spaceship.getLeftTop().getX() - (move + this.level.spaceship.getSpaceshipWidth()));
+                    this.level.spaceship.getRightBottom().setX(this.level.spaceship.getLeftTop().getX()+this.level.spaceship.getSpaceshipWidth());
 
                     //logs the moves
                     if (move > 0)
-                        Log.i(TAG, "spaceship moves " + move + " to right");
+                        Log.i(TAG, "spaceship moves " + move + " to left");
                     else if (move < 0)
-                        Log.i(TAG, "spaceship moves " + Math.abs(move) + " to Left");
+                        Log.i(TAG, "spaceship moves " + Math.abs(move) + " to right");
+
+                    if (move!=0)
+                        Log.i(TAG, "GETTING SICK: leftTop("+this.level.spaceship.getLeftTop().getX()+","+this.level.spaceship.getLeftTop().getY()+") rightBottom("+this.level.spaceship.getRightBottom().getX()+","+this.level.spaceship.getRightBottom().getY()+")");
+
 
                 }
                 //force spaceship stay in border of game
@@ -187,6 +194,7 @@ public class LevelView extends View {
         Point topLeft = new Point((this.screenWidth / 2) - (this.level.spaceship.getBitmapSrc().getWidth() / 2),this.screenHeight-(100*2));
         Point bottomRight = new Point(topLeft.getX()+100, topLeft.getY()+100);
         this.level.spaceship.setCoordinates(topLeft,bottomRight);
+        Log.i(TAG, "GETTING SICK: init at leftTop("+this.level.spaceship.getLeftTop().getX()+","+this.level.spaceship.getLeftTop().getY()+") rightBottom("+this.level.spaceship.getRightBottom().getX()+","+this.level.spaceship.getRightBottom().getY()+")");
         invalidate();
 
         //start timer
@@ -217,10 +225,10 @@ public class LevelView extends View {
                                 elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_good_bomb), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
                                 break;
                             case "Rock":
-                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_asteroid_block), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
+                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_asteroid), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
                                 break;
                             case "SuperRock":
-                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_asteroid), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
+                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_dead_asteroid), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
                                 break;
                             case "Space":
                                 break;
@@ -264,8 +272,13 @@ public class LevelView extends View {
                                     LevelView.this.level.incrementNumCoinsEarned();
                                     Log.i(TAG, "1 coin added. total of "+LevelView.this.level.getNumCoinsEarned()+" coins");
                                     break;
+                                case "Rock":
+                                case "Bomb":
+                                    LevelView.this.setGameEnded(true);
+                                    break;
                                 case "SuperRock":
                                     Log.i(TAG, "SuperRock hit!!!!!!");
+                                    LevelView.this.level.reduceNumCoins();
                                     LevelView.this.setGameEnded(true);
                                     break;
                                 case "GoodBomb":

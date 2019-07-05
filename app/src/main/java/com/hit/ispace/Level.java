@@ -52,6 +52,14 @@ public class Level {
         this.numCoinsEarned++;
     }
 
+    public void reduceNumCoins() {
+        if (getNumCoinsEarned() <= SuperRock.POWER) {
+            this.numCoinsEarned = 0;
+        } else {
+            this.numCoinsEarned -= SuperRock.POWER;
+        }
+    }
+
     public int getLevelType() {
         return levelType;
     }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">iSpace</string>
+    <string name="faster">מהר יותר</string>
+    <string name="free_style">סגנון חופשי</string>
+    <string name="game_over">סיום משחק</string>
+    <string name="getting_sick">כאב ראש</string>
+    <string name="high_score">תוצאת שיא</string>
+    <string name="info">מידע</string>
+    <string name="msg_no">לא</string>
+    <string name="msg_yes">כן</string>
+    <string name="ok">אוקיי</string>
+    <string name="one_player">שחק</string>
+    <string name="out_game">בטוח שברצונך לצאת?</string>
+    <string name="save">שמור</string>
+    <string name="score">תוצאה</string>
+    <string name="setting_music">מוזיקה</string>
+    <string name="setting_sound">סאונד</string>
+    <string name="settings">הגדרות</string>
+    <string name="text_user_high_score">תוצאת שיא חדשה!!!</string>
+    <string name="text_user_score">התוצאה שלך היא:</string>
+    <string name="user_name">שם</string>
+</resources>
