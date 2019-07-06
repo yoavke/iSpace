@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.animation.Animation;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -51,7 +52,7 @@ public class ShopActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         ShopAdapter adapter = new ShopAdapter(this ,mDatabaseHelper.getAllSpaceShip());
         recyclerView.setAdapter(adapter);
-        int number_of_coins = NULL;
+        int number_of_coins;
         number_of_coins = mDatabaseHelper.getTotalCoins();
         coins_total = findViewById(R.id.coins_value);
         coins_total.setText(String.valueOf(number_of_coins));
@@ -85,7 +86,6 @@ public class ShopActivity extends AppCompatActivity {
             }
         });
         invisibleAnim.start();
-
         settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
         isPlayed = getIntent().getBooleanExtra("isPlayed", false);
     }

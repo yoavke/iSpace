@@ -21,9 +21,15 @@
     <string name="msg_no">No</string>
     <string name="space_shop">Space Shop</string>
     <string name="level">Level:</string>
-    <string name="info_about_coins">You have :</string>
+    <string name="info_about_coins">Total coins:</string>
     <string name="are_you_sure_buy">Are you sure you want to buy?</string>
     <string name="are_you_sure_select">Are you sure you want to select this item?</string>
     <string name="comment">if you press \"yes\", you will start the game with this spaceship</string>
     <string name="you_already">You already buy this item</string>
+    <string name="buy_now">Buy now!</string>
+    <string name="swipe_more">Swipe to see more spaces</string>
+    <string name="success_buying">Buying successfully</string>
+    <string name="no_success_buying">Something goes wrong</string>
+    <string name="cant_buy">You don\'t have enough money to buy this item</string>
+    <string name="use_this_space">Use</string>
 </resources>

@@ -2,13 +2,7 @@ package com.hit.ispace;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +14,13 @@ import android.widget.Toast;
 import android.content.DialogInterface;
 
 import com.bumptech.glide.Glide;
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static java.sql.Types.NULL;
 
 
 public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder> {
@@ -32,11 +29,14 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
     private Context mContext;
     Dialog buyDialog,selectDialog;
     TextView name_space , price_space ;
-    Button btn_yes , btn_no ;
+    Button btn_yes , btn_no , shop_or_select ;
+    DatabaseHelper mDatabaseHelper;
+
 
     public ShopAdapter(Context context , List<SpaceShipShop> spaceShip) {
         this.spaceShip = spaceShip;
         mContext = context;
+        mDatabaseHelper = new DatabaseHelper(context);
 
     }
 
@@ -51,51 +51,38 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
 
     //Set display values of view objects.
     @Override
-    public void onBindViewHolder(@NonNull ShopAdapter.ShopViewHolder holder, int i) {
+    public void onBindViewHolder(@NonNull final ShopAdapter.ShopViewHolder holder, int i) {
         final SpaceShipShop space = spaceShip.get(i);
         Glide.with(mContext)
                 .asBitmap()
-                .load(R.drawable.spaceship_6)
+                .load(R.drawable.spaceship_3)
                 .into(holder.imageSpaceShip);
 
         if(space.getLocked() == 0){
             holder.price.setText(R.string.you_already);
             holder.coin_or_done.setImageResource(R.drawable.icon_check);
+            holder.buy_or_select.setText(R.string.use_this_space);
 
-            selectDialog = new Dialog(mContext);
-            selectDialog.setContentView(R.layout.dialog_select_item);
-            selectDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            holder.imageSpaceShip.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View view) {
-                    name_space = (TextView) selectDialog.findViewById(R.id.name_space_ship);
-                    name_space.setText(space.getName_ship());
-                    btn_no = (Button) selectDialog.findViewById(R.id.btn_yes_select);
-                    btn_yes = (Button) selectDialog.findViewById(R.id.btn_yes_select);
-                    //Toast.makeText(mContext, space.getName_ship(), Toast.LENGTH_SHORT).show();
-                    selectDialog.show();
-                }
-            });
         }
         else {
             holder.price.setText(String.format("%d" ,space.getPrice()));
-            buyDialog = new Dialog(mContext);
-            buyDialog.setContentView(R.layout.dialog_shop);
-            buyDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            holder.imageSpaceShip.setOnClickListener(new View.OnClickListener() {
+            holder.coin_or_done.setImageResource(R.drawable.icon_coin);
+            holder.buy_or_select.setText(R.string.buy_now);
+            holder.buy_or_select.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    name_space = (TextView) buyDialog.findViewById(R.id.name_space_ship);
-                    price_space = (TextView) buyDialog.findViewById(R.id.price_of_space_ship);
-                    name_space.setText(space.getName_ship());
-                    price_space.setText(String.valueOf(space.getPrice()) + "$");
-                    btn_no = (Button) buyDialog.findViewById(R.id.btn_no_buy);
-                    btn_yes = (Button) buyDialog.findViewById(R.id.btn_yes_buy);
-                    noSelectAndBuy(view);
-                    //Toast.makeText(mContext, space.getName_ship(), Toast.LENGTH_SHORT).show();
-                    buyDialog.show();
+                public void onClick(final View view) {
+                    int number_of_coins;
+                    number_of_coins = mDatabaseHelper.getTotalCoins();
+                    if(number_of_coins < space.getPrice())
+                    {
+                        FancyToast.makeText(mContext , mContext.getString(R.string.cant_buy),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
+                    }
+                    else {
+                        BuySpaceShip(space.getId());
+                    }
                 }
             });
+
         }
 
     }
@@ -115,16 +102,30 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
         private CircleImageView imageSpaceShip;
         private TextView price;
         private ImageView coin_or_done;
+        private Button buy_or_select;
 
         public ShopViewHolder(@NonNull View itemView) {
             super(itemView);
             imageSpaceShip = itemView.findViewById(R.id.image_space_ship);
             price = itemView.findViewById(R.id.price_space_ship);
             coin_or_done = itemView.findViewById(R.id.icon_animation_coin);
+            buy_or_select = itemView.findViewById(R.id.btn_buy_or_select);
         }
     }
 
     public void noSelectAndBuy(View view) {
         view.setEnabled(false);
     }
+
+    public void BuySpaceShip(int id) {
+        boolean updateData = mDatabaseHelper.buySpaceShip(id);
+
+        if (updateData) {
+            FancyToast.makeText(mContext , mContext.getString(R.string.success_buying),FancyToast.LENGTH_LONG, FancyToast.SUCCESS,true).show();
+        }
+      else {
+            FancyToast.makeText(mContext , mContext.getString(R.string.no_success_buying),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
+      }
+    }
+
 }

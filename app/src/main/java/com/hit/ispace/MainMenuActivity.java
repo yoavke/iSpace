@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     private Button btnShop;
     private Button btnInfo;
     public SharedPreferences settings ;
+    private Animation animShake;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,11 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         StartSmartAnimation.startAnimation(findViewById(R.id.btn_shop) , AnimationType.BounceInRight, 3000 , 0 , true );
         StartSmartAnimation.startAnimation(findViewById(R.id.btn_info) , AnimationType.BounceInRight, 3000 , 0 , true );
 
+
+        animShake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        btnFreeStyle.startAnimation(animShake);
+        btnFaster.startAnimation(animShake);
+        btnGettingSick.startAnimation(animShake);
 
         btnFreeStyle.setOnClickListener(this);
         btnFaster.setOnClickListener(this);

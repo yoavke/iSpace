@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="280dp"
-    android:layout_height="280dp"
+    android:layout_height="400dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="1dp"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:layout_width="280dp"
@@ -12,7 +13,8 @@
         app:cardCornerRadius="4dp"
         app:cardMaxElevation="2dp"
         app:cardElevation="1dp"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        app:cardBackgroundColor="@color/colorLayout">
 
 
         <LinearLayout
@@ -29,6 +31,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
                 android:scaleType="centerCrop"
+                app:civ_border_width="4dp"
+                app:civ_border_color="@color/whiteColor"
                 android:src="@drawable/ic_launcher_background" />
 
             <LinearLayout
@@ -49,7 +53,7 @@
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
                     android:text="5000"
-                    android:textColor="#000" />
+                    android:textColor="@color/blackColor" />
 
                 <ImageView
                     android:id="@+id/icon_animation_coin"
@@ -64,5 +68,28 @@
 
     </android.support.v7.widget.CardView>
 
-</RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="17sp"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:text="@string/swipe_more"
+        android:textColor="@color/whiteColor" />
+
+    <Button
+        android:id="@+id/btn_buy_or_select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/frame_btn_shop"
+        android:layout_margin="20dp"
+        android:text="@string/buy_now"
+        android:layout_gravity="center"/>
+
+</LinearLayout>
 

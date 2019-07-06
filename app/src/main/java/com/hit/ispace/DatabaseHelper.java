@@ -61,12 +61,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO levels(level,speed) VALUES('Free Style',1)");
         db.execSQL("INSERT INTO levels(level,speed) VALUES('Getting Sick',2)");
         db.execSQL("INSERT INTO bank(coins_total,coins_now) VALUES(8000,0)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(1,'Space Ship 1','R.drawable.spaceship1',1,500)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(2,'Space Ship 2','R.drawable.spaceship2',1,1000)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(3,'Space Ship 3','R.drawable.spaceship3',1,2000)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(4,'Space Ship 4','R.drawable.spaceship4',0,3000)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(5,'Space Ship 5','R.drawable.spaceship5',1,4000)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(6,'Space Ship 6','R.drawable.spaceship6',1,5000)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(1,'Space Ship 1','R.drawable.spaceship_1',1,100)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(2,'Space Ship 2','R.drawable.spaceship_2',1,150)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(3,'Space Ship 3','R.drawable.spaceship_3',1,200)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(4,'Space Ship 4','R.drawable.spaceship_4',1,250)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(5,'Space Ship 5','R.drawable.spaceship_5',1,300)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(6,'Space Ship 6','R.drawable.spaceship_6',1,400)");
     }
 
     @Override
@@ -216,27 +216,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return coins_total;
     }
 
-    public boolean buySpaceShip(int cost_of_product)
+    public boolean buySpaceShip(int id)
     {
-        int total_coins = NULL , new_total_coins;
+        int total_coins, new_total_coins, cost_of_product;
         SQLiteDatabase db = getReadableDatabase();
+
         String query = "SELECT coins_total FROM bank";
         Cursor data = db.rawQuery(query, null);
         data.moveToFirst();
-        int coins_total = data.getInt(data.getColumnIndex("coins_total"));
+        total_coins = data.getInt(data.getColumnIndex("coins_total"));
+
+        String query1 = "SELECT price FROM spaceships WHERE id="+id;
+        Cursor data1 = db.rawQuery(query1, null);
+        data1.moveToFirst();
+        cost_of_product = data1.getInt(data1.getColumnIndex("price"));
+
         new_total_coins = total_coins - cost_of_product ;
         ContentValues contentValues = new ContentValues();
         contentValues.put(BANK_COL_1 , new_total_coins);
-
-        Log.i(TAG, "buySpaceShip: Update coins " + new_total_coins + " to " + TABLE_NAME_RECORDS);
-
         long result = db.update(TABLE_NAME_BANK, contentValues,null, null);
 
-        //if date as update incorrectly it will return -1
+        ContentValues contentValues1 = new ContentValues();
+        contentValues1.put(SPACESHIPS_COL_4 , 0);
+        long result1 = db.update(TABLE_NAME_SPACE_SHIPS, contentValues1,"id="+id, null);
+
         if (result == -1) {
             return false;
         } else {
-            return true;
+            if(result1 == -1)
+                return false;
+            else
+                return true;
         }
     }
 
