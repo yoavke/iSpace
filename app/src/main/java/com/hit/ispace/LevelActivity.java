@@ -1,13 +1,18 @@
 package com.hit.ispace;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class LevelActivity extends AppCompatActivity {
 
@@ -62,12 +67,12 @@ public class LevelActivity extends AppCompatActivity {
                     //stopping threads
                     levelView.animateElementThread.quit();
                     levelView.createElementThread.quit();
-                    LevelActivity.this.waitEndGameThread.quit();
-
                     //end the game
-                    finishGame(level.getNumCoinsEarned());
+                    finishGame(level.getNumCoinsEarned(), (int)(LevelActivity.this.levelView.getKm()/100));
+                    LevelActivity.this.waitEndGameThread.quit();
+                } else {
+                    waitEndGameHandler.postDelayed(this, 10);
                 }
-                waitEndGameHandler.postDelayed(this, 10);
             }
         }, 1000);
 
@@ -87,11 +92,43 @@ public class LevelActivity extends AppCompatActivity {
         });
     }
 
-    public void finishGame(int coinsEarned) {
+    public void finishGame(int coinsEarned, int kmPassed) {
         //TODO add coins to the bank database
         Log.d(TAG, "coins earned in game: " +coinsEarned);
         DatabaseHelper db = new DatabaseHelper(this);
         db.updateCoin(coinsEarned);
+        ArrayList<UserScore> userScores = db.checkScore(this.level.getLevelType(), kmPassed);
+
+        //1st-5th place
+        if (userScores.size()<5 || userScores == null) {
+            //open dialog for 1st place
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
+            View myView = getLayoutInflater().inflate(R.layout.dialog_high_score, null);
+
+            final TextView score = myView.findViewById(R.id.user_score);
+            builder.setView(myView);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            //another try to open dialog
+//            Dialog myDialog = new Dialog(LevelActivity.this);
+//            myDialog.setContentView(R.layout.dialog_high_score);
+//            TextView score = myDialog.findViewById(R.id.user_score);
+//            score.setText(Integer.toString(kmPassed));
+//            myDialog.show();
+//            Log.e(TAG, "test");
+        }
+        //not in top 5
+        else {
+            AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
+            View myView = getLayoutInflater().inflate(R.layout.dialog_score, null);
+
+            final TextView score = myView.findViewById(R.id.user_score);
+            builder.setView(myView);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
 
         //finish activity with relevant request_code
         //set intent for data (coins earned will be sent to called activity

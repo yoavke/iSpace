@@ -4,7 +4,7 @@ public class UserScore
 {
     private String name;
     private int score;
-    private String level;
+    private int level;
 
     public UserScore(){}
 
@@ -18,11 +18,11 @@ public class UserScore
         return name;
     }
 
-    public String getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public void setLevel(String level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 

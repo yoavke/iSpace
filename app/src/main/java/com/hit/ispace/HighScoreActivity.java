@@ -48,11 +48,11 @@ public class HighScoreActivity extends AppCompatActivity {
         recyclerFasterView.setLayoutManager(new LinearLayoutManager(this));
         recyclerGettingSickView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new HighScoreAdapter(mDatabaseHelper.getTopFreeStyle());
+        adapter = new HighScoreAdapter(mDatabaseHelper.getTopHighScore(1));
         recyclerFreeStyleView.setAdapter(adapter);
-        adapter = new HighScoreAdapter(mDatabaseHelper.getTopFaster());
+        adapter = new HighScoreAdapter(mDatabaseHelper.getTopHighScore(2));
         recyclerFasterView.setAdapter(adapter);
-        adapter = new HighScoreAdapter(mDatabaseHelper.getTopGettingSick());
+        adapter = new HighScoreAdapter(mDatabaseHelper.getTopHighScore(3));
         recyclerGettingSickView.setAdapter(adapter);
 
         settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);

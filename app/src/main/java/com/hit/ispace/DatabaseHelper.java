@@ -134,6 +134,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (data.moveToFirst()) {
             do {
                 UserScore userScore = new UserScore();
+                userScore.setLevel(id_level);
+                userScore.setName(data.getString(data.getColumnIndex("name")));
+                userScore.setScore(data.getInt(data.getColumnIndex("record")));
+                userScoreList.add(userScore);
+            } while (data.moveToNext());
+        }
+        data.close();
+        return userScoreList;
+    }
+
+    public ArrayList<UserScore> checkScore(int id_level, int score)
+    {
+        ArrayList<UserScore> userScoreList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT name,record FROM records where record<"+score+" AND level="+id_level+ " ORDER BY record DESC";
+        Cursor data = db.rawQuery(query, null);
+        if (data.moveToFirst()) {
+            do {
+                UserScore userScore = new UserScore();
+                userScore.setLevel(id_level);
                 userScore.setName(data.getString(data.getColumnIndex("name")));
                 userScore.setScore(data.getInt(data.getColumnIndex("record")));
                 userScoreList.add(userScore);
