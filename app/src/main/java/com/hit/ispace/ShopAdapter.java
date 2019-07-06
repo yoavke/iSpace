@@ -59,11 +59,23 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
                 .load(R.drawable.spaceship_3)
                 .into(holder.imageSpaceShip);
 
-        if(space.getLocked() == 0){
+        if(space.getLocked() == 0) {
             holder.price.setText(R.string.you_already);
             holder.coin_or_done.setImageResource(R.drawable.icon_check);
             holder.buy_or_select.setText(R.string.use_this_space);
+            //holder.buy_or_select.setOnClickListener(new View.OnClickListener() {
+                //@Override
+                //need add metoda for say if he use this space so dont need change this space else do change and say this change successful
+                /*public void onClick(final View view) {
+                    if () {
+                        FancyToast.makeText(mContext, mContext.getString(R.string.cant_buy), FancyToast.LENGTH_LONG, FancyToast.ERROR, true).show();
+                    }
+                    else {
 
+                    }
+                }
+
+            });*/
         }
         else {
             holder.price.setText(String.format("%d" ,space.getPrice()));

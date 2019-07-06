@@ -10,16 +10,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.RelativeLayout;
 
-import com.github.jinatonic.confetti.CommonConfetti;
-
 public class HighScoreActivity extends AppCompatActivity {
 
     DatabaseHelper mDatabaseHelper;
     private RecyclerView recyclerFreeStyleView,recyclerFasterView,recyclerGettingSickView;
     private HighScoreAdapter adapter;
     private SharedPreferences settings;
+    private MediaPlayer high_score;
     private RelativeLayout container;
     private boolean isPlayed;
+
 
 
     @Override
@@ -34,6 +34,7 @@ public class HighScoreActivity extends AppCompatActivity {
     private void initView() {
 
         container = findViewById(R.id.container_high_score_activity);
+        high_score= MediaPlayer.create(this, R.raw.high_score);
 
         recyclerFreeStyleView = findViewById(R.id.recycler_free_style_score);
         recyclerFasterView = findViewById(R.id.recycler_faster_score);
@@ -57,6 +58,8 @@ public class HighScoreActivity extends AppCompatActivity {
         settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
         //lastScore = getIntent().getIntExtra("isInTable", 0);
         isPlayed = getIntent().getBooleanExtra("isPlayed", false);
+        playSound(R.raw.high_score);
+
     }
 
     public String readSetting (String key)
