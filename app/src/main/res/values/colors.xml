@@ -15,5 +15,7 @@
     <color name="specialColor">#D6463F</color>
     <color name="empty_back">#77E9E2E2</color>
     <color name="greenColor">#67C76B</color>
+    <color name="blueColor">#798DF0D6</color>
+    <color name="purpleWhite">#66C051C5</color>
 
 </resources>

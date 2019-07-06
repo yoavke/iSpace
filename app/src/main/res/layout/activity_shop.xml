@@ -48,12 +48,18 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="40dp">
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_margin="20dp">
 
                 <TextView
                     android:id="@+id/text_coins"
-                    android:layout_width="318dp"
+                    android:layout_width="110dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:gravity="center"
@@ -62,12 +68,6 @@
                     android:textColor="@color/whiteColor"
                     android:textStyle="bold"
                     android:fontFamily="casual"/>
-
-            <LinearLayout
-                android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_margin="20dp">
 
                 <TextView
                     android:id="@+id/coins_value"
@@ -92,14 +92,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center">
+                android:layout_height="400dp"
+                android:gravity="center"
+                android:orientation="vertical">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_space_ship"
                 android:layout_width="280dp"
-                android:layout_height="280dp"
-                android:background="@drawable/layout_ripple"
+                android:layout_height="400dp"
                 android:layout_gravity="center"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/title_high_score">
