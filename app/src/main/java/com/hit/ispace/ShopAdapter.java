@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -69,7 +70,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
             holder.coin_or_done.setImageResource(R.drawable.icon_coin);
             holder.buy_or_select.setText(R.string.buy_now);
             holder.buy_or_select.setOnClickListener(new View.OnClickListener() {
-                @Override
+                    @Override
                 public void onClick(final View view) {
                     int number_of_coins;
                     number_of_coins = mDatabaseHelper.getTotalCoins();
@@ -81,6 +82,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
                         BuySpaceShip(space.getId());
                     }
                 }
+
             });
 
         }

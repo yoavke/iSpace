@@ -10,6 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.RelativeLayout;
 
+import com.github.jinatonic.confetti.CommonConfetti;
+
 public class HighScoreActivity extends AppCompatActivity {
 
     DatabaseHelper mDatabaseHelper;
@@ -17,7 +19,6 @@ public class HighScoreActivity extends AppCompatActivity {
     private HighScoreAdapter adapter;
     private SharedPreferences settings;
     private RelativeLayout container;
-    //private int lastScore;
     private boolean isPlayed;
 
 
@@ -27,27 +28,32 @@ public class HighScoreActivity extends AppCompatActivity {
         setContentView(R.layout.activity_score);
         mDatabaseHelper = new DatabaseHelper(this);
 
-        iniwtView();
+        initView();
     }
 
-    private void iniwtView() {
+    private void initView() {
+
+        container = findViewById(R.id.container_high_score_activity);
 
         recyclerFreeStyleView = findViewById(R.id.recycler_free_style_score);
         recyclerFasterView = findViewById(R.id.recycler_faster_score);
         recyclerGettingSickView = findViewById(R.id.recycler_getting_sick_score);
+
         recyclerFreeStyleView.setHasFixedSize(true);
         recyclerFasterView.setHasFixedSize(true);
         recyclerGettingSickView.setHasFixedSize(true);
-        container = findViewById(R.id.container_high_score_activity);
+
         recyclerFreeStyleView.setLayoutManager(new LinearLayoutManager(this));
         recyclerFasterView.setLayoutManager(new LinearLayoutManager(this));
         recyclerGettingSickView.setLayoutManager(new LinearLayoutManager(this));
+
         adapter = new HighScoreAdapter(mDatabaseHelper.getTopFreeStyle());
         recyclerFreeStyleView.setAdapter(adapter);
         adapter = new HighScoreAdapter(mDatabaseHelper.getTopFaster());
         recyclerFasterView.setAdapter(adapter);
         adapter = new HighScoreAdapter(mDatabaseHelper.getTopGettingSick());
         recyclerGettingSickView.setAdapter(adapter);
+
         settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
         //lastScore = getIntent().getIntExtra("isInTable", 0);
         isPlayed = getIntent().getBooleanExtra("isPlayed", false);
