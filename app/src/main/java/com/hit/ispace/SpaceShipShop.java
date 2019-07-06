@@ -3,13 +3,13 @@ package com.hit.ispace;
 public class SpaceShipShop {
     private int id;
     private String name_ship;
-    private int src_path;
+    private String src_path;
     private int locked;
     private int price;
 
     public SpaceShipShop(){}
 
-    public SpaceShipShop(int id, String name_ship, int src_path, int locked,int price)
+    public SpaceShipShop(int id, String name_ship, String src_path, int locked,int price)
     {
         this.id = id;
         this.name_ship = name_ship;
@@ -24,7 +24,7 @@ public class SpaceShipShop {
         return name_ship;
     }
 
-    public int getSrc_path() {
+    public String getSrc_path() {
         return src_path;
     }
 
@@ -40,7 +40,7 @@ public class SpaceShipShop {
         this.name_ship = name_ship;
     }
 
-    public void setSrc_path(int src_path) {
+    public void setSrc_path(String src_path) {
         this.src_path = src_path;
     }
 

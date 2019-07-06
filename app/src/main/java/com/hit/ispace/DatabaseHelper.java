@@ -24,6 +24,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME_RECORDS = "records";
     private static final String TABLE_NAME_BANK = "bank";
     private static final String TABLE_NAME_SPACE_SHIPS = "spaceships";
+    private static final String TABLE_NAME_MY_SPACESHIP = "myspaceship";
 
     //levels columns
     private static final String LEVELS_COL_1 = "id";
@@ -40,12 +41,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String BANK_COL_1 = "coins_total";
     private static final String BANK_COL_2 = "coins_now";
 
-    //spaceships
+    //spaceships columns
     private static final String SPACESHIPS_COL_1 = "id";
     private static final String SPACESHIPS_COL_2 = "name";
     private static final String SPACESHIPS_COL_3 = "src_path";
     private static final String SPACESHIPS_COL_4 = "locked";
     private static final String SPACESHIPS_COL_5 = "price";
+
+    //myspaceship columns
+    private static final String MYSPACESHIP_COL1 = "spaceship_id";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -58,15 +62,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + TABLE_NAME_RECORDS + " ("+RECORDS_COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+RECORDS_COL_2+" INTEGER, "+RECORDS_COL_3+" INTEGER, "+RECORDS_COL_4+" TEXT)");
         db.execSQL("create table " + TABLE_NAME_BANK + " ("+BANK_COL_1+" INTEGER, "+BANK_COL_2+" INTEGER)");
         db.execSQL("create table " + TABLE_NAME_SPACE_SHIPS + " ("+SPACESHIPS_COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+SPACESHIPS_COL_2+" TEXT, "+SPACESHIPS_COL_3+" INTEGER, "+SPACESHIPS_COL_4+" INTEGER,"+SPACESHIPS_COL_5+" INTEGER )");
+        db.execSQL("create table " + TABLE_NAME_MY_SPACESHIP + "("+MYSPACESHIP_COL1+" INTEGER)");
         db.execSQL("INSERT INTO levels(level,speed) VALUES('Free Style',1)");
         db.execSQL("INSERT INTO levels(level,speed) VALUES('Getting Sick',2)");
         db.execSQL("INSERT INTO bank(coins_total,coins_now) VALUES(8000,0)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(1,'Space Ship 1','R.drawable.spaceship_1',1,100)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(2,'Space Ship 2','R.drawable.spaceship_2',1,150)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(3,'Space Ship 3','R.drawable.spaceship_3',1,200)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(4,'Space Ship 4','R.drawable.spaceship_4',1,250)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(5,'Space Ship 5','R.drawable.spaceship_5',1,300)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(6,'Space Ship 6','R.drawable.spaceship_6',1,400)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(1,'Space Ship 1','spaceship_1',1,100)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(2,'Space Ship 2','spaceship_2',1,150)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(3,'Space Ship 3','spaceship_3',1,200)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(4,'Space Ship 4','spaceship_4',1,250)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(5,'Space Ship 5','spaceship_5',1,300)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(6,'Space Ship 6','spaceship_6',1,400)");
+        db.execSQL("INSERT INTO "+TABLE_NAME_MY_SPACESHIP+"("+MYSPACESHIP_COL1+") VALUES(1)");
+
     }
 
     @Override
@@ -174,7 +181,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 SpaceShipShop spaceShipShop = new SpaceShipShop();
                 spaceShipShop.setId(data.getInt(data.getColumnIndex("id")));
                 spaceShipShop.setName_ship(data.getString(data.getColumnIndex("name")));
-                spaceShipShop.setSrc_path(data.getInt(data.getColumnIndex("src_path")));
+                spaceShipShop.setSrc_path(data.getString(data.getColumnIndex("src_path")));
                 spaceShipShop.setLocked(data.getInt(data.getColumnIndex("locked")));
                 spaceShipShop.setPrice(data.getInt(data.getColumnIndex("price")));
                 spaceShipList.add(spaceShipShop);

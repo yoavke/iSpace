@@ -2,6 +2,8 @@ package com.hit.ispace;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -54,11 +56,14 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
     @Override
     public void onBindViewHolder(@NonNull final ShopAdapter.ShopViewHolder holder, int i) {
         final SpaceShipShop space = spaceShip.get(i);
+        Resources res = this.mContext.getResources();
+        String spaceshipBitmap = spaceShip.get(i).getSrc_path();
+        int resID = res.getIdentifier(spaceshipBitmap , "drawable", mContext.getPackageName());
+        Drawable drawable = res.getDrawable(resID );
         Glide.with(mContext)
                 .asBitmap()
-                .load(R.drawable.spaceship_3)
+                .load(drawable)
                 .into(holder.imageSpaceShip);
-
         if(space.getLocked() == 0) {
             holder.price.setText(R.string.you_already);
             holder.coin_or_done.setImageResource(R.drawable.icon_check);
