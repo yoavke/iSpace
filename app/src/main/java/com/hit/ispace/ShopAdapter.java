@@ -70,8 +70,8 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
                 public void onClick(final View view) {
                     name_space = (TextView) selectDialog.findViewById(R.id.name_space_ship);
                     name_space.setText(space.getName_ship());
-                    btn_yes = (Button) selectDialog.findViewById(R.id.btn_yes_buy);
-                    noSelect(view);
+                    btn_no = (Button) selectDialog.findViewById(R.id.btn_yes_select);
+                    btn_yes = (Button) selectDialog.findViewById(R.id.btn_yes_select);
                     //Toast.makeText(mContext, space.getName_ship(), Toast.LENGTH_SHORT).show();
                     selectDialog.show();
                 }
@@ -89,6 +89,9 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
                     price_space = (TextView) buyDialog.findViewById(R.id.price_of_space_ship);
                     name_space.setText(space.getName_ship());
                     price_space.setText(String.valueOf(space.getPrice()) + "$");
+                    btn_no = (Button) buyDialog.findViewById(R.id.btn_no_buy);
+                    btn_yes = (Button) buyDialog.findViewById(R.id.btn_yes_buy);
+                    noSelectAndBuy(view);
                     //Toast.makeText(mContext, space.getName_ship(), Toast.LENGTH_SHORT).show();
                     buyDialog.show();
                 }
@@ -121,7 +124,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
         }
     }
 
-    public void noSelect(View view) {
-        
+    public void noSelectAndBuy(View view) {
+        view.setEnabled(false);
     }
 }
