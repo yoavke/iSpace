@@ -30,6 +30,7 @@ public class LevelView extends View {
     private boolean gameEnded;
     private long startTime;
     private long checkTime;
+    private long km;
     private int speed;
 
     protected HandlerThread createElementThread;
@@ -110,6 +111,7 @@ public class LevelView extends View {
         {
             //free style - moving in natural way - left goes left and right goes right
             case CSettings.LevelTypes.FREE_STYLE:
+            case CSettings.LevelTypes.FASTER:
                 //if spaceship will remain in border of game after moving, make the move
                 if (this.level.spaceship.getLeftTop().getX()+move >= 0 && this.level.spaceship.getLeftTop().getX()+move <= getWidth()-level.spaceship.getBitmapSrc().getWidth()) {
 
@@ -119,12 +121,9 @@ public class LevelView extends View {
 
                     //logs the moves
                     if (move > 0)
-                        Log.i(TAG, "spaceship moves " + move + " to right");
+                        Log.d(TAG, "spaceship moves " + move + " to right");
                     else if (move < 0)
-                        Log.i(TAG, "spaceship moves " + Math.abs(move) + " to Left");
-
-                    Log.i(TAG, "GETTING SICK: leftTop("+this.level.spaceship.getLeftTop().getX()+","+this.level.spaceship.getLeftTop().getY()+") rightBottom("+this.level.spaceship.getRightBottom().getX()+","+this.level.spaceship.getRightBottom().getY()+")");
-
+                        Log.d(TAG, "spaceship moves " + Math.abs(move) + " to Left");
 
                 }
                 //force spaceship stay in border of game
@@ -152,13 +151,9 @@ public class LevelView extends View {
 
                     //logs the moves
                     if (move > 0)
-                        Log.i(TAG, "spaceship moves " + move + " to left");
+                        Log.d(TAG, "spaceship moves " + move + " to left");
                     else if (move < 0)
-                        Log.i(TAG, "spaceship moves " + Math.abs(move) + " to right");
-
-                    if (move!=0)
-                        Log.i(TAG, "GETTING SICK: leftTop("+this.level.spaceship.getLeftTop().getX()+","+this.level.spaceship.getLeftTop().getY()+") rightBottom("+this.level.spaceship.getRightBottom().getX()+","+this.level.spaceship.getRightBottom().getY()+")");
-
+                        Log.d(TAG, "spaceship moves " + Math.abs(move) + " to right");
 
                 }
                 //force spaceship stay in border of game
@@ -194,7 +189,7 @@ public class LevelView extends View {
         Point topLeft = new Point((this.screenWidth / 2) - (this.level.spaceship.getBitmapSrc().getWidth() / 2),this.screenHeight-(100*2));
         Point bottomRight = new Point(topLeft.getX()+100, topLeft.getY()+100);
         this.level.spaceship.setCoordinates(topLeft,bottomRight);
-        Log.i(TAG, "GETTING SICK: init at leftTop("+this.level.spaceship.getLeftTop().getX()+","+this.level.spaceship.getLeftTop().getY()+") rightBottom("+this.level.spaceship.getRightBottom().getX()+","+this.level.spaceship.getRightBottom().getY()+")");
+        Log.d(TAG, "GETTING SICK: init at leftTop("+this.level.spaceship.getLeftTop().getX()+","+this.level.spaceship.getLeftTop().getY()+") rightBottom("+this.level.spaceship.getRightBottom().getX()+","+this.level.spaceship.getRightBottom().getY()+")");
         invalidate();
 
         //start timer
@@ -245,7 +240,7 @@ public class LevelView extends View {
             public void run() {
 
                 LevelView.this.checkTime = System.currentTimeMillis();
-                long km = (LevelView.this.checkTime-LevelView.this.startTime);
+                LevelView.this.km = (LevelView.this.checkTime-LevelView.this.startTime);
 
                 if (km>=5000 && km<15000) {
                     LevelView.this.speed = 3;
@@ -276,7 +271,6 @@ public class LevelView extends View {
                                 case "SuperRock":
                                     Log.i(TAG, "SuperRock hit!!!!!!");
                                     LevelView.this.level.reduceNumCoins();
-                                    LevelView.this.setGameEnded(true);
                                     break;
                                 case "GoodBomb":
                                     Log.i(TAG, "GoodBomb hit!!!!!!");
@@ -288,7 +282,7 @@ public class LevelView extends View {
                                     break;
                             }
 
-                            Log.i(TAG, "Hit " + elem.sayMyName());
+                            Log.d(TAG, "Hit " + elem.sayMyName());
                             LevelView.this.level.elementFactory.getElemList().remove(elem);
                             postInvalidate();
                         }
@@ -319,5 +313,10 @@ public class LevelView extends View {
 
     public void setGameEnded(boolean gameEnded) {
         this.gameEnded = gameEnded;
+    }
+
+    public long getKm()
+    {
+        return this.km;
     }
 }

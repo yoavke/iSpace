@@ -16,6 +16,7 @@ public class LevelActivity extends AppCompatActivity {
     private Handler waitEndGameHandler;
     private Level level;
     private TextView scoreTxt, coinsTxt;
+    private LevelView levelView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,7 @@ public class LevelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_level);
 
         //get the view of the level
-        final LevelView levelView = findViewById(R.id.levelview);
+        levelView = findViewById(R.id.levelview);
         this.scoreTxt = findViewById(R.id.score_value);
         this.coinsTxt = findViewById(R.id.coins_value);
 
@@ -76,10 +77,12 @@ public class LevelActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                int coinsValue;
+                int coinsValue, kmValue;
                 coinsValue = LevelActivity.this.level.getNumCoinsEarned();
-                Log.e(TAG, "thread: " + Thread.currentThread().getName());
+                kmValue = (int)(LevelActivity.this.levelView.getKm()/100);
+
                 LevelActivity.this.coinsTxt.setText(Integer.toString(coinsValue));
+                LevelActivity.this.scoreTxt.setText(Integer.toString(kmValue));
             }
         });
     }

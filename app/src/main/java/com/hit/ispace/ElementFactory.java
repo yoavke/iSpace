@@ -78,7 +78,7 @@ public final class ElementFactory implements Runnable{
                 else if (selectedByPriority>=34 && selectedByPriority<=63) {
                     flyingElem = CSettings.FlyingElements.ROCK;
                 }
-                //15% superrock
+                //30% superrock
                 else if (selectedByPriority>=64 && selectedByPriority<=93) {
                     flyingElem = CSettings.FlyingElements.SUPERROCK;
                 }
