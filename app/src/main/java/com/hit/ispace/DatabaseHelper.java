@@ -122,14 +122,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Returns top 5 on Free Style game
+     * Returns top 5
      * @return
      */
-    public List<UserScore> getTopFreeStyle()
+    public List<UserScore> getTopHighScore(int id_level)
     {
         List<UserScore> userScoreList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        String query = "SELECT name,record FROM records where level=1 ORDER BY record DESC limit 5";
+        String query = "SELECT name,record FROM records where level="+id_level+ " ORDER BY record DESC limit 5";
         Cursor data = db.rawQuery(query, null);
         if (data.moveToFirst()) {
             do {
@@ -143,47 +143,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return userScoreList;
     }
 
-    /**
-     * Returns top 5 on Faster game
-     * @return
-     */
-    public List<UserScore> getTopFaster(){
-        List<UserScore> userScoreList = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
-        String query = "SELECT name,record FROM records where level=2 ORDER BY record DESC limit 5";
-        Cursor data = db.rawQuery(query, null);
-        if (data.moveToFirst()) {
-            do {
-                UserScore userScore = new UserScore();
-                userScore.setName(data.getString(data.getColumnIndex("name")));
-                userScore.setScore(data.getInt(data.getColumnIndex("record")));
-                userScoreList.add(userScore);
-            } while (data.moveToNext());
-        }
-        data.close();
-        return userScoreList;
-    }
-
-    /**
-     * Returns top 5 on Getting Sick game
-     * @return
-     */
-    public List<UserScore> getTopGettingSick(){
-        List<UserScore> userScoreList = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
-        String query = "SELECT name,record FROM records where level=3 ORDER BY record DESC limit 5";
-        Cursor data = db.rawQuery(query, null);
-        if (data.moveToFirst()) {
-            do {
-                UserScore userScore = new UserScore();
-                userScore.setName(data.getString(data.getColumnIndex("name")));
-                userScore.setScore(data.getInt(data.getColumnIndex("record")));
-                userScoreList.add(userScore);
-            } while (data.moveToNext());
-        }
-        data.close();
-        return userScoreList;
-    }
 
     public List<SpaceShipShop> getAllSpaceShip(){
         List<SpaceShipShop> spaceShipList = new ArrayList<>();
