@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".HighScoreActivity"
-    android:background="@drawable/background_score"
+    android:background="@color/blackColor"
     android:padding="16dp">
 
     <LinearLayout
@@ -55,23 +55,23 @@
             android:layout_marginTop="25dp"
             android:gravity="center"
             android:text="@string/text_user_high_score"
-            android:textSize="40sp"
+            android:textSize="20sp"
             android:fontFamily="casual"
             android:textStyle="bold"
             android:textColor="@color/whiteColor"/>
 
         <ImageView
             android:id="@+id/icon_animation_stars"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:src="@drawable/frame_animation_stars"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="55dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/text_user_score"
-            android:textSize="40sp"
+            android:textSize="20sp"
             android:textColor="@color/specialColor"
             android:fontFamily="casual"
             android:layout_gravity="center"
@@ -80,9 +80,9 @@
         <TextView
             android:id="@+id/user_score"
             android:layout_width="wrap_content"
-            android:layout_height="70dp"
+            android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textSize="30sp"
+            android:textSize="25sp"
             android:textColor="@color/whiteColor"
             android:fontFamily="casual"
             android:layout_gravity="center"
