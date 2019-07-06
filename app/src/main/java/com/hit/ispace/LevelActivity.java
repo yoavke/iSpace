@@ -23,6 +23,9 @@ public class LevelActivity extends AppCompatActivity {
     private TextView scoreTxt, coinsTxt;
     private LevelView levelView;
 
+    private int coinsEarned;
+    private int kmPassed;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,42 +96,43 @@ public class LevelActivity extends AppCompatActivity {
     }
 
     public void finishGame(int coinsEarned, int kmPassed) {
-        //TODO add coins to the bank database
-        Log.d(TAG, "coins earned in game: " +coinsEarned);
-        DatabaseHelper db = new DatabaseHelper(this);
-        db.updateCoin(coinsEarned);
-        ArrayList<UserScore> userScores = db.checkScore(this.level.getLevelType(), kmPassed);
+        this.coinsEarned = coinsEarned;
+        this.kmPassed = kmPassed;
 
-        //1st-5th place
-        if (userScores.size()<5 || userScores == null) {
-            //open dialog for 1st place
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //TODO add coins to the bank database
+                Log.d(TAG, "coins earned in game: " +LevelActivity.this.coinsEarned);
+                DatabaseHelper db = new DatabaseHelper(LevelActivity.this);
+                db.updateCoin(LevelActivity.this.coinsEarned);
+                ArrayList<UserScore> userScores = db.checkScore(LevelActivity.this.level.getLevelType(), LevelActivity.this.kmPassed);
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
-            View myView = getLayoutInflater().inflate(R.layout.dialog_high_score, null);
+                //1st-5th place
+                if (userScores.size()<5 || userScores == null) {
+                    //open dialog for 1st place
 
-            final TextView score = myView.findViewById(R.id.user_score);
-            builder.setView(myView);
-            AlertDialog dialog = builder.create();
-            dialog.show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
+                    View myView = getLayoutInflater().inflate(R.layout.dialog_high_score, null);
 
-            //another try to open dialog
-//            Dialog myDialog = new Dialog(LevelActivity.this);
-//            myDialog.setContentView(R.layout.dialog_high_score);
-//            TextView score = myDialog.findViewById(R.id.user_score);
-//            score.setText(Integer.toString(kmPassed));
-//            myDialog.show();
-//            Log.e(TAG, "test");
-        }
-        //not in top 5
-        else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
-            View myView = getLayoutInflater().inflate(R.layout.dialog_score, null);
+                    final TextView score = myView.findViewById(R.id.user_score);
+                    builder.setView(myView);
+                    score.setText(Integer.toString(LevelActivity.this.kmPassed));
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                //not in top 5
+                else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
+                    View myView = getLayoutInflater().inflate(R.layout.dialog_score, null);
 
-            final TextView score = myView.findViewById(R.id.user_score);
-            builder.setView(myView);
-            AlertDialog dialog = builder.create();
-            dialog.show();
-        }
+                    final TextView score = myView.findViewById(R.id.user_score);
+                    builder.setView(myView);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+            }
+        });
 
         //finish activity with relevant request_code
         //set intent for data (coins earned will be sent to called activity
