@@ -231,7 +231,7 @@ public class LevelView extends View {
                     }
                 }
 
-                createElementHandler.postDelayed(this, 700*LevelView.this.speed);
+                createElementHandler.postDelayed(this, (LevelView.this.level.getLevelType()==CSettings.LevelTypes.FREE_STYLE?700:350)*LevelView.this.speed);
             }
         }, 500);
 
@@ -249,8 +249,8 @@ public class LevelView extends View {
                 }
                 CopyOnWriteArrayList<IElement> templist = LevelView.this.level.elementFactory.getElemList();
                 for (IElement elem : templist) {
-                    Point newTopLeft = new Point(elem.getLeftTop().getX(),elem.getLeftTop().getY()+1);
-                    Point newBottomRight = new Point(elem.getRightBottom().getX(),elem.getRightBottom().getY()+1);
+                    Point newTopLeft = new Point(elem.getLeftTop().getX(),elem.getLeftTop().getY()+(LevelView.this.level.getLevelType()==CSettings.LevelTypes.FREE_STYLE?1:2));
+                    Point newBottomRight = new Point(elem.getRightBottom().getX(),elem.getRightBottom().getY()+(LevelView.this.level.getLevelType()==CSettings.LevelTypes.FREE_STYLE?1:2));
 
                     if (((LevelView.this.level.spaceship.getLeftTop().getX() >= newTopLeft.getX() && LevelView.this.level.spaceship.getLeftTop().getX() <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getLeftTop().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getLeftTop().getY() <= newBottomRight.getY()))
                             || ((LevelView.this.level.spaceship.getRightBottom().getX() >= newTopLeft.getX() && LevelView.this.level.spaceship.getRightBottom().getX() <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getRightBottom().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getRightBottom().getY() <= newBottomRight.getY()))

@@ -58,8 +58,8 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
         final SpaceShipShop space = spaceShip.get(i);
         Resources res = this.mContext.getResources();
         String spaceshipBitmap = spaceShip.get(i).getSrc_path();
-        int resID = res.getIdentifier(spaceshipBitmap , "drawable", mContext.getPackageName());
-        Drawable drawable = res.getDrawable(resID );
+        int resID = res.getIdentifier("share1" , "drawable", mContext.getPackageName());
+        Drawable drawable = res.getDrawable(resID);
         Glide.with(mContext)
                 .asBitmap()
                 .load(drawable)

@@ -3,6 +3,8 @@ package com.hit.ispace;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -31,6 +33,10 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        Resources res = getResources();
+        int resID = res.getIdentifier("spaceship_1" , "drawable", getPackageName());
+        Drawable drawable = res.getDrawable(resID );
+        Toast.makeText(this,"int: " + resID,Toast.LENGTH_LONG).show();
         initView();
     }
 
