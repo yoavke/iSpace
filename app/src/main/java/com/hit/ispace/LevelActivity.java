@@ -73,10 +73,15 @@ public class LevelActivity extends AppCompatActivity {
     }
 
     public void setValues() {
-        int coinsValue;
-        coinsValue = this.level.getNumCoinsEarned();
-        Log.e(TAG, "thread: " + Thread.currentThread().getName());
-        //this.coinsTxt.setText(Integer.toString(coinsValue));
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                int coinsValue;
+                coinsValue = LevelActivity.this.level.getNumCoinsEarned();
+                Log.e(TAG, "thread: " + Thread.currentThread().getName());
+                LevelActivity.this.coinsTxt.setText(Integer.toString(coinsValue));
+            }
+        });
     }
 
     public void finishGame(int coinsEarned) {
