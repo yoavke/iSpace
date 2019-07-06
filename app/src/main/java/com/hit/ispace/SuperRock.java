@@ -7,6 +7,9 @@ public class SuperRock extends Obstacle implements IDestroyable{
 
     private static final String TAG = SuperRock.class.getSimpleName();
 
+    //num of coins superrock reduces from current level bank
+    protected static final int POWER = 5;
+
     private Point topLeft;
     private Point bottomRight;
     private boolean isDestroyable = false;

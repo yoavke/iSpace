@@ -28,6 +28,9 @@ public class LevelView extends View {
     private int screenHeight=0;
     private int fingerDownX;
     private boolean gameEnded;
+    private long startTime;
+    private long checkTime;
+    private int speed;
 
     protected HandlerThread createElementThread;
     protected HandlerThread animateElementThread;
@@ -39,6 +42,7 @@ public class LevelView extends View {
         Log.i(TAG, "LevelView created");
 
         this.gameEnded = false;
+        this.speed = 4;
         this.createElementThread = new HandlerThread("create elements thread");
         this.animateElementThread = new HandlerThread("animate elements thread");
     }
@@ -119,6 +123,9 @@ public class LevelView extends View {
                     else if (move < 0)
                         Log.i(TAG, "spaceship moves " + Math.abs(move) + " to Left");
 
+                    Log.i(TAG, "GETTING SICK: leftTop("+this.level.spaceship.getLeftTop().getX()+","+this.level.spaceship.getLeftTop().getY()+") rightBottom("+this.level.spaceship.getRightBottom().getX()+","+this.level.spaceship.getRightBottom().getY()+")");
+
+
                 }
                 //force spaceship stay in border of game
 
@@ -141,13 +148,17 @@ public class LevelView extends View {
 
                     //set the new coordinate of spaceship
                     this.level.spaceship.getLeftTop().setX(this.level.spaceship.getLeftTop().getX() - move);
-                    this.level.spaceship.getRightBottom().setX(this.level.spaceship.getLeftTop().getX() - (move + this.level.spaceship.getSpaceshipWidth()));
+                    this.level.spaceship.getRightBottom().setX(this.level.spaceship.getLeftTop().getX()+this.level.spaceship.getSpaceshipWidth());
 
                     //logs the moves
                     if (move > 0)
-                        Log.i(TAG, "spaceship moves " + move + " to right");
+                        Log.i(TAG, "spaceship moves " + move + " to left");
                     else if (move < 0)
-                        Log.i(TAG, "spaceship moves " + Math.abs(move) + " to Left");
+                        Log.i(TAG, "spaceship moves " + Math.abs(move) + " to right");
+
+                    if (move!=0)
+                        Log.i(TAG, "GETTING SICK: leftTop("+this.level.spaceship.getLeftTop().getX()+","+this.level.spaceship.getLeftTop().getY()+") rightBottom("+this.level.spaceship.getRightBottom().getX()+","+this.level.spaceship.getRightBottom().getY()+")");
+
 
                 }
                 //force spaceship stay in border of game
@@ -183,7 +194,11 @@ public class LevelView extends View {
         Point topLeft = new Point((this.screenWidth / 2) - (this.level.spaceship.getBitmapSrc().getWidth() / 2),this.screenHeight-(100*2));
         Point bottomRight = new Point(topLeft.getX()+100, topLeft.getY()+100);
         this.level.spaceship.setCoordinates(topLeft,bottomRight);
+        Log.i(TAG, "GETTING SICK: init at leftTop("+this.level.spaceship.getLeftTop().getX()+","+this.level.spaceship.getLeftTop().getY()+") rightBottom("+this.level.spaceship.getRightBottom().getX()+","+this.level.spaceship.getRightBottom().getY()+")");
         invalidate();
+
+        //start timer
+        this.startTime = System.currentTimeMillis();
 
         //start threads
         createElementThread.start();
@@ -210,37 +225,44 @@ public class LevelView extends View {
                                 elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_good_bomb), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
                                 break;
                             case "Rock":
-                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_asteroid_block), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
+                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_asteroid), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
                                 break;
                             case "SuperRock":
-                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_asteroid), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
+                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_dead_asteroid), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
                                 break;
                             case "Space":
                                 break;
                         }
                     }
-
-                    // remove elements from data structure
-                    if (elem.getLeftTop().getY()>LevelView.this.screenHeight) {
-                        Log.i(TAG, "element " + elem.sayMyName() + " has been removed! " + elem.getLeftTop().getY());
-                        LevelView.this.level.elementFactory.setCollectedSize();
-                        LevelView.this.level.elementFactory.getElemList().remove((IElement)elem);
-                    }
                 }
 
-                createElementHandler.postDelayed(this, 3000);
+                createElementHandler.postDelayed(this, 700*LevelView.this.speed);
             }
         }, 500);
 
         this.animateElementHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
+                LevelView.this.checkTime = System.currentTimeMillis();
+                long km = (LevelView.this.checkTime-LevelView.this.startTime);
+
+                if (km>=5000 && km<15000) {
+                    LevelView.this.speed = 3;
+                    Log.e(TAG, "increase speed to 3");
+                } else if (km>=15000) {
+                    Log.e(TAG, "increase speed to 2");
+                    LevelView.this.speed = 2;
+                }
+                    Log.e(TAG,"km: " + km);
                 CopyOnWriteArrayList<IElement> templist = LevelView.this.level.elementFactory.getElemList();
                 for (IElement elem : templist) {
-                    Point newTopLeft = new Point(elem.getLeftTop().getX(),elem.getLeftTop().getY()+2);
-                    Point newBottomRight = new Point(elem.getRightBottom().getX(),elem.getRightBottom().getY()+2);
+                    Point newTopLeft = new Point(elem.getLeftTop().getX(),elem.getLeftTop().getY()+1);
+                    Point newBottomRight = new Point(elem.getRightBottom().getX(),elem.getRightBottom().getY()+1);
 
-                    if (((LevelView.this.level.spaceship.getLeftTop().getX() >= newTopLeft.getX() && LevelView.this.level.spaceship.getLeftTop().getX() <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getLeftTop().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getLeftTop().getY() <= newBottomRight.getY())) || ((LevelView.this.level.spaceship.getRightBottom().getX() >= newTopLeft.getX() && LevelView.this.level.spaceship.getRightBottom().getX() <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getRightBottom().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getRightBottom().getY() <= newBottomRight.getY())))
+                    if (((LevelView.this.level.spaceship.getLeftTop().getX() >= newTopLeft.getX() && LevelView.this.level.spaceship.getLeftTop().getX() <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getLeftTop().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getLeftTop().getY() <= newBottomRight.getY()))
+                            || ((LevelView.this.level.spaceship.getRightBottom().getX() >= newTopLeft.getX() && LevelView.this.level.spaceship.getRightBottom().getX() <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getRightBottom().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getRightBottom().getY() <= newBottomRight.getY()))
+                            || ((LevelView.this.level.spaceship.getLeftTop().getX()+CSettings.Dimension.SPACESHIP_SIZE >= newTopLeft.getX() && LevelView.this.level.spaceship.getLeftTop().getX()+CSettings.Dimension.SPACESHIP_SIZE <= newBottomRight.getX()) && (LevelView.this.level.spaceship.getLeftTop().getY() >= newTopLeft.getY() && LevelView.this.level.spaceship.getLeftTop().getY() <= newBottomRight.getY())))
                     {
                         if (elem.getHit()==false) {
                             elem.setHit();
@@ -250,8 +272,13 @@ public class LevelView extends View {
                                     LevelView.this.level.incrementNumCoinsEarned();
                                     Log.i(TAG, "1 coin added. total of "+LevelView.this.level.getNumCoinsEarned()+" coins");
                                     break;
+                                case "Rock":
+                                case "Bomb":
+                                    LevelView.this.setGameEnded(true);
+                                    break;
                                 case "SuperRock":
                                     Log.i(TAG, "SuperRock hit!!!!!!");
+                                    LevelView.this.level.reduceNumCoins();
                                     LevelView.this.setGameEnded(true);
                                     break;
                                 case "GoodBomb":
@@ -266,13 +293,22 @@ public class LevelView extends View {
 
                             Log.i(TAG, "Hit " + elem.sayMyName());
                             LevelView.this.level.elementFactory.getElemList().remove(elem);
+                            postInvalidate();
                         }
                     }
                     elem.setCoordinates(newTopLeft, newBottomRight);
-                    Log.w(TAG, "new y: " + elem.getLeftTop().getY() + templist.size());
+                    Log.w(TAG, "new y: " + elem.getLeftTop().getY() + " size: " + templist.size());
+
+                    // remove elements from data structure
+                    if (elem.getLeftTop().getY()>LevelView.this.screenHeight) {
+                        Log.i(TAG, "element " + elem.sayMyName() + " has been removed! " + elem.getLeftTop().getY());
+                        LevelView.this.level.elementFactory.setCollectedSize();
+                        LevelView.this.level.elementFactory.getElemList().remove((IElement)elem);
+                        postInvalidate();
+                    }
                 }
                 postInvalidate();
-                animateElementHandler.postDelayed(this, 5);
+                animateElementHandler.postDelayed(this, LevelView.this.speed);
 
             }
 

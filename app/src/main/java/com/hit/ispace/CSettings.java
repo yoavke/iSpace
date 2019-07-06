@@ -15,7 +15,8 @@ public abstract class CSettings {
 
     public static class LevelTypes{
         public static final int FREE_STYLE = 1;
-        public static final int GETTING_SICK = 2;
+        public static final int FASTER = 2;
+        public static final int GETTING_SICK = 3;
     }
 
     public static class RequestCodes{

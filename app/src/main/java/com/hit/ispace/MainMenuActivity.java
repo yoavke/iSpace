@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.podcopic.animationlib.library.AnimationType;
 import com.podcopic.animationlib.library.StartSmartAnimation;
@@ -23,16 +24,11 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     private Button btnInfo;
     public SharedPreferences settings ;
 
-    private DatabaseHelper myDb;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         initView();
-
-        myDb = new DatabaseHelper(this);
-
     }
 
     private String readSetting(String key) {
@@ -86,19 +82,23 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     //Handle onClick events
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()) {
             case R.id.btn_freestyle:
-                startActivity(new Intent(this, LevelActivity.class));
+                intent = new Intent(this, LevelActivity.class);
+                intent.putExtra("levelType", 1);
+                startActivity(intent);
                 break;
-
             case R.id.btn_faster:
-                startActivity(new Intent(this, LevelActivity.class));
+                intent = new Intent(this, LevelActivity.class);
+                intent.putExtra("levelType", 2);
+                startActivity(intent);
                 break;
-
             case R.id.btn_getting_sick:
-                startActivity(new Intent(this, LevelActivity.class));
+                intent = new Intent(this, LevelActivity.class);
+                intent.putExtra("levelType", 3);
+                startActivity(intent);
                 break;
-
             case R.id.btn_settings:
                 startActivity(new Intent(this, SettingMusicActivity.class));
                 break;

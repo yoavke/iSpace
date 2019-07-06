@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LevelActivity extends AppCompatActivity {
@@ -14,6 +15,7 @@ public class LevelActivity extends AppCompatActivity {
     private HandlerThread waitEndGameThread;
     private Handler waitEndGameHandler;
     private Level level;
+    private TextView scoreTxt, coinsTxt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,11 +24,13 @@ public class LevelActivity extends AppCompatActivity {
 
         //get the view of the level
         final LevelView levelView = findViewById(R.id.levelview);
+        this.scoreTxt = findViewById(R.id.score_value);
+        this.coinsTxt = findViewById(R.id.coins_value);
 
         //set the background of the level view
         levelView.setBackgroundColor(getResources().getColor(R.color.blackColor));
 
-        final int levelType = 1; //getIntent().getIntExtra("levelType", 0);
+        final int levelType = getIntent().getIntExtra("levelType", 0);
         this.waitEndGameThread = new HandlerThread("wait for end of game thread");
         this.waitEndGameThread.start();
         this.waitEndGameHandler = new Handler(waitEndGameThread.getLooper());
@@ -34,6 +38,7 @@ public class LevelActivity extends AppCompatActivity {
         //check if the level type chosen exists
         switch (levelType) {
             case CSettings.LevelTypes.FREE_STYLE:
+            case CSettings.LevelTypes.FASTER:
             case CSettings.LevelTypes.GETTING_SICK:
                 //instantiate level here so we dont instantiate it for level that doesn't exists
                 level = new Level(levelType);
@@ -51,8 +56,7 @@ public class LevelActivity extends AppCompatActivity {
         this.waitEndGameHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Log.d(TAG, "game still playing");
-
+                LevelActivity.this.setValues();
                 if (levelView.isGameEnded()) {
                     //stopping threads
                     levelView.animateElementThread.quit();
@@ -62,10 +66,17 @@ public class LevelActivity extends AppCompatActivity {
                     //end the game
                     finishGame(level.getNumCoinsEarned());
                 }
-                waitEndGameHandler.postDelayed(this, 20);
+                waitEndGameHandler.postDelayed(this, 10);
             }
-        }, 20);
+        }, 1000);
 
+    }
+
+    public void setValues() {
+        int coinsValue;
+        coinsValue = this.level.getNumCoinsEarned();
+        Log.e(TAG, "thread: " + Thread.currentThread().getName());
+        //this.coinsTxt.setText(Integer.toString(coinsValue));
     }
 
     public void finishGame(int coinsEarned) {
