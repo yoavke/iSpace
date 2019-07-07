@@ -112,7 +112,6 @@ public class LevelActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                //TODO add coins to the bank database
                 Log.d(TAG, "coins earned in game: " +LevelActivity.this.coinsEarned);
                 mDatabaseHelper = new DatabaseHelper(LevelActivity.this);
                 mDatabaseHelper.updateCoin(LevelActivity.this.coinsEarned);
