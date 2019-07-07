@@ -52,11 +52,12 @@ public class Level {
         this.numCoinsEarned +=5;
     }
 
-    public void reduceNumCoins() {
-        if (getNumCoinsEarned() <= SuperRock.POWER) {
-            this.numCoinsEarned = 0;
+    public boolean reduceNumCoins() {
+        if (getNumCoinsEarned()-SuperRock.POWER <= 0) {
+            return false;
         } else {
             this.numCoinsEarned -= SuperRock.POWER;
+            return true;
         }
     }
 

@@ -228,7 +228,7 @@ public class LevelView extends View {
                                 elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_dead_asteroid), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
                                 break;
                             case "SuperRock":
-                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_asteroid), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
+                                elem.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.icon_ufo), CSettings.Dimension.ELEMENT_SIZE, CSettings.Dimension.ELEMENT_SIZE, false));
                                 break;
                             case "Space":
                                 break;
@@ -275,7 +275,8 @@ public class LevelView extends View {
                                     break;
                                 case "SuperRock":
                                     Log.i(TAG, "SuperRock hit!!!!!!");
-                                    LevelView.this.level.reduceNumCoins();
+                                    if (!LevelView.this.level.reduceNumCoins())
+                                        LevelView.this.setGameEnded(true);
                                     break;
                                 case "GoodBomb":
                                     Log.i(TAG, "GoodBomb hit!!!!!!");
