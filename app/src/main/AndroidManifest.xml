@@ -20,7 +20,9 @@
         </activity>
         <activity android:name=".LevelActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+
         <activity android:name=".HighScoreActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>

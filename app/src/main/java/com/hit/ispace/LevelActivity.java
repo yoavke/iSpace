@@ -2,7 +2,9 @@ package com.hit.ispace;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -196,6 +198,28 @@ public class LevelActivity extends AppCompatActivity {
                             intent = new Intent(LevelActivity.this, LevelActivity.class);
                             intent.putExtra("levelType", LevelActivity.this.level.getLevelType());
                             startActivity(intent);
+                        }
+                    });
+
+                    btnSharing.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Intent sendIntent = new Intent();
+                            try
+                            {
+                                sendIntent.setAction(Intent.ACTION_SEND);
+                                sendIntent.putExtra(Intent.EXTRA_TEXT,"I got a score of "+ Integer.toString(LevelActivity.this.kmPassed)+", I'll see you passing me");
+                                sendIntent.setType("text/plain");
+                                sendIntent.setPackage("com.whatsapp");
+                                startActivity(sendIntent);
+                            }
+                            catch ( ActivityNotFoundException ex  )
+                            {
+                                // If Waze is not installed, open it in Google Play:
+                                Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "market //details id=whatsapp" ) );
+                                startActivity(intent);
+                            }
                         }
                     });
                     dialog.show();
