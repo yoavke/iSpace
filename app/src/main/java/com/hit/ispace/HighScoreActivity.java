@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -16,8 +17,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.github.jinatonic.confetti.CommonConfetti;
+import nl.dionsegijn.konfetti.KonfettiView;
+import nl.dionsegijn.konfetti.models.Shape;
+import nl.dionsegijn.konfetti.models.Size;
 
 public class HighScoreActivity extends AppCompatActivity {
 
@@ -28,6 +30,7 @@ public class HighScoreActivity extends AppCompatActivity {
     private MediaPlayer high_score;
     private RelativeLayout container;
     private boolean isPlayed;
+    private KonfettiView konfetti;
     private TextView nameTopDialog;
     private Button btnTopFreeStyle ,btnTopFaster , btnTopFreeGettingSick ;
     Dialog dialog;
@@ -39,7 +42,17 @@ public class HighScoreActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
         mDatabaseHelper = new DatabaseHelper(this);
-
+        konfetti = findViewById(R.id.viewKonfetti);
+        konfetti.build()
+                .addColors(Color.YELLOW, Color.GREEN, Color.RED, Color.BLUE)
+                .setDirection(0.0, 359.0)
+                .setSpeed(1f, 5f)
+                .setFadeOutEnabled(true)
+                .setTimeToLive(2500L)
+                .addShapes(Shape.RECT, Shape.CIRCLE)
+                .addSizes(new Size(12, 10))
+                .setPosition(-50f, konfetti.getWidth() + 50f, -50f, -50f)
+                .streamFor(300, 5000L);
         initView();
     }
 
