@@ -41,6 +41,8 @@ public class LevelView extends View {
 
     protected Handler createElementHandler, animateElementHandler;
 
+    protected boolean sleep;
+
     public LevelView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         Log.i(TAG, "LevelView created");
@@ -207,6 +209,7 @@ public class LevelView extends View {
         this.createElementHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
+
                 LevelView.this.level.elementFactory.createNewElements();
 
                 for (IElement elem : LevelView.this.level.elementFactory.getElemList()) {
