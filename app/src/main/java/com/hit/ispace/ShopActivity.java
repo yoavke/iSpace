@@ -11,11 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.ArrayList;
 
@@ -43,15 +46,16 @@ public class ShopActivity extends AppCompatActivity {
         setContentView(R.layout.activity_shop);
         mDatabaseHelper = new DatabaseHelper(this);
 
-        iniwtView();
+        initView();
     }
 
-    private void iniwtView(){
+    private void initView(){
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = findViewById(R.id.recycler_space_ship);
         recyclerView.setLayoutManager(layoutManager);
         ShopAdapter adapter = new ShopAdapter(this ,mDatabaseHelper.getAllSpaceShip());
         recyclerView.setAdapter(adapter);
+
         int number_of_coins;
         number_of_coins = mDatabaseHelper.getTotalCoins();
         coins_total = findViewById(R.id.coins_value);

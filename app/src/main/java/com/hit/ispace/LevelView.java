@@ -265,7 +265,7 @@ public class LevelView extends View {
                             switch (elem.sayMyName()) {
                                 case "Coin":
                                     LevelView.this.level.incrementNumCoinsEarned();
-                                    Log.i(TAG, "1 coin added. total of "+LevelView.this.level.getNumCoinsEarned()+" coins");
+                                    Log.i(TAG, "5 coin added. total of "+LevelView.this.level.getNumCoinsEarned()+" coins");
                                     break;
                                 case "Rock":
                                 case "Bomb":

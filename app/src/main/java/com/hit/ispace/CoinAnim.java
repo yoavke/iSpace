@@ -20,7 +20,7 @@ public class CoinAnim extends AppCompatActivity {
         setContentView(R.layout.activity_level);
 
         //id of ImageView of coin
-        final ImageView coinIv = findViewById(R.id.icon_animation_stars);//this bad name !!!
+        final ImageView coinIv = findViewById(R.id.toast_icon);//this bad name !!!
 
         final ObjectAnimator invisibleAnim = ObjectAnimator.ofFloat(coinIv,"scaleX",1f,0f).setDuration(1000);
         final ObjectAnimator visibleAnim = ObjectAnimator.ofFloat(coinIv,"scaleX",0f,1f).setDuration(1000);

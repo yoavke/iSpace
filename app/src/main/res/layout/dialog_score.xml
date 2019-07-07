@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     tools:context=".HighScoreActivity"
-    android:background="@drawable/background"
+    android:background="@drawable/background_dialog"
     android:padding="25dp">
 
     <LinearLayout

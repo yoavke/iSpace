@@ -8,7 +8,7 @@
     android:layout_gravity="center"
     android:orientation="vertical"
     tools:context=".HighScoreActivity"
-    android:background="@drawable/background"
+    android:background="@drawable/background_dialog"
     android:padding="25dp">
 
     <LinearLayout
@@ -61,14 +61,7 @@
             android:textStyle="bold"
             android:textColor="@color/whiteColor"/>
 
-        <ImageView
-            android:id="@+id/icon_animation_stars"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/frame_animation_stars"/>
-
         <android.support.v7.widget.CardView
-
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
             android:id="@+id/card_view"
             android:layout_width="340dp"

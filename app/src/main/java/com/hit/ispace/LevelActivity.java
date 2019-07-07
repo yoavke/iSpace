@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -147,6 +148,7 @@ public class LevelActivity extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
                     final View myView = getLayoutInflater().inflate(R.layout.dialog_high_score, null);
                     final TextView score = (TextView) myView.findViewById(R.id.user_score);
+                    myView.setBackgroundResource(R.drawable.background_dialog);
                     msgHighScore = (TextView) myView.findViewById(R.id.text_msg_score);
                     if(mDatabaseHelper.getHighScore(LevelActivity.this.level.getLevelType()) < LevelActivity.this.kmPassed){
                         msgHighScore.setText(getText(R.string.new_high_score));

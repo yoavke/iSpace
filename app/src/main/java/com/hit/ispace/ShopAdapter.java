@@ -2,6 +2,7 @@ package com.hit.ispace;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
@@ -64,6 +65,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
                 .asBitmap()
                 .load(drawable)
                 .into(holder.imageSpaceShip);
+
         if(space.getLocked() == 0) {
             int idSpaceShip = mDatabaseHelper.getSpaceShipId();
             holder.price.setText(R.string.you_already);
@@ -72,10 +74,8 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
             if(space.getId() == idSpaceShip ) {
                 holder.buy_or_select.setBackground(mContext.getResources().getDrawable(R.drawable.scope_button_cant_use));
             }
-
             holder.buy_or_select.setOnClickListener(new View.OnClickListener() {
                 @Override
-                //need add metoda for say if he use this space so dont need change this space else do change and say this change successful
                 public void onClick(final View view) {
                     int idSpaceShip = mDatabaseHelper.getSpaceShipId();
                     if (space.getId() == idSpaceShip ) {
@@ -85,6 +85,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
                         updateSpaceShipInShop(space.getId());
                     }
                 }
+
             });
         }
         else {
