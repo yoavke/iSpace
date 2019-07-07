@@ -238,7 +238,7 @@ public class LevelView extends View {
 
                 createElementHandler.postDelayed(this, (LevelView.this.level.getLevelType()==CSettings.LevelTypes.FREE_STYLE?700:350)*LevelView.this.speed);
             }
-        }, 500);
+        }, (LevelView.this.level.getLevelType()==CSettings.LevelTypes.FREE_STYLE?700:350)*LevelView.this.speed);
 
         this.animateElementHandler.postDelayed(new Runnable() {
             @Override
@@ -308,7 +308,7 @@ public class LevelView extends View {
 
             }
 
-        }, 1000);
+        }, LevelView.this.level.getLevelType()==CSettings.LevelTypes.FREE_STYLE?700:350);
 
         Log.i(TAG, "Started playing level #" +level.getLevelType());
     }
