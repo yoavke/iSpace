@@ -171,11 +171,33 @@ public class LevelActivity extends AppCompatActivity {
                 //not in top 5
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
-                    View myView = getLayoutInflater().inflate(R.layout.dialog_score, null);
+                    final View myView = getLayoutInflater().inflate(R.layout.dialog_score, null);
 
-                    final TextView score = myView.findViewById(R.id.user_score);
+                    final TextView score = (TextView) myView.findViewById(R.id.user_score);
+                    userNameEditText = (EditText) myView.findViewById(R.id.user_name);
                     builder.setView(myView);
-                    AlertDialog dialog = builder.create();
+                    score.setText(Integer.toString(LevelActivity.this.kmPassed));
+                    btnStartAgain = (Button) myView.findViewById(R.id.btn_start_again);
+                    btnSharing = (Button) myView.findViewById(R.id.btn_sharing_in_whatsaps);
+                    btnHome = (Button) myView.findViewById(R.id.btn_home);
+                    final AlertDialog dialog = builder.create();
+
+                    btnHome.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(LevelActivity.this, MainMenuActivity.class));
+                        }
+                    });
+
+                    btnStartAgain.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent;
+                            intent = new Intent(LevelActivity.this, LevelActivity.class);
+                            intent.putExtra("levelType", LevelActivity.this.level.getLevelType());
+                            startActivity(intent);
+                        }
+                    });
                     dialog.show();
                 }
             }

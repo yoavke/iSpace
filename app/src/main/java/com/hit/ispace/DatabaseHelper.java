@@ -155,7 +155,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     {
         ArrayList<UserScore> userScoreList = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        String query = "SELECT name,record FROM records where record<"+score+" AND level="+id_level+ " ORDER BY record DESC";
+        String query = "SELECT name,record FROM records where record>"+score+" AND level="+id_level+ " ORDER BY record DESC";
         Cursor data = db.rawQuery(query, null);
         if (data.moveToFirst()) {
             do {
