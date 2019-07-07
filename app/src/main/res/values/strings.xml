@@ -29,7 +29,8 @@
     <string name="buy_now">Buy now!</string>
     <string name="swipe_more">Swipe to see more spaces</string>
     <string name="success_buying">Buying successfully</string>
-    <string name="no_success_buying">Something goes wrong</string>
+    <string name="no_success">Something goes wrong</string>
+    <string name="success_adding">Adding successfully</string>
     <string name="cant_buy">You don\'t have enough money to buy this item</string>
     <string name="use_this_space">Use</string>
 </resources>

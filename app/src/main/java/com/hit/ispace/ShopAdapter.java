@@ -143,7 +143,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
             FancyToast.makeText(mContext , mContext.getString(R.string.success_buying),FancyToast.LENGTH_LONG, FancyToast.SUCCESS,true).show();
         }
       else {
-            FancyToast.makeText(mContext , mContext.getString(R.string.no_success_buying),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
+            FancyToast.makeText(mContext , mContext.getString(R.string.no_success),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
       }
     }
 

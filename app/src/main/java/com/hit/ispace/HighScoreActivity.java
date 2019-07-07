@@ -2,6 +2,7 @@ package com.hit.ispace;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.RelativeLayout;
+
+import com.github.jinatonic.confetti.CommonConfetti;
 
 public class HighScoreActivity extends AppCompatActivity {
 

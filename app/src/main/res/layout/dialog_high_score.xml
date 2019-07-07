@@ -101,6 +101,7 @@
             android:layout_height="40dp"
             android:layout_gravity="center"
             android:background="@drawable/scope_text"
+            android:textColor="@color/whiteColor"
             android:gravity="center"
             android:padding="5dp" />
 

@@ -9,8 +9,12 @@ import android.os.HandlerThread;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.ArrayList;
 
@@ -22,9 +26,13 @@ public class LevelActivity extends AppCompatActivity {
     private Level level;
     private TextView scoreTxt, coinsTxt;
     private LevelView levelView;
+    DatabaseHelper mDatabaseHelper;
 
     private int coinsEarned;
     private int kmPassed;
+    private EditText userNameEditText;
+    private Button btnSave, btnStartAgain, btnSharing, btnHome;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,21 +112,60 @@ public class LevelActivity extends AppCompatActivity {
             public void run() {
                 //TODO add coins to the bank database
                 Log.d(TAG, "coins earned in game: " +LevelActivity.this.coinsEarned);
-                DatabaseHelper db = new DatabaseHelper(LevelActivity.this);
-                db.updateCoin(LevelActivity.this.coinsEarned);
-                ArrayList<UserScore> userScores = db.checkScore(LevelActivity.this.level.getLevelType(), LevelActivity.this.kmPassed);
+                mDatabaseHelper = new DatabaseHelper(LevelActivity.this);
+                mDatabaseHelper.updateCoin(LevelActivity.this.coinsEarned);
+                ArrayList<UserScore> userScores = mDatabaseHelper.checkScore(LevelActivity.this.level.getLevelType(), LevelActivity.this.kmPassed);
 
                 //1st-5th place
                 if (userScores.size()<5 || userScores == null) {
                     //open dialog for 1st place
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
-                    View myView = getLayoutInflater().inflate(R.layout.dialog_high_score, null);
+                    final View myView = getLayoutInflater().inflate(R.layout.dialog_high_score, null);
 
-                    final TextView score = myView.findViewById(R.id.user_score);
+                    final TextView score = (TextView) myView.findViewById(R.id.user_score);
+                    userNameEditText = (EditText) myView.findViewById(R.id.user_name);
                     builder.setView(myView);
                     score.setText(Integer.toString(LevelActivity.this.kmPassed));
-                    AlertDialog dialog = builder.create();
+                    btnSave = (Button) myView.findViewById(R.id.save_button);
+                    btnStartAgain = (Button) myView.findViewById(R.id.btn_start_again);
+                    btnSharing = (Button) myView.findViewById(R.id.btn_sharing_in_whatsaps);
+                    btnHome = (Button) myView.findViewById(R.id.btn_home);
+                    final AlertDialog dialog = builder.create();
+
+                    btnSave.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            int level = LevelActivity.this.level.getLevelType();
+                            String newUser = userNameEditText.getText().toString();
+                            int score = LevelActivity.this.kmPassed;
+                            if(newUser.length() != 0)
+                            {
+                                AddData(level,newUser,score);
+                                dialog.dismiss();
+                            }
+                            else {
+                                FancyToast.makeText(LevelActivity.this , "You must put something in the text field!",FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
+                            }
+                        }
+                    });
+
+                    btnHome.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(LevelActivity.this, MainMenuActivity.class));
+                        }
+                    });
+
+                    btnStartAgain.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent;
+                            intent = new Intent(LevelActivity.this, LevelActivity.class);
+                            intent.putExtra("levelType", LevelActivity.this.level.getLevelType());
+                            startActivity(intent);
+                        }
+                    });
                     dialog.show();
                 }
                 //not in top 5
@@ -141,5 +188,14 @@ public class LevelActivity extends AppCompatActivity {
 
         setResult(RESULT_OK, data);
 //        finish();
+    }
+
+    public void AddData(int level, String name, int score) {
+        boolean insertData = mDatabaseHelper.addNewRecord(level,name,score);
+        if (insertData) {
+            FancyToast.makeText(this , getString(R.string.success_adding),FancyToast.LENGTH_LONG, FancyToast.SUCCESS,true).show();
+        } else {
+            FancyToast.makeText(this , getString(R.string.no_success),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
+        }
     }
 }
