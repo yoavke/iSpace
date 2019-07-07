@@ -11,7 +11,8 @@
     <string name="user_name">Name</string>
     <string name="score">Score</string>
     <string name="text_user_score">Your score is:</string>
-    <string name="text_user_high_score">New High Score !!!</string>
+    <string name="new_high_score">New High Score !!!</string>
+    <string name="in_top_15">You are in the top 15th</string>
     <string name="save">SAVE</string>
     <string name="free_style">FreeStyle</string>
     <string name="faster">Faster</string>

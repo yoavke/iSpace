@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +34,7 @@ public class LevelActivity extends AppCompatActivity {
 
     private int coinsEarned;
     private int kmPassed;
+    private TextView msgHighScore;
     private EditText userNameEditText;
     private Button btnSave, btnStartAgain, btnSharing, btnHome;
 
@@ -118,13 +121,19 @@ public class LevelActivity extends AppCompatActivity {
                 mDatabaseHelper.updateCoin(LevelActivity.this.coinsEarned);
                 ArrayList<UserScore> userScores = mDatabaseHelper.checkScore(LevelActivity.this.level.getLevelType(), LevelActivity.this.kmPassed);
 
-                //1st-5th place
+                //1st-15th place
                 if (userScores.size()<15 || userScores == null) {
                     //open dialog for 1st place
-
                     AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
                     final View myView = getLayoutInflater().inflate(R.layout.dialog_high_score, null);
                     final TextView score = (TextView) myView.findViewById(R.id.user_score);
+                    msgHighScore = (TextView) myView.findViewById(R.id.text_msg_score);
+                    if(mDatabaseHelper.getHighScore(LevelActivity.this.level.getLevelType()) < LevelActivity.this.kmPassed){
+                        msgHighScore.setText(getText(R.string.new_high_score));
+                    }
+                    else {
+                        msgHighScore.setText(getText(R.string.in_top_15));
+                    }
                     userNameEditText = (EditText) myView.findViewById(R.id.user_name);
                     builder.setView(myView);
                     score.setText(Integer.toString(LevelActivity.this.kmPassed));

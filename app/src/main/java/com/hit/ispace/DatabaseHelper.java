@@ -236,4 +236,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public int getHighScore(int id_level)
+    {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT record FROM records where level="+id_level+ " ORDER BY record DESC limit 1";
+        Cursor data = db.rawQuery(query, null);
+        data.moveToFirst();
+
+        int user_score=data.getInt(data.getColumnIndex("record"));
+        return user_score;
+    }
+
 }
