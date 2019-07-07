@@ -67,6 +67,8 @@ public class LevelActivity extends AppCompatActivity {
         this.waitEndGameThread.start();
         this.waitEndGameHandler = new Handler(waitEndGameThread.getLooper());
 
+        mDatabaseHelper = new DatabaseHelper(LevelActivity.this);
+        int idSpaceShip = mDatabaseHelper.getSpaceShipId();
         //check if the level type chosen exists
         switch (levelType) {
             case CSettings.LevelTypes.FREE_STYLE:
@@ -74,7 +76,7 @@ public class LevelActivity extends AppCompatActivity {
             case CSettings.LevelTypes.GETTING_SICK:
                 //instantiate level here so we dont instantiate it for level that doesn't exists
                 level = new Level(levelType);
-                levelView.startLevel(level);
+                levelView.startLevel(level,idSpaceShip);
                 break;
             default:
                 Log.e(TAG, "No such level type");

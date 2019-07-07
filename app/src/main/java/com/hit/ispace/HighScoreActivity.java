@@ -129,7 +129,6 @@ public class HighScoreActivity extends AppCompatActivity {
         });
 
         settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
-        //lastScore = getIntent().getIntExtra("isInTable", 0);
         isPlayed = getIntent().getBooleanExtra("isPlayed", false);
         playSound(R.raw.high_score);
 

@@ -51,12 +51,11 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
     public void onBindViewHolder(@NonNull final ShopAdapter.ShopViewHolder holder, int i) {
         final SpaceShipShop space = spaceShip.get(i);
         Resources res = this.mContext.getResources();
-        String spaceshipBitmap = spaceShip.get(i).getSrc_path();
+        int arrSpaceShip[] = {R.drawable.spaceship_1 ,R.drawable.spaceship_2,R.drawable.spaceship_3,R.drawable.spaceship_4,R.drawable.spaceship_5,R.drawable.spaceship_6};
         int resID = res.getIdentifier("share1" , "drawable", mContext.getPackageName());
-        Drawable drawable = res.getDrawable(resID);
         Glide.with(mContext)
                 .asBitmap()
-                .load(drawable)
+                .load(arrSpaceShip[i])
                 .into(holder.imageSpaceShip);
 
         if(space.getLocked() == 0) {
