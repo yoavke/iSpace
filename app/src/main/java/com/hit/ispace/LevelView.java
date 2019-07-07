@@ -187,10 +187,9 @@ public class LevelView extends View {
         this.screenWidth  = Resources.getSystem().getDisplayMetrics().widthPixels;
         this.screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
-        //TODO change hardcoded 100 to class variable in Dimension class
         // initialize avatar on the screen when start the level
-        Point topLeft = new Point((this.screenWidth / 2) - (this.level.spaceship.getBitmapSrc().getWidth() / 2),this.screenHeight-(100*2));
-        Point bottomRight = new Point(topLeft.getX()+100, topLeft.getY()+100);
+        Point topLeft = new Point((this.screenWidth / 2) - (this.level.spaceship.getBitmapSrc().getWidth() / 2),this.screenHeight-(CSettings.Dimension.SPACESHIP_SIZE*2));
+        Point bottomRight = new Point(topLeft.getX()+CSettings.Dimension.SPACESHIP_SIZE, topLeft.getY()+CSettings.Dimension.SPACESHIP_SIZE);
         this.level.spaceship.setCoordinates(topLeft,bottomRight);
         Log.d(TAG, "GETTING SICK: init at leftTop("+this.level.spaceship.getLeftTop().getX()+","+this.level.spaceship.getLeftTop().getY()+") rightBottom("+this.level.spaceship.getRightBottom().getX()+","+this.level.spaceship.getRightBottom().getY()+")");
         invalidate();
