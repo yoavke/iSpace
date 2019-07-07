@@ -1,27 +1,36 @@
 package com.hit.ispace;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.github.jinatonic.confetti.CommonConfetti;
 
 public class HighScoreActivity extends AppCompatActivity {
 
     DatabaseHelper mDatabaseHelper;
-    private RecyclerView recyclerFreeStyleView,recyclerFasterView,recyclerGettingSickView;
+    private RecyclerView recyclerView;
     private HighScoreAdapter adapter;
     private SharedPreferences settings;
     private MediaPlayer high_score;
     private RelativeLayout container;
     private boolean isPlayed;
+    private TextView nameTopDialog;
+    private Button btnTopFreeStyle ,btnTopFaster , btnTopFreeGettingSick ;
+    Dialog dialog;
 
 
 
@@ -38,25 +47,73 @@ public class HighScoreActivity extends AppCompatActivity {
 
         container = findViewById(R.id.container_high_score_activity);
         high_score= MediaPlayer.create(this, R.raw.high_score);
+        dialog = new Dialog(this);
 
-        recyclerFreeStyleView = findViewById(R.id.recycler_free_style_score);
-        recyclerFasterView = findViewById(R.id.recycler_faster_score);
-        recyclerGettingSickView = findViewById(R.id.recycler_getting_sick_score);
+        btnTopFreeStyle = (Button) findViewById(R.id.btn_top_free_style);
+        btnTopFreeStyle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.setContentView(R.layout.dialog_top_high_score);
+                nameTopDialog = (TextView) dialog.findViewById(R.id.name_top_high_score);
+                nameTopDialog.setText(getText(R.string.free_style));
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.setCancelable(true);
+                dialog.show();
 
-        recyclerFreeStyleView.setHasFixedSize(true);
-        recyclerFasterView.setHasFixedSize(true);
-        recyclerGettingSickView.setHasFixedSize(true);
+                recyclerView = (RecyclerView) dialog.findViewById(R.id.recycler_high_score);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(HighScoreActivity.this));
 
-        recyclerFreeStyleView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerFasterView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerGettingSickView.setLayoutManager(new LinearLayoutManager(this));
+                adapter = new HighScoreAdapter(mDatabaseHelper.getTopHighScore(1));
+                recyclerView.setAdapter(adapter);
+            }
+        });
 
-        adapter = new HighScoreAdapter(mDatabaseHelper.getTopHighScore(1));
-        recyclerFreeStyleView.setAdapter(adapter);
-        adapter = new HighScoreAdapter(mDatabaseHelper.getTopHighScore(2));
-        recyclerFasterView.setAdapter(adapter);
-        adapter = new HighScoreAdapter(mDatabaseHelper.getTopHighScore(3));
-        recyclerGettingSickView.setAdapter(adapter);
+        btnTopFaster = (Button) findViewById(R.id.btn_top_faster);
+        btnTopFaster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.setContentView(R.layout.dialog_top_high_score);
+                nameTopDialog = (TextView) dialog.findViewById(R.id.name_top_high_score);
+                nameTopDialog.setText(getText(R.string.faster));
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.setCancelable(true);
+                dialog.show();
+
+                recyclerView = (RecyclerView) dialog.findViewById(R.id.recycler_high_score);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(HighScoreActivity.this));
+
+                adapter = new HighScoreAdapter(mDatabaseHelper.getTopHighScore(2));
+                recyclerView.setAdapter(adapter);
+            }
+        });
+
+        btnTopFreeGettingSick = (Button) findViewById(R.id.btn_top_getting_sick);
+        btnTopFreeGettingSick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                dialog.setContentView(R.layout.dialog_top_high_score);
+                nameTopDialog = (TextView) dialog.findViewById(R.id.name_top_high_score);
+                nameTopDialog.setText(getText(R.string.getting_sick));
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.setCancelable(true);
+                dialog.show();
+
+                recyclerView = (RecyclerView) dialog.findViewById(R.id.recycler_high_score);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new LinearLayoutManager(HighScoreActivity.this));
+
+                adapter = new HighScoreAdapter(mDatabaseHelper.getTopHighScore(3));
+                recyclerView.setAdapter(adapter);
+            }
+        });
 
         settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
         //lastScore = getIntent().getIntExtra("isInTable", 0);
@@ -121,4 +178,5 @@ public class HighScoreActivity extends AppCompatActivity {
             Intent serviceIntent = new Intent(HighScoreActivity.this, BackgroundMusic.class);
             startService(serviceIntent);
     }
+
 }

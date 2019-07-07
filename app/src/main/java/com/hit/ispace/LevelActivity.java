@@ -119,20 +119,21 @@ public class LevelActivity extends AppCompatActivity {
                 ArrayList<UserScore> userScores = mDatabaseHelper.checkScore(LevelActivity.this.level.getLevelType(), LevelActivity.this.kmPassed);
 
                 //1st-5th place
-                if (userScores.size()<5 || userScores == null) {
+                if (userScores.size()<15 || userScores == null) {
                     //open dialog for 1st place
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
                     final View myView = getLayoutInflater().inflate(R.layout.dialog_high_score, null);
-
                     final TextView score = (TextView) myView.findViewById(R.id.user_score);
                     userNameEditText = (EditText) myView.findViewById(R.id.user_name);
                     builder.setView(myView);
                     score.setText(Integer.toString(LevelActivity.this.kmPassed));
+
                     btnSave = (Button) myView.findViewById(R.id.save_button);
                     btnStartAgain = (Button) myView.findViewById(R.id.btn_start_again);
                     btnSharing = (Button) myView.findViewById(R.id.btn_sharing_in_whatsaps);
                     btnHome = (Button) myView.findViewById(R.id.btn_home);
+
                     final AlertDialog dialog = builder.create();
 
                     btnSave.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +148,7 @@ public class LevelActivity extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                             else {
-                                FancyToast.makeText(LevelActivity.this , "You must put something in the text field!",FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
+                                FancyToast.makeText(LevelActivity.this , getString(R.string.msg_error_save_score),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
                             }
                         }
                     });
@@ -168,6 +169,28 @@ public class LevelActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                     });
+
+                    btnSharing.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Intent sendIntent = new Intent();
+                            try
+                            {
+                                sendIntent.setAction(Intent.ACTION_SEND);
+                                sendIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.text_send_whatsapp_1)+ Integer.toString(LevelActivity.this.kmPassed)+getString(R.string.text_send_whatsapp_2));
+                                sendIntent.setType("text/plain");
+                                sendIntent.setPackage("com.whatsapp");
+                                startActivity(sendIntent);
+                            }
+                            catch ( ActivityNotFoundException ex  )
+                            {
+                                // If Waze is not installed, open it in Google Play:
+                                Intent intent = new Intent( Intent.ACTION_VIEW, Uri.parse( "market //details id=whatsapp" ) );
+                                startActivity(intent);
+                            }
+                        }
+                    });
                     dialog.show();
                 }
                 //not in top 5
@@ -179,9 +202,11 @@ public class LevelActivity extends AppCompatActivity {
                     userNameEditText = (EditText) myView.findViewById(R.id.user_name);
                     builder.setView(myView);
                     score.setText(Integer.toString(LevelActivity.this.kmPassed));
+
                     btnStartAgain = (Button) myView.findViewById(R.id.btn_start_again);
                     btnSharing = (Button) myView.findViewById(R.id.btn_sharing_in_whatsaps);
                     btnHome = (Button) myView.findViewById(R.id.btn_home);
+
                     final AlertDialog dialog = builder.create();
 
                     btnHome.setOnClickListener(new View.OnClickListener() {
@@ -209,7 +234,7 @@ public class LevelActivity extends AppCompatActivity {
                             try
                             {
                                 sendIntent.setAction(Intent.ACTION_SEND);
-                                sendIntent.putExtra(Intent.EXTRA_TEXT,"I got a score of "+ Integer.toString(LevelActivity.this.kmPassed)+", I'll see you passing me");
+                                sendIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.text_send_whatsapp_1)+ Integer.toString(LevelActivity.this.kmPassed)+getString(R.string.text_send_whatsapp_2));
                                 sendIntent.setType("text/plain");
                                 sendIntent.setPackage("com.whatsapp");
                                 startActivity(sendIntent);
