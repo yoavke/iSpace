@@ -39,6 +39,14 @@
     <string name="text_send_whatsapp_2">, in iSpace app. let\'s see if you can get a better score.</string>
     <string name="msg_error_save_score">You must put name to save you\'r high score!</string>
     <string name="cant_do_nothing">This is your current SpaceShip </string>
+    <string name="instructions">Instructions</string>
+    <string name="instructions_content">swipe left and right to move the space.\npay attention! elemnts are falling on the screen you should take or avoid them! \n\n Elements:</string>
+    <string name="inst_coin">Get 5 coins for each coin you collect.</string>
+    <string name="inst_good_bomb">Deletes a random element</string>
+    <string name="inst_ufo">Steals 3 coins from your collection. </string>
+    <string name="inst_dead_asteroid">Leads to the ending the game.</string>
+    <string name="good_luck">Good Luck :)</string>
+    <string name="dont_remember">Don\'t remember me again</string>
 
 
 </resources>
