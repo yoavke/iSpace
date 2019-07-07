@@ -116,7 +116,7 @@ public class LevelActivity extends AppCompatActivity {
         return value;
     }
 
-        public void setValues() {
+    public void setValues() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

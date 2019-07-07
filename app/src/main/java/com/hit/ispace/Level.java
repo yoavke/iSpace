@@ -49,7 +49,14 @@ public class Level {
     }
 
     public void incrementNumCoinsEarned() {
-        this.numCoinsEarned +=5;
+        if (this.getLevelType()==CSettings.LevelTypes.FREE_STYLE)
+            this.numCoinsEarned += 3;
+        else if (this.getLevelType()==CSettings.LevelTypes.FASTER)
+            this.numCoinsEarned += 5;
+        else if (this.getLevelType()==CSettings.LevelTypes.GETTING_SICK)
+            this.numCoinsEarned += 7;
+        else
+            this.numCoinsEarned += 1;
     }
 
     public boolean reduceNumCoins() {
