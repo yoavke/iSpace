@@ -317,7 +317,7 @@ public class LevelActivity extends AppCompatActivity {
             public void run() {
                 doubleBackToExitPressedOnce=false;
             }
-        }, 1000);
+        }, 1500);
     }
 
     @Override

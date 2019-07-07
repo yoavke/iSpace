@@ -70,19 +70,19 @@ public final class ElementFactory implements Runnable{
                 else if (selectedByPriority>=2 && selectedByPriority<=3) {
                     flyingElem = CSettings.FlyingElements.GOODBOMB;
                 }
-                //30% bomb
-                else if (selectedByPriority>=4 && selectedByPriority<=33) {
+                //22% bomb
+                else if (selectedByPriority>=4 && selectedByPriority<=25) {
                     flyingElem = CSettings.FlyingElements.BOMB;
                 }
                 //30% rock
-                else if (selectedByPriority>=34 && selectedByPriority<=63) {
+                else if (selectedByPriority>=26 && selectedByPriority<=55) {
                     flyingElem = CSettings.FlyingElements.ROCK;
                 }
                 //30% superrock
-                else if (selectedByPriority>=64 && selectedByPriority<=93) {
+                else if (selectedByPriority>=56 && selectedByPriority<=85) {
                     flyingElem = CSettings.FlyingElements.SUPERROCK;
                 }
-                //6% coin
+                //15% coin
                 else {
                     flyingElem = CSettings.FlyingElements.COIN;
                 }
