@@ -1,5 +1,6 @@
 package com.hit.ispace;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -10,13 +11,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.content.DialogInterface;
-
 import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
@@ -24,16 +21,12 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-import static java.sql.Types.NULL;
 
 
 public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder> {
 
     private List<SpaceShipShop> spaceShip;
     private Context mContext;
-    Dialog buyDialog,selectDialog;
-    TextView name_space , price_space ;
-    Button btn_yes , btn_no , shop_or_select ;
     DatabaseHelper mDatabaseHelper;
 
 
@@ -83,6 +76,9 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
                     }
                     else {
                         updateSpaceShipInShop(space.getId());
+                        Intent intent = ((Activity) mContext).getIntent();
+                        ((Activity) mContext).setResult(((Activity) mContext).RESULT_OK, intent);
+                        ((Activity) mContext).finish();
                     }
                 }
 
@@ -103,6 +99,10 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
                     }
                     else {
                         buySpaceShipInShop(space.getId());
+                        updateSpaceShipInShop(space.getId());
+                        Intent intent = ((Activity) mContext).getIntent();
+                        ((Activity) mContext).setResult(((Activity) mContext).RESULT_OK, intent);
+                        ((Activity) mContext).finish();
                     }
                 }
 
