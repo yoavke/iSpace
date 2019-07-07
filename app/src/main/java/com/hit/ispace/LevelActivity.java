@@ -148,7 +148,7 @@ public class LevelActivity extends AppCompatActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
                     final View myView = getLayoutInflater().inflate(R.layout.dialog_high_score, null);
                     final TextView score = (TextView) myView.findViewById(R.id.user_score);
-                    myView.setBackgroundResource(R.drawable.background_dialog);
+                    myView.setBackgroundResource(R.color.grayColor);
                     msgHighScore = (TextView) myView.findViewById(R.id.text_msg_score);
                     if(mDatabaseHelper.getHighScore(LevelActivity.this.level.getLevelType()) < LevelActivity.this.kmPassed){
                         msgHighScore.setText(getText(R.string.new_high_score));

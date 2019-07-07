@@ -49,7 +49,7 @@ public class Level {
     }
 
     public void incrementNumCoinsEarned() {
-        this.numCoinsEarned =+5;
+        this.numCoinsEarned +=5;
     }
 
     public void reduceNumCoins() {
