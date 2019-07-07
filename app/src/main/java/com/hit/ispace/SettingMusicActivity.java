@@ -14,14 +14,14 @@ public class SettingMusicActivity extends AppCompatActivity {
     private SharedPreferences settings;
     private SharedPreferences.Editor editor;
     private com.suke.widget.SwitchButton setting_sound , setting_music;
-    private ImageView info;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_music);
 
-        ImageView imageView = findViewById(R.id.animation_ufo_view);
+        imageView = findViewById(R.id.animation_ufo_view);
         AnimationDrawable animationDrawable = (AnimationDrawable)imageView.getDrawable();
         animationDrawable.start();
 

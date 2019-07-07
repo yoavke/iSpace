@@ -36,16 +36,9 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         Resources res = getResources();
         int resID = res.getIdentifier("spaceship_1" , "drawable", getPackageName());
         Drawable drawable = res.getDrawable(resID );
-        Toast.makeText(this,"int: " + resID,Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"int: " + resID,Toast.LENGTH_LONG).show();
         initView();
     }
-
-    private String readSetting(String key) {
-       String value;
-        value = settings.getString(key, "");
-       return value;
-    }
-
 
     //Initialize all UI elements
     private void initView() {
@@ -91,6 +84,12 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             startService(serviceIntent);
         }
 
+    }
+
+    private String readSetting(String key) {
+        String value;
+        value = settings.getString(key, "");
+        return value;
     }
 
     //Handle onClick events

@@ -1,12 +1,15 @@
 package com.hit.ispace;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -178,7 +181,7 @@ public class LevelView extends View {
         this.level = level;
         Log.d(TAG, "Painting spaceship on the screen");
         //TODO: Select the aircraft from user's shop and change hardcoded 100 to class variable
-        this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.rocket_ship),100, 100, false));
+        this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.rocket_ship),120, 120, false));
 
         //TODO remove 2 lines of code of width and height
         this.screenWidth  = Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -261,7 +264,7 @@ public class LevelView extends View {
                             switch (elem.sayMyName()) {
                                 case "Coin":
                                     LevelView.this.level.incrementNumCoinsEarned();
-                                    Log.i(TAG, "1 coin added. total of "+LevelView.this.level.getNumCoinsEarned()+" coins");
+                                    Log.i(TAG, "5 coin added. total of "+LevelView.this.level.getNumCoinsEarned()+" coins");
                                     break;
                                 case "Rock":
                                 case "Bomb":
@@ -318,4 +321,5 @@ public class LevelView extends View {
     {
         return this.km;
     }
+
 }
