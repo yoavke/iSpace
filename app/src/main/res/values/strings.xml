@@ -32,11 +32,13 @@
     <string name="success_buying">Buying successfully</string>
     <string name="no_success">Something goes wrong</string>
     <string name="success_adding">Adding successfully</string>
+    <string name="success_update">Update succeeded</string>
     <string name="cant_buy">You don\'t have enough money to buy this item</string>
     <string name="use_this_space">Use</string>
     <string name="text_send_whatsapp_1">I got a score of </string>
     <string name="text_send_whatsapp_2">, in iSpace app. let\'s see if you can get a better score.</string>
     <string name="msg_error_save_score">You must put name to save you\'r high score!</string>
+    <string name="cant_do_nothing">This is your current SpaceShip </string>
 
 
 </resources>

@@ -181,7 +181,7 @@ public class LevelView extends View {
         this.level = level;
         Log.d(TAG, "Painting spaceship on the screen");
         //TODO: Select the aircraft from user's shop and change hardcoded 100 to class variable
-        this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.rocket_ship),100, 100, false));
+        this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.rocket_ship),120, 120, false));
 
         //TODO remove 2 lines of code of width and height
         this.screenWidth  = Resources.getSystem().getDisplayMetrics().widthPixels;

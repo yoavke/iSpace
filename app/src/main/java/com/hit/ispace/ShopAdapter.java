@@ -65,22 +65,27 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
                 .load(drawable)
                 .into(holder.imageSpaceShip);
         if(space.getLocked() == 0) {
+            int idSpaceShip = mDatabaseHelper.getSpaceShipId();
             holder.price.setText(R.string.you_already);
             holder.coin_or_done.setImageResource(R.drawable.icon_check);
             holder.buy_or_select.setText(R.string.use_this_space);
-            //holder.buy_or_select.setOnClickListener(new View.OnClickListener() {
-                //@Override
+            if(space.getId() == idSpaceShip ) {
+                holder.buy_or_select.setBackground(mContext.getResources().getDrawable(R.drawable.scope_button_cant_use));
+            }
+
+            holder.buy_or_select.setOnClickListener(new View.OnClickListener() {
+                @Override
                 //need add metoda for say if he use this space so dont need change this space else do change and say this change successful
-                /*public void onClick(final View view) {
-                    if () {
-                        FancyToast.makeText(mContext, mContext.getString(R.string.cant_buy), FancyToast.LENGTH_LONG, FancyToast.ERROR, true).show();
+                public void onClick(final View view) {
+                    int idSpaceShip = mDatabaseHelper.getSpaceShipId();
+                    if (space.getId() == idSpaceShip ) {
+                        FancyToast.makeText(mContext, mContext.getString(R.string.cant_do_nothing), FancyToast.LENGTH_LONG, FancyToast.WARNING, true).show();
                     }
                     else {
-
+                        updateSpaceShipInShop(space.getId());
                     }
                 }
-
-            });*/
+            });
         }
         else {
             holder.price.setText(String.format("%d" ,space.getPrice()));
@@ -96,7 +101,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
                         FancyToast.makeText(mContext , mContext.getString(R.string.cant_buy),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
                     }
                     else {
-                        BuySpaceShip(space.getId());
+                        buySpaceShipInShop(space.getId());
                     }
                 }
 
@@ -136,7 +141,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
         view.setEnabled(false);
     }
 
-    public void BuySpaceShip(int id) {
+    public void buySpaceShipInShop(int id) {
         boolean updateData = mDatabaseHelper.buySpaceShip(id);
 
         if (updateData) {
@@ -146,5 +151,17 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
             FancyToast.makeText(mContext , mContext.getString(R.string.no_success),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
       }
     }
+
+    public void updateSpaceShipInShop(int id) {
+        boolean updateData = mDatabaseHelper.updateUseSpaceShip(id);
+
+        if (updateData) {
+            FancyToast.makeText(mContext , mContext.getString(R.string.success_update),FancyToast.LENGTH_LONG, FancyToast.SUCCESS,true).show();
+        }
+        else {
+            FancyToast.makeText(mContext , mContext.getString(R.string.no_success),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
+        }
+    }
+
 
 }

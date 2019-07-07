@@ -66,13 +66,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO levels(level,speed) VALUES('Free Style',1)");
         db.execSQL("INSERT INTO levels(level,speed) VALUES('Getting Sick',2)");
         db.execSQL("INSERT INTO bank(coins_total,coins_now) VALUES(8000,0)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(1,'Space Ship 1','spaceship_1',1,100)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(1,'Space Ship 1','spaceship_1',0,100)");
         db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(2,'Space Ship 2','spaceship_2',1,150)");
         db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(3,'Space Ship 3','spaceship_3',1,200)");
         db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(4,'Space Ship 4','spaceship_4',1,250)");
         db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(5,'Space Ship 5','spaceship_5',1,300)");
         db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(6,'Space Ship 6','spaceship_6',1,400)");
-        db.execSQL("INSERT INTO "+TABLE_NAME_MY_SPACESHIP+"("+MYSPACESHIP_COL1+") VALUES(1)");
+        db.execSQL("INSERT INTO myspaceship(spaceship_id) VALUES(1)");
 
     }
 
@@ -192,7 +192,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public int getTotalCoins(){
-        int total_coins = NULL ;
         SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT coins_total FROM bank";
         Cursor data = db.rawQuery(query, null);
@@ -226,25 +225,59 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues1.put(SPACESHIPS_COL_4 , 0);
         long result1 = db.update(TABLE_NAME_SPACE_SHIPS, contentValues1,"id="+id, null);
 
-        if (result == -1) {
+        ContentValues contentValues2 = new ContentValues();
+        contentValues2.put(MYSPACESHIP_COL1 , id);
+        long result2 = db.update(TABLE_NAME_MY_SPACESHIP, contentValues2,null, null);
+
+        if (result == -1 || result1 == -1 || result2 == -1 ) {
             return false;
         } else {
-            if(result1 == -1)
-                return false;
-            else
-                return true;
+            return true;
         }
     }
 
     public int getHighScore(int id_level)
     {
+        int user_score = 0;
         SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT record FROM records where level="+id_level+ " ORDER BY record DESC limit 1";
         Cursor data = db.rawQuery(query, null);
         data.moveToFirst();
 
-        int user_score=data.getInt(data.getColumnIndex("record"));
+        if(data != null && data.moveToFirst()){
+            user_score = data.getInt(data.getColumnIndex("record"));
+        }
+        else{
+        user_score = 0;
+        }
         return user_score;
+    }
+
+    public int getSpaceShipId(){
+        int spaceShipId;
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM myspaceship";
+        Cursor data = db.rawQuery(query, null);
+        data.moveToFirst();
+        spaceShipId = data.getInt(data.getColumnIndex("spaceship_id"));
+        return spaceShipId;
+    }
+
+    public boolean updateUseSpaceShip(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MYSPACESHIP_COL1 , id);
+
+        Log.i(TAG, "updateUseSpaceShip: Update spaceShip " + id + " to " + TABLE_NAME_MY_SPACESHIP);
+
+        long result = db.update(TABLE_NAME_MY_SPACESHIP, contentValues,null, null);
+
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
     }
 
 }
