@@ -25,6 +25,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_NAME_BANK = "bank";
     private static final String TABLE_NAME_SPACE_SHIPS = "spaceships";
     private static final String TABLE_NAME_MY_SPACESHIP = "myspaceship";
+    private static final String TABLE_NAME_REMEMBER = "remember";
+
 
     //levels columns
     private static final String LEVELS_COL_1 = "id";
@@ -51,6 +53,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //myspaceship columns
     private static final String MYSPACESHIP_COL1 = "spaceship_id";
 
+    //remember columns
+    private static final String REMEMBER_COL1 = "is_remember";
+
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
         SQLiteDatabase db = getWritableDatabase();
@@ -63,6 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + TABLE_NAME_BANK + " ("+BANK_COL_1+" INTEGER, "+BANK_COL_2+" INTEGER)");
         db.execSQL("create table " + TABLE_NAME_SPACE_SHIPS + " ("+SPACESHIPS_COL_1+" INTEGER PRIMARY KEY AUTOINCREMENT, "+SPACESHIPS_COL_2+" TEXT, "+SPACESHIPS_COL_3+" INTEGER, "+SPACESHIPS_COL_4+" INTEGER,"+SPACESHIPS_COL_5+" INTEGER )");
         db.execSQL("create table " + TABLE_NAME_MY_SPACESHIP + "("+MYSPACESHIP_COL1+" INTEGER)");
+        db.execSQL("create table " + TABLE_NAME_REMEMBER + "("+REMEMBER_COL1+" INTEGER)");
         db.execSQL("INSERT INTO levels(level,speed) VALUES('Free Style',1)");
         db.execSQL("INSERT INTO levels(level,speed) VALUES('Getting Sick',2)");
         db.execSQL("INSERT INTO bank(coins_total,coins_now) VALUES(8000,0)");
@@ -73,6 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(5,'Space Ship 5','spaceship_5',1,300)");
         db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(6,'Space Ship 6','spaceship_6',1,400)");
         db.execSQL("INSERT INTO myspaceship(spaceship_id) VALUES(1)");
+        db.execSQL("INSERT INTO remember(is_remember) VALUES(1)");
 
     }
 
@@ -271,6 +279,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Log.i(TAG, "updateUseSpaceShip: Update spaceShip " + id + " to " + TABLE_NAME_MY_SPACESHIP);
 
         long result = db.update(TABLE_NAME_MY_SPACESHIP, contentValues,null, null);
+
+        if (result == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean updateRemember(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(REMEMBER_COL1 , 0);
+
+        Log.i(TAG, "updateUseSpaceShip: Update spaceShip " + 0 + " to " + TABLE_NAME_REMEMBER);
+
+        long result = db.update(TABLE_NAME_REMEMBER, contentValues,null, null);
 
         if (result == -1) {
             return false;

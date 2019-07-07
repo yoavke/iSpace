@@ -1,5 +1,6 @@
 package com.hit.ispace;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -11,10 +12,12 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -179,11 +182,12 @@ public class LevelView extends View {
         }
     }
 
-    public void startLevel(Level level) {
+    public void startLevel(Level level,int idSpaceShip) {
         this.level = level;
+        int arrSpaceShip[] = {R.drawable.spaceship_1 ,R.drawable.spaceship_2,R.drawable.spaceship_3,R.drawable.spaceship_4,R.drawable.spaceship_5,R.drawable.spaceship_6};
         Log.d(TAG, "Painting spaceship on the screen");
         //TODO: Select the aircraft from user's shop and change hardcoded 100 to class variable
-        this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.rocket_ship),120, 120, false));
+        this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),arrSpaceShip[idSpaceShip-1]),120, 120, false));
 
         //TODO remove 2 lines of code of width and height
         this.screenWidth  = Resources.getSystem().getDisplayMetrics().widthPixels;

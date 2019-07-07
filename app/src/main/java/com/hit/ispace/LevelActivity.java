@@ -67,6 +67,8 @@ public class LevelActivity extends AppCompatActivity {
         this.waitEndGameThread.start();
         this.waitEndGameHandler = new Handler(waitEndGameThread.getLooper());
 
+        mDatabaseHelper = new DatabaseHelper(LevelActivity.this);
+        int idSpaceShip = mDatabaseHelper.getSpaceShipId();
         //check if the level type chosen exists
         switch (levelType) {
             case CSettings.LevelTypes.FREE_STYLE:
@@ -74,7 +76,7 @@ public class LevelActivity extends AppCompatActivity {
             case CSettings.LevelTypes.GETTING_SICK:
                 //instantiate level here so we dont instantiate it for level that doesn't exists
                 level = new Level(levelType);
-                levelView.startLevel(level);
+                levelView.startLevel(level,idSpaceShip);
                 break;
             default:
                 Log.e(TAG, "No such level type");
@@ -176,7 +178,10 @@ public class LevelActivity extends AppCompatActivity {
                             if(newUser.length() != 0)
                             {
                                 AddData(level,newUser,score);
-                                dialog.dismiss();
+                                Intent intent = new Intent(LevelActivity.this, MainMenuActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
                             }
                             else {
                                 FancyToast.makeText(LevelActivity.this , getString(R.string.msg_error_save_score),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
@@ -187,7 +192,10 @@ public class LevelActivity extends AppCompatActivity {
                     btnHome.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            startActivity(new Intent(LevelActivity.this, MainMenuActivity.class));
+                            Intent intent = new Intent(LevelActivity.this, MainMenuActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
                         }
                     });
 
@@ -197,6 +205,8 @@ public class LevelActivity extends AppCompatActivity {
                             Intent intent;
                             intent = new Intent(LevelActivity.this, LevelActivity.class);
                             intent.putExtra("levelType", LevelActivity.this.level.getLevelType());
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         }
                     });
@@ -228,10 +238,11 @@ public class LevelActivity extends AppCompatActivity {
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
                     final View myView = getLayoutInflater().inflate(R.layout.dialog_score, null);
-
+                    myView.setBackgroundResource(R.color.grayColor);
                     final TextView score = (TextView) myView.findViewById(R.id.user_score);
                     userNameEditText = (EditText) myView.findViewById(R.id.user_name);
                     builder.setView(myView);
+
                     score.setText(Integer.toString(LevelActivity.this.kmPassed));
 
                     btnStartAgain = (Button) myView.findViewById(R.id.btn_start_again);
@@ -243,8 +254,10 @@ public class LevelActivity extends AppCompatActivity {
                     btnHome.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            startActivity(new Intent(LevelActivity.this, MainMenuActivity.class));
-                        }
+                            Intent intent = new Intent(LevelActivity.this, MainMenuActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);                        }
                     });
 
                     btnStartAgain.setOnClickListener(new View.OnClickListener() {
@@ -253,6 +266,8 @@ public class LevelActivity extends AppCompatActivity {
                             Intent intent;
                             intent = new Intent(LevelActivity.this, LevelActivity.class);
                             intent.putExtra("levelType", LevelActivity.this.level.getLevelType());
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         }
                     });
