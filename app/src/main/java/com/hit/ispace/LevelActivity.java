@@ -238,10 +238,11 @@ public class LevelActivity extends AppCompatActivity {
                 else {
                     AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
                     final View myView = getLayoutInflater().inflate(R.layout.dialog_score, null);
-
+                    myView.setBackgroundResource(R.color.grayColor);
                     final TextView score = (TextView) myView.findViewById(R.id.user_score);
                     userNameEditText = (EditText) myView.findViewById(R.id.user_name);
                     builder.setView(myView);
+
                     score.setText(Integer.toString(LevelActivity.this.kmPassed));
 
                     btnStartAgain = (Button) myView.findViewById(R.id.btn_start_again);

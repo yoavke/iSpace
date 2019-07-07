@@ -41,8 +41,8 @@ public class HighScoreActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_score);
-        mDatabaseHelper = new DatabaseHelper(this);
-        konfetti = findViewById(R.id.viewKonfetti);
+        konfetti = findViewById(R.id.viewKonfetti);        mDatabaseHelper = new DatabaseHelper(this);
+
         konfetti.build()
                 .addColors(Color.YELLOW, Color.GREEN, Color.RED, Color.BLUE)
                 .setDirection(0.0, 359.0)
