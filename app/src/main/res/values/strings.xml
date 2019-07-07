@@ -47,6 +47,7 @@
     <string name="inst_dead_asteroid">Leads to the ending the game.</string>
     <string name="good_luck">Good Luck :)</string>
     <string name="dont_remember">Don\'t remember me again</string>
+    <string name="doubleClickExit">Please click BACK again to exit</string>
 
 
 </resources>

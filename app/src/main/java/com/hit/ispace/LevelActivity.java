@@ -46,6 +46,7 @@ public class LevelActivity extends AppCompatActivity {
     private EditText userNameEditText;
     public SharedPreferences settings ;
     private Button btnSave, btnStartAgain, btnSharing, btnHome;
+    private boolean doubleBackToExitPressedOnce = false;
 
 
     @Override
@@ -301,33 +302,22 @@ public class LevelActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        new FancyAlertDialog.Builder(LevelActivity.this)
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
 
-                .setBackgroundColor(Color.parseColor("#D0A29898"))
-                .setMessage(getString(R.string.out_game))
-                .setNegativeBtnText(getString(R.string.msg_no))
-                .setPositiveBtnBackground(Color.parseColor("#FF67C76B"))
-                .setPositiveBtnText(getString(R.string.msg_yes))
-                .setNegativeBtnBackground(Color.parseColor("#FFD6463F"))
-                .setAnimation(Animation.POP)
-                .isCancellable(true)
-                .setIcon(R.drawable.icon_exit, Icon.Visible)
-                .OnPositiveClicked(new FancyAlertDialogListener() {
-                    @Override
-                    public void OnClick() {
-                        Intent intent = new Intent(LevelActivity.this, MainMenuActivity.class);
-                        startActivity(intent);
-                        finish();
+        this.doubleBackToExitPressedOnce = true;
+        String message = getResources().getString(R.string.doubleClickExit);
+        FancyToast.makeText(this,message,FancyToast.LENGTH_LONG,FancyToast.WARNING,false).show();
 
-                    }
-                })
-                .OnNegativeClicked(new FancyAlertDialogListener() {
-                    @Override
-                    public void OnClick() {
+        new Handler().postDelayed(new Runnable() {
 
-                    }
-                })
-                .build();
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 1000);
     }
 
     @Override
