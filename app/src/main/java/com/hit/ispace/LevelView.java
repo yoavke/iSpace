@@ -19,7 +19,13 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Checkable;
+import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -30,6 +36,7 @@ public class LevelView extends View {
     //TAG
     private static final String TAG = LevelView.class.getSimpleName();
 
+    DatabaseHelper mDatabaseHelper;
     private Level level=null;
     private int screenWidth=0;
     private int screenHeight=0;
@@ -39,6 +46,8 @@ public class LevelView extends View {
     private long checkTime;
     private long km;
     private int speed;
+    private ImageButton okDontRemember;
+    private CheckBox checkBoxDontRemember;
 
     protected HandlerThread createElementThread;
     protected HandlerThread animateElementThread;
@@ -185,10 +194,27 @@ public class LevelView extends View {
 
     public void startLevel(Level level) {
         this.level = level;
-
+        mDatabaseHelper = new DatabaseHelper(getContext());
         final Dialog dialog = new Dialog(getContext());
-        dialog.setContentView(R.layout.dialog_info_level);
-        dialog.show();
+
+        if(mDatabaseHelper.ifCheckRemember() == 1){
+            dialog.setContentView(R.layout.dialog_info_level);
+            okDontRemember = (ImageButton) dialog.findViewById(R.id.btn_done);
+            checkBoxDontRemember = (CheckBox) dialog.findViewById(R.id.check_box_dont_remember);
+            okDontRemember.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(checkBoxDontRemember.isChecked()){
+                        mDatabaseHelper.updateRemember();
+                        dialog.dismiss();
+                    }
+                    else {
+                        dialog.dismiss();
+                    }
+                }
+            });
+            dialog.show();
+        }
 
         Log.d(TAG, "Painting spaceship on the screen");
         //TODO: Select the aircraft from user's shop and change hardcoded 100 to class variable
@@ -199,7 +225,7 @@ public class LevelView extends View {
         Resources res = getContext().getResources();
         int resID = res.getIdentifier(src , "drawable", getContext().getPackageName());
 
-        this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),resID),120, 120, false));
+        this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),resID),130, 130, false));
 
         //TODO remove 2 lines of code of width and height
         this.screenWidth  = Resources.getSystem().getDisplayMetrics().widthPixels;

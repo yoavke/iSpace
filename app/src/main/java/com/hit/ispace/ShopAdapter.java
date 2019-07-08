@@ -74,7 +74,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
                 public void onClick(final View view) {
                     int idSpaceShip = mDatabaseHelper.getSpaceShipId();
                     if (space.getId() == idSpaceShip ) {
-                        FancyToast.makeText(mContext, mContext.getString(R.string.cant_do_nothing), FancyToast.LENGTH_LONG, FancyToast.WARNING, true).show();
+                        FancyToast.makeText(mContext, mContext.getString(R.string.cant_do_nothing), FancyToast.LENGTH_SHORT, FancyToast.WARNING, true).show();
                     }
                     else {
                         updateSpaceShipInShop(space.getId());
@@ -97,7 +97,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
                     number_of_coins = mDatabaseHelper.getTotalCoins();
                     if(number_of_coins < space.getPrice())
                     {
-                        FancyToast.makeText(mContext , mContext.getString(R.string.cant_buy),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
+                        FancyToast.makeText(mContext , mContext.getString(R.string.cant_buy),FancyToast.LENGTH_SHORT, FancyToast.ERROR,true).show();
                     }
                     else {
                         buySpaceShipInShop(space.getId());
@@ -148,10 +148,10 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
         boolean updateData = mDatabaseHelper.buySpaceShip(id);
 
         if (updateData) {
-            FancyToast.makeText(mContext , mContext.getString(R.string.success_buying),FancyToast.LENGTH_LONG, FancyToast.SUCCESS,true).show();
+            FancyToast.makeText(mContext , mContext.getString(R.string.success_buying),FancyToast.LENGTH_SHORT, FancyToast.SUCCESS,true).show();
         }
       else {
-            FancyToast.makeText(mContext , mContext.getString(R.string.no_success),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
+            FancyToast.makeText(mContext , mContext.getString(R.string.no_success),FancyToast.LENGTH_SHORT, FancyToast.ERROR,true).show();
       }
     }
 
@@ -159,10 +159,10 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
         boolean updateData = mDatabaseHelper.updateUseSpaceShip(id);
 
         if (updateData) {
-            FancyToast.makeText(mContext , mContext.getString(R.string.success_update),FancyToast.LENGTH_LONG, FancyToast.SUCCESS,true).show();
+            FancyToast.makeText(mContext , mContext.getString(R.string.success_update),FancyToast.LENGTH_SHORT, FancyToast.SUCCESS,true).show();
         }
         else {
-            FancyToast.makeText(mContext , mContext.getString(R.string.no_success),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
+            FancyToast.makeText(mContext , mContext.getString(R.string.no_success),FancyToast.LENGTH_SHORT, FancyToast.ERROR,true).show();
         }
     }
 
