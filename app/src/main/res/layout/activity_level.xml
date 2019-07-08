@@ -68,6 +68,7 @@
         </LinearLayout>
 
     </android.support.v7.widget.CardView>
+
     <com.hit.ispace.LevelView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

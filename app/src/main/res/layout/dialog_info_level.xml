@@ -12,8 +12,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="206dp"
-        android:gravity="center"
+        android:layout_height="170dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -23,8 +22,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/icon_inst" />
 
             <TextView
@@ -35,27 +34,36 @@
                 android:layout_marginRight="20dp"
                 android:fontFamily="casual"
                 android:text="@string/instructions"
-                android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textColor="@color/blackColor"
                 android:textSize="28sp"
                 android:textStyle="bold" />
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/icon_inst" />
-
         </LinearLayout>
 
         <TextView
-            android:layout_width="362dp"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
+            android:gravity="center"
             android:fontFamily="casual"
             android:text="@string/instructions_content"
             android:textColor="@color/blackColor"
-            android:textSize="18sp"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:fontFamily="casual"
+            android:text="@string/elements"
+            android:textColor="@color/blackColor"
+            android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -63,21 +71,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:layout_marginTop="6dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/icon_coin" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
@@ -85,7 +90,7 @@
             android:fontFamily="casual"
             android:text="@string/inst_coin"
             android:textColor="@color/blackColor"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
 
@@ -94,15 +99,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:layout_marginTop="6dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/icon_ufo"/>
@@ -116,21 +119,20 @@
             android:fontFamily="casual"
             android:text="@string/inst_ufo"
             android:textColor="@color/blackColor"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginTop="3dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:layout_marginTop="6dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/icon_good_bomb"/>
@@ -144,22 +146,20 @@
             android:fontFamily="casual"
             android:text="@string/inst_good_bomb"
             android:textColor="@color/blackColor"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginTop="3dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:layout_marginTop="6dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/icon_bad_bomb"/>
@@ -173,22 +173,20 @@
             android:fontFamily="casual"
             android:text="@string/inst_dead_asteroid"
             android:textColor="@color/blackColor"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:layout_marginTop="6dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="@drawable/icon_dead_asteroid" />
@@ -202,7 +200,7 @@
             android:fontFamily="casual"
             android:text="@string/inst_dead_asteroid"
             android:textColor="@color/blackColor"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -215,12 +213,12 @@
         android:fontFamily="casual"
         android:text="@string/good_luck"
         android:textColor="@color/blackColor"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <CheckBox
@@ -229,10 +227,9 @@
             android:layout_height="match_parent" />
 
         <TextView
-            android:layout_width="250dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:fontFamily="casual"
             android:text="@string/dont_remember"
             android:textColor="@color/grayColor"
@@ -240,4 +237,16 @@
             android:textStyle="bold" />
 
     </LinearLayout>
+
+
+    <ImageButton
+        android:id="@+id/btn_done"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/icon_done" />
 </LinearLayout>

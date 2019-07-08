@@ -184,6 +184,12 @@ public class LevelView extends View {
 
     public void startLevel(Level level,int idSpaceShip) {
         this.level = level;
+
+
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.dialog_info_level);
+        dialog.show();
+
         int arrSpaceShip[] = {R.drawable.spaceship_1 ,R.drawable.spaceship_2,R.drawable.spaceship_3,R.drawable.spaceship_4,R.drawable.spaceship_5,R.drawable.spaceship_6};
         Log.d(TAG, "Painting spaceship on the screen");
         //TODO: Select the aircraft from user's shop and change hardcoded 100 to class variable

@@ -41,7 +41,8 @@
     <string name="msg_error_save_score">אתה חייב לרשום את שמך כדי לשמור את השיא שלך!</string>
     <string name="cant_do_nothing">זוהי החללית הנוכחית שלך</string>
     <string name="instructions">הוראות</string>
-    <string name="instructions_content">החלק שמאלה וימינה כדי להזיז את החללית.\nשים לב! אלמנטים נופלים על המסך. אתה צריך לקחת אותם או להתחמק מהם! \n\n האלמנטים:</string>
+    <string name="instructions_content">החלק שמאלה וימינה כדי להזיז את החללית.\nשים לב, אלמנטים נופלים על המסך. אתה צריך לקחת אותם או להתחמק מהם.</string>
+    <string name="elements">האלמנטים:</string>
     <string name="inst_coin">קבל 3/5/7 מטבעות (סגנון חופשי,מהר יותר,כאב ראש) לכל מטבע שתאסוף.</string>
     <string name="inst_good_bomb">מוחק אלמנט אקראי.</string>
     <string name="inst_ufo">גונב 3 מטבעות מאוסף המטבעות שלך. </string>

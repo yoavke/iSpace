@@ -30,7 +30,6 @@ import com.shashank.sony.fancydialoglib.Icon;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import java.util.ArrayList;
-
 public class LevelActivity extends AppCompatActivity {
 
     private static final String TAG = LevelActivity.class.getSimpleName();
