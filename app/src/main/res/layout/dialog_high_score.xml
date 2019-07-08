@@ -25,7 +25,9 @@
             android:fontFamily="casual"
             android:textSize="24sp"
             android:layout_marginTop="70dp"/>
+
         <TextView
+            android:id="@+id/text_msg_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_high_score"
@@ -67,13 +69,12 @@
                 android:layout_marginBottom="10dp"/>
 
             <TextView
-                android:id="@+id/user_name_score"
+                android:id="@+id/user_score"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:gravity="center"
                 android:fontFamily="casual"
-                android:text="user"
                 android:textColor="@color/blackColor"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -93,8 +94,9 @@
             android:layout_width="190dp"
             android:layout_height="50dp"
             android:fontFamily="casual"
-            android:text="Write here name"
             android:textColor="@color/blackColor"
+            android:background="@drawable/layout_ripple"
+            android:layout_margin="10dp"
             android:textSize="20sp"
             android:textStyle="bold"
             android:typeface="serif" />
@@ -104,9 +106,51 @@
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:textColor="@color/blackColor"
-            android:background="@color/grayColor"
+            android:background="@drawable/scope_button_cant_use"
             android:text="@string/save"
             />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="320dp"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/btn_start_again"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/icon_repeat" />
+
+        <ImageButton
+            android:id="@+id/btn_sharing_in_whatsaps"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/icon_share" />
+
+
+        <ImageButton
+            android:id="@+id/btn_home"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/icon_home"/>
+
     </LinearLayout>
 
 </RelativeLayout>
