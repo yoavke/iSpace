@@ -67,7 +67,7 @@
             android:layout_width="340dp"
             android:layout_height="150dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/colorLayout"
+            android:background="@drawable/layout_ripple_level"
             card_view:cardCornerRadius="10dp">
 
             <LinearLayout
@@ -98,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="10dp"
                         android:fontFamily="casual"
-                        android:textColor="@color/whiteColor"
+                        android:textColor="@color/blackColor"
                         android:textSize="25sp"
                         android:textStyle="bold" />
 
