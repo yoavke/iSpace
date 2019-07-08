@@ -53,10 +53,12 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
     @Override
     public void onBindViewHolder(@NonNull final ShopAdapter.ShopViewHolder holder, int i) {
         final SpaceShipShop space = spaceShip.get(i);
-        int arrSpaceShip[] = {R.drawable.spaceship_1 ,R.drawable.spaceship_2,R.drawable.spaceship_3,R.drawable.spaceship_4,R.drawable.spaceship_5,R.drawable.spaceship_6};
+        Resources res = mContext.getResources();
+        int resID = res.getIdentifier(space.getSrc_path() , "drawable", mContext.getPackageName());
+
         Glide.with(mContext)
                 .asBitmap()
-                .load(arrSpaceShip[i])
+                .load(resID)
                 .into(holder.imageSpaceShip);
 
         if(space.getLocked() == 0) {

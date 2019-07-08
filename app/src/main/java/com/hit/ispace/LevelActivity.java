@@ -316,6 +316,8 @@ public class LevelActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
+            this.levelView.createElementThread.quit();
+            this.levelView.animateElementThread.quit();
             return;
         }
 
