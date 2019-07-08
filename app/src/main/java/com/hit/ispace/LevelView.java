@@ -155,7 +155,7 @@ public class LevelView extends View {
                 } else if (this.level.spaceship.getLeftTop().getX()+move > getWidth()-this.level.spaceship.getBitmapSrc().getWidth()) {
 
                     this.level.spaceship.getLeftTop().setX(getWidth()-this.level.spaceship.getBitmapSrc().getWidth());
-                    this.level.spaceship.getRightBottom().setX(this.level.spaceship.getLeftTop().getX()+100);
+                    this.level.spaceship.getRightBottom().setX(this.level.spaceship.getLeftTop().getX()+CSettings.Dimension.SPACESHIP_SIZE);
 
                 }
                 break;
@@ -185,7 +185,7 @@ public class LevelView extends View {
                 } else if (this.level.spaceship.getLeftTop().getX()+move > getWidth()-this.level.spaceship.getBitmapSrc().getWidth()) {
 
                     this.level.spaceship.getLeftTop().setX(getWidth()-this.level.spaceship.getBitmapSrc().getWidth());
-                    this.level.spaceship.getRightBottom().setX(this.level.spaceship.getLeftTop().getX()+100);
+                    this.level.spaceship.getRightBottom().setX(this.level.spaceship.getLeftTop().getX()+CSettings.Dimension.SPACESHIP_SIZE);
                 }
                 break;
             default:
@@ -193,10 +193,11 @@ public class LevelView extends View {
         }
     }
 
-    public void startLevel(Level level) {
-        this.level = level;
+    public void start(Level level) {
         final DatabaseHelper db = new DatabaseHelper(getContext());
         final Dialog dialog = new Dialog(getContext());
+
+        final Level newlevel = level;
 
         if(db.ifCheckRemember() == 1){
             dialog.setContentView(R.layout.dialog_info_level);
@@ -213,22 +214,30 @@ public class LevelView extends View {
                     else {
                         dialog.dismiss();
                     }
+                    LevelView.this.startLevel(newlevel);
                 }
             });
             dialog.show();
-        }
+
+        } else
+            LevelView.this.startLevel(newlevel);
+    }
+
+    public void startLevel(Level level) {
+        this.level = level;
+        final DatabaseHelper db = new DatabaseHelper(getContext());
+
 
         Log.d(TAG, "Painting spaceship on the screen");
-        //TODO: Select the aircraft from user's shop and change hardcoded 100 to class variable
 
         String src = db.getSpaceShipSrc();
 
         Resources res = getContext().getResources();
         int resID = res.getIdentifier(src , "drawable", getContext().getPackageName());
 
-        this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),resID),130, 130, false));
+        this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),resID),CSettings.Dimension.SPACESHIP_SIZE, CSettings.Dimension.SPACESHIP_SIZE, false));
 
-        //TODO remove 2 lines of code of width and height
+        //getting the screen size for the canvas and to know where to locate the elements
         this.screenWidth  = Resources.getSystem().getDisplayMetrics().widthPixels;
         this.screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
 
