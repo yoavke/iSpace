@@ -43,9 +43,9 @@
     <string name="instructions_content">swipe left and right to move the space.\npay attention, elements are falling on the screen. you should take or avoid them.</string>
     <string name="elements">Elements:</string>
     <string name="inst_coin">Get 3/5/7 coins (FreeStyle/Faster/GettingSick) for each coin you collect.</string>
-    <string name="inst_good_bomb">Deletes a random element.</string>
-    <string name="inst_ufo">Steals 3 coins from your collection. </string>
-    <string name="inst_dead_asteroid">Leads to the ending the game.</string>
+    <string name="inst_good_bomb">Delete a random element.</string>
+    <string name="inst_ufo">Steal 3 coins from your collection. </string>
+    <string name="inst_dead_asteroid">Lead to the ending the game.</string>
     <string name="good_luck">Good Luck :)</string>
     <string name="dont_remember">Don\'t remember me again</string>
     <string name="doubleClickExit">Please click BACK again to exit</string>

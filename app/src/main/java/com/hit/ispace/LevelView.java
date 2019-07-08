@@ -7,6 +7,8 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -36,7 +38,6 @@ public class LevelView extends View {
     //TAG
     private static final String TAG = LevelView.class.getSimpleName();
 
-    DatabaseHelper mDatabaseHelper;
     private Level level=null;
     private int screenWidth=0;
     private int screenHeight=0;
@@ -194,18 +195,19 @@ public class LevelView extends View {
 
     public void startLevel(Level level) {
         this.level = level;
-        mDatabaseHelper = new DatabaseHelper(getContext());
+        final DatabaseHelper db = new DatabaseHelper(getContext());
         final Dialog dialog = new Dialog(getContext());
 
-        if(mDatabaseHelper.ifCheckRemember() == 1){
+        if(db.ifCheckRemember() == 1){
             dialog.setContentView(R.layout.dialog_info_level);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             okDontRemember = (ImageButton) dialog.findViewById(R.id.btn_done);
             checkBoxDontRemember = (CheckBox) dialog.findViewById(R.id.check_box_dont_remember);
             okDontRemember.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(checkBoxDontRemember.isChecked()){
-                        mDatabaseHelper.updateRemember();
+                        db.updateRemember();
                         dialog.dismiss();
                     }
                     else {
@@ -219,7 +221,6 @@ public class LevelView extends View {
         Log.d(TAG, "Painting spaceship on the screen");
         //TODO: Select the aircraft from user's shop and change hardcoded 100 to class variable
 
-        DatabaseHelper db = new DatabaseHelper(getContext());
         String src = db.getSpaceShipSrc();
 
         Resources res = getContext().getResources();
