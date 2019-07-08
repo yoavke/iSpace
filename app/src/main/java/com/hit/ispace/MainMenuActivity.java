@@ -33,10 +33,12 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        Resources res = getResources();
-        int resID = res.getIdentifier("spaceship_1" , "drawable", getPackageName());
-        Drawable drawable = res.getDrawable(resID );
-        //Toast.makeText(this,"int: " + resID,Toast.LENGTH_LONG).show();
+
+        Toast.makeText(this,"my int: " + R.drawable.spaceship_1,Toast.LENGTH_LONG).show();
+//        Resources res = getResources();
+//        int resID = res.getIdentifier("spaceship_1" , "drawable", getPackageName());
+//        Drawable drawable = res.getDrawable(resID );
+//        //Toast.makeText(this,"int: " + resID,Toast.LENGTH_LONG).show();
         initView();
     }
 
