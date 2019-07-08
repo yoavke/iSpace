@@ -50,4 +50,6 @@
     <string name="good_luck">בהצלחה :)</string>
     <string name="dont_remember">אל תזכיר לי שוב</string>
     <string name="doubleClickExit">לחיצה כפולה אחורה כדי לצאת</string>
+    <string name="msg_lose">אופס, התוצאה שלך לא מספיקה ל15 הגדולים. אולי בפעם הבאה :)</string>
+
 </resources>

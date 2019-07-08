@@ -62,7 +62,7 @@ public class ShopActivity extends AppCompatActivity {
         coins_total.setText(String.valueOf(number_of_coins));
 
         //id of ImageView of coin
-        final ImageView coinIv = findViewById(R.id.icon_animation_coin);//this bad name !!!
+        final ImageView coinIv = findViewById(R.id.icon_animation_coin);
 
         final ObjectAnimator invisibleAnim = ObjectAnimator.ofFloat(coinIv,"scaleX",1f,0f).setDuration(1000);
         final ObjectAnimator visibleAnim = ObjectAnimator.ofFloat(coinIv,"scaleX",0f,1f).setDuration(1000);

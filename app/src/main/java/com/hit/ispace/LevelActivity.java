@@ -1,5 +1,8 @@
 package com.hit.ispace;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -16,9 +19,11 @@ import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,11 +47,15 @@ public class LevelActivity extends AppCompatActivity {
 
     private int coinsEarned;
     private int kmPassed;
-    private TextView msgHighScore;
+    private TextView msgHighScore,score;
     private EditText userNameEditText;
     public SharedPreferences settings ;
-    private Button btnSave, btnStartAgain, btnSharing, btnHome;
+    private ImageButton btnStartAgain, btnSharing, btnHome;
+    private Button btnSave;
     private boolean doubleBackToExitPressedOnce = false;
+    boolean isFlip = false;
+    Dialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +111,39 @@ public class LevelActivity extends AppCompatActivity {
             }
         }, 1000);
 
+
+        //id of ImageView of coin
+        final ImageView coinIv = findViewById(R.id.icon_animation_coin);
+
+        final ObjectAnimator invisibleAnim = ObjectAnimator.ofFloat(coinIv,"scaleX",1f,0f).setDuration(1000);
+        final ObjectAnimator visibleAnim = ObjectAnimator.ofFloat(coinIv,"scaleX",0f,1f).setDuration(1000);
+
+        invisibleAnim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+
+                isFlip  = !isFlip;
+
+                if(isFlip)
+                    coinIv.setImageResource(R.drawable.icon_coin);
+                else
+                    coinIv.setImageResource(R.drawable.icon_coin);
+                visibleAnim.start();
+            }
+        });
+
+        visibleAnim.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                invisibleAnim.start();
+            }
+        });
+        invisibleAnim.start();
+
+
+
         settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
         // Checks whether the last time the user played background music
         if (readSetting("music").equals("true")) {
@@ -141,31 +183,27 @@ public class LevelActivity extends AppCompatActivity {
                 mDatabaseHelper = new DatabaseHelper(LevelActivity.this);
                 mDatabaseHelper.updateCoin(LevelActivity.this.coinsEarned);
                 ArrayList<UserScore> userScores = mDatabaseHelper.checkScore(LevelActivity.this.level.getLevelType(), LevelActivity.this.kmPassed);
-
+                dialog = new Dialog(LevelActivity.this);
                 //1st-15th place
                 if (userScores.size()<15 || userScores == null) {
                     //open dialog for 1st place
-                    AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
-                    final View myView = getLayoutInflater().inflate(R.layout.dialog_high_score, null);
-                    final TextView score = (TextView) myView.findViewById(R.id.user_score);
-                    myView.setBackgroundResource(R.color.grayColor);
-                    //msgHighScore = (TextView) myView.findViewById(R.id.text_msg_score);
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    dialog.setContentView(R.layout.dialog_high_score);
+                    btnStartAgain = (ImageButton) dialog.findViewById(R.id.btn_start_again);
+                    btnSharing = (ImageButton) dialog.findViewById(R.id.btn_sharing_in_whatsapps);
+                    btnHome = (ImageButton) dialog.findViewById(R.id.btn_home);
+                    score = (TextView) dialog.findViewById(R.id.user_score);
+                    msgHighScore = (TextView) dialog.findViewById(R.id.text_msg_score);
                     if(mDatabaseHelper.getHighScore(LevelActivity.this.level.getLevelType()) < LevelActivity.this.kmPassed){
                         msgHighScore.setText(getText(R.string.new_high_score));
                     }
                     else {
                         msgHighScore.setText(getText(R.string.in_top_15));
                     }
-                    userNameEditText = (EditText) myView.findViewById(R.id.user_name);
-                    builder.setView(myView);
+
+                    userNameEditText = (EditText) dialog.findViewById(R.id.user_name);
                     score.setText(Integer.toString(LevelActivity.this.kmPassed));
-
-                    //btnSave = (Button) myView.findViewById(R.id.save_button);
-                    btnStartAgain = (Button) myView.findViewById(R.id.btn_start_again);
-                    btnSharing = (Button) myView.findViewById(R.id.btn_sharing_in_whatsaps);
-                    btnHome = (Button) myView.findViewById(R.id.btn_home);
-
-                    final AlertDialog dialog = builder.create();
+                    btnSave = (Button) dialog.findViewById(R.id.btn_save);
 
                     btnSave.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -234,20 +272,11 @@ public class LevelActivity extends AppCompatActivity {
                 }
                 //not in top 5
                 else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(LevelActivity.this);
-                    final View myView = getLayoutInflater().inflate(R.layout.dialog_score, null);
-                    myView.setBackgroundResource(R.color.grayColor);
-                    final TextView score = (TextView) myView.findViewById(R.id.user_score);
-                    userNameEditText = (EditText) myView.findViewById(R.id.user_name);
-                    builder.setView(myView);
-
-                    score.setText(Integer.toString(LevelActivity.this.kmPassed));
-
-                    btnStartAgain = (Button) myView.findViewById(R.id.btn_start_again);
-                    btnSharing = (Button) myView.findViewById(R.id.btn_sharing_in_whatsaps);
-                    btnHome = (Button) myView.findViewById(R.id.btn_home);
-
-                    final AlertDialog dialog = builder.create();
+                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+                    dialog.setContentView(R.layout.dialog_score);
+                    btnStartAgain = (ImageButton) dialog.findViewById(R.id.btn_start_again);
+                    btnSharing = (ImageButton) dialog.findViewById(R.id.btn_sharing_in_whatsapps);
+                    btnHome = (ImageButton) dialog.findViewById(R.id.btn_home);
 
                     btnHome.setOnClickListener(new View.OnClickListener() {
                         @Override
