@@ -73,6 +73,7 @@ public class LevelActivity extends AppCompatActivity {
             case CSettings.LevelTypes.GETTING_SICK:
                 //instantiate level here so we dont instantiate it for level that doesn't exists
                 level = new Level(levelType);
+
                 levelView.startLevel(level);
                 break;
             default:
