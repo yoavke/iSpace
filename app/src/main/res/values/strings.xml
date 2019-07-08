@@ -23,8 +23,8 @@
     <string name="space_shop">Space Shop</string>
     <string name="level">Level:</string>
     <string name="info_about_coins">Total coins:</string>
-    <string name="are_you_sure_buy">Are you sure you want to buy?</string>
-    <string name="are_you_sure_select">Are you sure you want to select this item?</string>
+    <string name="are_you_sure_buy">Are you sure you want to buy this item?</string>
+    <string name="are_you_sure_select">Are you sure you want to use this item?</string>
     <string name="comment">if you press \"yes\", you will start the game with this spaceship</string>
     <string name="you_already">You already buy this item</string>
     <string name="buy_now">Buy now!</string>
@@ -33,21 +33,19 @@
     <string name="no_success">Something goes wrong</string>
     <string name="success_adding">Adding successfully</string>
     <string name="success_update">Update succeeded</string>
-    <string name="cant_buy">You don\'t have enough money to buy this item</string>
+    <string name="cant_buy">You don\'t have enough coins to buy this item</string>
     <string name="use_this_space">Use</string>
     <string name="text_send_whatsapp_1">I got a score of </string>
     <string name="text_send_whatsapp_2">, in iSpace app. let\'s see if you can get a better score.</string>
-    <string name="msg_error_save_score">You must put name to save you\'r high score!</string>
-    <string name="cant_do_nothing">This is your current SpaceShip </string>
+    <string name="msg_error_save_score">You must put a name to save you\'r high score!</string>
+    <string name="cant_do_nothing">This is your current SpaceShip</string>
     <string name="instructions">Instructions</string>
-    <string name="instructions_content">swipe left and right to move the space.\npay attention! elemnts are falling on the screen you should take or avoid them! \n\n Elements:</string>
-    <string name="inst_coin">Get 5 coins for each coin you collect.</string>
-    <string name="inst_good_bomb">Deletes a random element</string>
+    <string name="instructions_content">swipe left and right to move the space.\npay attention! elements are falling on the screen. you should take or avoid them! \n\n Elements:</string>
+    <string name="inst_coin">Get 3/5/7 coins(FreeStyle/Faster/GettingSick) for each coin you collect.</string>
+    <string name="inst_good_bomb">Deletes a random element.</string>
     <string name="inst_ufo">Steals 3 coins from your collection. </string>
     <string name="inst_dead_asteroid">Leads to the ending the game.</string>
     <string name="good_luck">Good Luck :)</string>
     <string name="dont_remember">Don\'t remember me again</string>
     <string name="doubleClickExit">Please click BACK again to exit</string>
-
-
 </resources>

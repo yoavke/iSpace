@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.support.annotation.DrawableRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
