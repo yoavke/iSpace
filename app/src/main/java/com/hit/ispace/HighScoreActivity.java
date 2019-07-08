@@ -45,7 +45,7 @@ public class HighScoreActivity extends AppCompatActivity {
         konfetti = findViewById(R.id.viewKonfetti);
 
         konfetti.build()
-                .addColors(Color.YELLOW, Color.GREEN, Color.RED, Color.BLUE)
+                .addColors(Color.MAGENTA, Color.BLUE, Color.RED)
                 .setDirection(0.0, 359.0)
                 .setSpeed(1f, 5f)
                 .setFadeOutEnabled(true)
