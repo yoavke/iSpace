@@ -90,6 +90,7 @@ public class ShopActivity extends AppCompatActivity {
             }
         });
         invisibleAnim.start();
+
         settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
         isPlayed = getIntent().getBooleanExtra("isPlayed", false);
     }
