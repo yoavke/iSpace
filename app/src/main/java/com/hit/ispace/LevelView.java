@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -182,18 +183,23 @@ public class LevelView extends View {
         }
     }
 
-    public void startLevel(Level level,int idSpaceShip) {
+    public void startLevel(Level level) {
         this.level = level;
-
 
         final Dialog dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.dialog_info_level);
         dialog.show();
 
-        int arrSpaceShip[] = {R.drawable.spaceship_1 ,R.drawable.spaceship_2,R.drawable.spaceship_3,R.drawable.spaceship_4,R.drawable.spaceship_5,R.drawable.spaceship_6};
         Log.d(TAG, "Painting spaceship on the screen");
         //TODO: Select the aircraft from user's shop and change hardcoded 100 to class variable
-        this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),arrSpaceShip[idSpaceShip-1]),120, 120, false));
+
+        DatabaseHelper db = new DatabaseHelper(getContext());
+        String src = db.getSpaceShipSrc();
+
+        Resources res = getContext().getResources();
+        int resID = res.getIdentifier(src , "drawable", getContext().getPackageName());
+
+        this.level.spaceship.setBitmapSrc(Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(),resID),120, 120, false));
 
         //TODO remove 2 lines of code of width and height
         this.screenWidth  = Resources.getSystem().getDisplayMetrics().widthPixels;

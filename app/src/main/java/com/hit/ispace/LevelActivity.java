@@ -48,7 +48,6 @@ public class LevelActivity extends AppCompatActivity {
     private Button btnSave, btnStartAgain, btnSharing, btnHome;
     private boolean doubleBackToExitPressedOnce = false;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +66,6 @@ public class LevelActivity extends AppCompatActivity {
         this.waitEndGameThread.start();
         this.waitEndGameHandler = new Handler(waitEndGameThread.getLooper());
 
-        mDatabaseHelper = new DatabaseHelper(LevelActivity.this);
-        int idSpaceShip = mDatabaseHelper.getSpaceShipId();
         //check if the level type chosen exists
         switch (levelType) {
             case CSettings.LevelTypes.FREE_STYLE:
@@ -76,7 +73,7 @@ public class LevelActivity extends AppCompatActivity {
             case CSettings.LevelTypes.GETTING_SICK:
                 //instantiate level here so we dont instantiate it for level that doesn't exists
                 level = new Level(levelType);
-                levelView.startLevel(level,idSpaceShip);
+                levelView.startLevel(level);
                 break;
             default:
                 Log.e(TAG, "No such level type");
@@ -319,6 +316,8 @@ public class LevelActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
+            this.levelView.createElementThread.quit();
+            this.levelView.animateElementThread.quit();
             return;
         }
 

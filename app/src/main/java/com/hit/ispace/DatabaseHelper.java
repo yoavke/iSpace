@@ -261,6 +261,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return user_score;
     }
 
+    //return the id of the spaceship the user has chosen to play with
     public int getSpaceShipId(){
         int spaceShipId;
         SQLiteDatabase db = getReadableDatabase();
@@ -269,6 +270,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         data.moveToFirst();
         spaceShipId = data.getInt(data.getColumnIndex("spaceship_id"));
         return spaceShipId;
+    }
+
+    public String getSpaceShipSrc() {
+        String spaceShipSrc;
+        int spaceship_id;
+        SQLiteDatabase db = getReadableDatabase();
+
+        String id_query = "SELECT * from myspaceship";
+        Cursor dataid = db.rawQuery(id_query, null);
+        dataid.moveToFirst();
+        spaceship_id = dataid.getInt(dataid.getColumnIndex(MYSPACESHIP_COL1));
+
+        String src_query = "SELECT src_path FROM spaceships WHERE id="+spaceship_id;
+        Cursor dataSrc = db.rawQuery(src_query, null);
+        dataSrc.moveToFirst();
+        spaceShipSrc = dataSrc.getString(dataSrc.getColumnIndex(SPACESHIPS_COL_3));
+
+        return spaceShipSrc;
     }
 
     public boolean updateUseSpaceShip(int id){

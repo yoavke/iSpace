@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.bumptech.glide.Glide;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
@@ -50,12 +53,12 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ShopViewHolder
     @Override
     public void onBindViewHolder(@NonNull final ShopAdapter.ShopViewHolder holder, int i) {
         final SpaceShipShop space = spaceShip.get(i);
-        Resources res = this.mContext.getResources();
-        int arrSpaceShip[] = {R.drawable.spaceship_1 ,R.drawable.spaceship_2,R.drawable.spaceship_3,R.drawable.spaceship_4,R.drawable.spaceship_5,R.drawable.spaceship_6};
-        int resID = res.getIdentifier("share1" , "drawable", mContext.getPackageName());
+        Resources res = mContext.getResources();
+        int resID = res.getIdentifier(space.getSrc_path() , "drawable", mContext.getPackageName());
+
         Glide.with(mContext)
                 .asBitmap()
-                .load(arrSpaceShip[i])
+                .load(resID)
                 .into(holder.imageSpaceShip);
 
         if(space.getLocked() == 0) {
