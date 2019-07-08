@@ -149,7 +149,7 @@ public class LevelActivity extends AppCompatActivity {
                     final View myView = getLayoutInflater().inflate(R.layout.dialog_high_score, null);
                     final TextView score = (TextView) myView.findViewById(R.id.user_score);
                     myView.setBackgroundResource(R.color.grayColor);
-                    msgHighScore = (TextView) myView.findViewById(R.id.text_msg_score);
+                    //msgHighScore = (TextView) myView.findViewById(R.id.text_msg_score);
                     if(mDatabaseHelper.getHighScore(LevelActivity.this.level.getLevelType()) < LevelActivity.this.kmPassed){
                         msgHighScore.setText(getText(R.string.new_high_score));
                     }
@@ -160,7 +160,7 @@ public class LevelActivity extends AppCompatActivity {
                     builder.setView(myView);
                     score.setText(Integer.toString(LevelActivity.this.kmPassed));
 
-                    btnSave = (Button) myView.findViewById(R.id.save_button);
+                    //btnSave = (Button) myView.findViewById(R.id.save_button);
                     btnStartAgain = (Button) myView.findViewById(R.id.btn_start_again);
                     btnSharing = (Button) myView.findViewById(R.id.btn_sharing_in_whatsaps);
                     btnHome = (Button) myView.findViewById(R.id.btn_home);
