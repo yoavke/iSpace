@@ -323,4 +323,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public int ifCheckRemember() {
+        int checkBoxId;
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM remember";
+        Cursor data = db.rawQuery(query, null);
+        data.moveToFirst();
+        checkBoxId = data.getInt(data.getColumnIndex("is_remember"));
+        return checkBoxId;
+    }
+
 }

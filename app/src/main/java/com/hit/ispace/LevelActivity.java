@@ -182,7 +182,7 @@ public class LevelActivity extends AppCompatActivity {
                                 startActivity(intent);
                             }
                             else {
-                                FancyToast.makeText(LevelActivity.this , getString(R.string.msg_error_save_score),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
+                                FancyToast.makeText(LevelActivity.this , getString(R.string.msg_error_save_score),FancyToast.LENGTH_SHORT, FancyToast.ERROR,true).show();
                             }
                         }
                     });
@@ -308,9 +308,9 @@ public class LevelActivity extends AppCompatActivity {
     public void AddData(int level, String name, int score) {
         boolean insertData = mDatabaseHelper.addNewRecord(level,name,score);
         if (insertData) {
-            FancyToast.makeText(this , getString(R.string.success_adding),FancyToast.LENGTH_LONG, FancyToast.SUCCESS,true).show();
+            FancyToast.makeText(this , getString(R.string.success_adding),FancyToast.LENGTH_SHORT, FancyToast.SUCCESS,true).show();
         } else {
-            FancyToast.makeText(this , getString(R.string.no_success),FancyToast.LENGTH_LONG, FancyToast.ERROR,true).show();
+            FancyToast.makeText(this , getString(R.string.no_success),FancyToast.LENGTH_SHORT, FancyToast.ERROR,true).show();
         }
     }
 
@@ -324,7 +324,7 @@ public class LevelActivity extends AppCompatActivity {
 
         this.doubleBackToExitPressedOnce = true;
         String message = getResources().getString(R.string.doubleClickExit);
-        FancyToast.makeText(this,message,FancyToast.LENGTH_LONG,FancyToast.WARNING,false).show();
+        FancyToast.makeText(this,message,FancyToast.LENGTH_SHORT,FancyToast.WARNING,false).show();
 
         new Handler().postDelayed(new Runnable() {
 
