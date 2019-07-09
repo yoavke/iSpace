@@ -47,7 +47,7 @@ public class LevelActivity extends AppCompatActivity {
 
     private int coinsEarned;
     private int kmPassed;
-    private TextView msgHighScore,score;
+    private TextView msgHighScore,score,coin;
     private EditText userNameEditText;
     public SharedPreferences settings ;
     private ImageButton btnStartAgain, btnSharing, btnHome;
@@ -193,6 +193,7 @@ public class LevelActivity extends AppCompatActivity {
                     btnSharing = (ImageButton) dialog.findViewById(R.id.btn_sharing_in_whatsapps);
                     btnHome = (ImageButton) dialog.findViewById(R.id.btn_home);
                     score = (TextView) dialog.findViewById(R.id.user_score);
+                    coin = (TextView) dialog.findViewById(R.id.user_coin);
                     msgHighScore = (TextView) dialog.findViewById(R.id.text_msg_score);
                     if(mDatabaseHelper.getHighScore(LevelActivity.this.level.getLevelType()) < LevelActivity.this.kmPassed){
                         msgHighScore.setText(getText(R.string.new_high_score));
@@ -203,6 +204,7 @@ public class LevelActivity extends AppCompatActivity {
 
                     userNameEditText = (EditText) dialog.findViewById(R.id.user_name);
                     score.setText(Integer.toString(LevelActivity.this.kmPassed));
+                    coin.setText(Integer.toString(LevelActivity.this.coinsEarned));
                     btnSave = (Button) dialog.findViewById(R.id.btn_save);
 
                     btnSave.setOnClickListener(new View.OnClickListener() {
@@ -277,6 +279,10 @@ public class LevelActivity extends AppCompatActivity {
                     btnStartAgain = (ImageButton) dialog.findViewById(R.id.btn_start_again);
                     btnSharing = (ImageButton) dialog.findViewById(R.id.btn_sharing_in_whatsapps);
                     btnHome = (ImageButton) dialog.findViewById(R.id.btn_home);
+                    score = (TextView) dialog.findViewById(R.id.user_score);
+                    coin = (TextView) dialog.findViewById(R.id.user_coin);
+                    score.setText(Integer.toString(LevelActivity.this.kmPassed));
+                    coin.setText(Integer.toString(LevelActivity.this.coinsEarned));
 
                     btnHome.setOnClickListener(new View.OnClickListener() {
                         @Override

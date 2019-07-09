@@ -50,4 +50,5 @@
     <string name="dont_remember">Don\'t remember me again</string>
     <string name="doubleClickExit">Please click BACK again to exit</string>
     <string name="msg_lose">Oops, your score is not enough to the top 15th. Maybe next time :)</string>
+    <string name="text_user_coin">You collect </string>
 </resources>

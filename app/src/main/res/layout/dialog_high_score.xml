@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="370dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
         android:background="@color/blackColor">
@@ -60,7 +60,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/text_user_score"
+                android:text="@string/text_user_coin"
                 android:textColor="@color/whiteColor"
                 android:textStyle="bold"
                 android:fontFamily="casual"
@@ -69,7 +69,7 @@
                 android:layout_marginBottom="10dp"/>
 
             <TextView
-                android:id="@+id/user_score"
+                android:id="@+id/user_coin"
                 android:layout_width="50dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
@@ -80,6 +80,13 @@
                 android:textStyle="bold"
                 android:typeface="serif" />
 
+            <ImageView
+                android:id="@+id/icon_animation_coin"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_coin"
+                />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -87,6 +94,37 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginTop="265dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_user_score"
+            android:textColor="@color/whiteColor"
+            android:textStyle="bold"
+            android:fontFamily="casual"
+            android:textSize="20sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/user_score"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:fontFamily="casual"
+            android:textColor="@color/whiteColor"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:typeface="serif" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="315dp"
         android:gravity="center">
 
         <EditText
@@ -116,7 +154,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="370dp"
         android:gravity="center">
 
         <ImageButton
