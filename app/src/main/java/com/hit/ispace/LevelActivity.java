@@ -11,11 +11,13 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -152,12 +154,6 @@ public class LevelActivity extends AppCompatActivity {
         }
     }
 
-    private String readSetting(String key) {
-        String value;
-        value = settings.getString(key, "");
-        return value;
-    }
-
     public void setValues() {
         runOnUiThread(new Runnable() {
             @Override
@@ -175,7 +171,7 @@ public class LevelActivity extends AppCompatActivity {
     public void finishGame(int coinsEarned, int kmPassed) {
         this.coinsEarned = coinsEarned;
         this.kmPassed = kmPassed;
-
+        playSound(R.raw.high_score);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -368,6 +364,43 @@ public class LevelActivity extends AppCompatActivity {
                 doubleBackToExitPressedOnce=false;
             }
         }, 1500);
+    }
+
+    public String readSetting (String key)
+    {
+        String value;
+        value = settings.getString(key, "");
+        return value;
+    }
+
+
+    // Play the Sound
+    private void playSound ( int idOfSound){
+
+        if (readSetting("sound").equals("true")) {
+            try {
+                MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), idOfSound);
+                if (mediaPlayer != null) {
+                    mediaPlayer.start();
+                }
+
+                assert mediaPlayer != null;
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(@NonNull MediaPlayer mp) {
+                        if (mp.isPlaying()) {
+                            mp.stop();
+                        }
+
+                        mp.reset();
+                        mp.release();
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
