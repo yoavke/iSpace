@@ -59,12 +59,21 @@ public class Level {
             this.numCoinsEarned += 1;
     }
 
-    public boolean reduceNumCoins() {
-        if (getNumCoinsEarned()-SuperRock.POWER < 0) {
-            return false;
-        } else {
-            this.numCoinsEarned -= SuperRock.POWER;
+    public boolean reduceNumCoins(boolean fullStrength) {
+        if (fullStrength) {
+            if ((this.numCoinsEarned % 2)==1) {
+                this.numCoinsEarned = (int)(this.numCoinsEarned * CSettings.Strength.HALF) + 1;
+            } else {
+                this.numCoinsEarned = (int)(this.numCoinsEarned * CSettings.Strength.HALF);
+            }
             return true;
+        } else {
+            if (getNumCoinsEarned() - SuperRock.POWER < 0) {
+                return false;
+            } else {
+                this.numCoinsEarned -= SuperRock.POWER;
+                return true;
+            }
         }
     }
 

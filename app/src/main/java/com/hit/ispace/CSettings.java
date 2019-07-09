@@ -34,6 +34,10 @@ public abstract class CSettings {
         public static final int TOP = -(Dimension.ELEMENT_SIZE);
     }
 
+    public static class Strength {
+        public static final double HALF = 0.5;
+    }
+
     public enum FlyingElements{
         COIN,
         GOODBOMB,
