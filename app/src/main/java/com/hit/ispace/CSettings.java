@@ -26,8 +26,8 @@ public abstract class CSettings {
     }
 
     public static class Dimension {
-        public static final int SPACESHIP_SIZE = 130;
-        public static final int ELEMENT_SIZE = 130;
+        public static final int SPACESHIP_SIZE = 115;
+        public static final int ELEMENT_SIZE = 115;
     }
 
     public static class Margin {

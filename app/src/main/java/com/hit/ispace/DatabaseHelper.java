@@ -73,12 +73,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO levels(level,speed) VALUES('Free Style',1)");
         db.execSQL("INSERT INTO levels(level,speed) VALUES('Getting Sick',2)");
         db.execSQL("INSERT INTO bank(coins_total,coins_now) VALUES(8000,0)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(1,'Space Ship 1','spaceship_1',0,100)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(2,'Space Ship 2','spaceship_2',1,150)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(3,'Space Ship 3','spaceship_3',1,200)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(4,'Space Ship 4','spaceship_4',1,250)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(5,'Space Ship 5','spaceship_5',1,300)");
-        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(6,'Space Ship 6','spaceship_6',1,400)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(1,'Space Ship 1','spaceship_1',0,0)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(2,'Space Ship 2','spaceship_2',1,200)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(3,'Space Ship 3','spaceship_3',1,800)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(4,'Space Ship 4','spaceship_4',1,1500)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(5,'Space Ship 5','spaceship_5',1,3000)");
+        db.execSQL("INSERT INTO spaceships(id,name,src_path,locked,price) VALUES(6,'Space Ship 6','spaceship_6',1,8000)");
         db.execSQL("INSERT INTO myspaceship(spaceship_id) VALUES(1)");
         db.execSQL("INSERT INTO remember(is_remember) VALUES(1)");
 
