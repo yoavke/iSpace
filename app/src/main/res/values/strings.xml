@@ -35,7 +35,7 @@
     <string name="cant_buy">You don\'t have enough coins to buy this item</string>
     <string name="use_this_space">Use</string>
     <string name="text_send_whatsapp_1">My distance is </string>
-    <string name="text_send_whatsapp_2">, in iSpace app. let\'s see if you can get a better score.</string>
+    <string name="text_send_whatsapp_2">m in iSpace app. let\'s see if you can get a better score.</string>
     <string name="msg_error_save_score">You must type your name in order to save your record</string>
     <string name="cant_do_nothing">This is your current SpaceShip</string>
     <string name="instructions">Instructions</string>
@@ -50,5 +50,5 @@
     <string name="dont_remember">Don\'t show this message in the future</string>
     <string name="doubleClickExit">Please click BACK again to exit</string>
     <string name="msg_lose">Oops.. your distance is not enough to the top 15. Maybe next time :)</string>
-    <string name="text_user_coin">You collect </string>
+    <string name="text_user_coin">Coins collected: </string>
 </resources>

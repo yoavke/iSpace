@@ -36,7 +36,7 @@
     <string name="cant_buy">אין לך מספיק מטבעות כדי לקנות חללית זו</string>
     <string name="use_this_space">השתמש</string>
     <string name="text_send_whatsapp_1">המרחק שלי הוא </string>
-    <string name="text_send_whatsapp_2">, באפליקציית ispace. בוא נראה אם תוכל לעקוף את תוצאת השיא שלי.</string>
+    <string name="text_send_whatsapp_2">מטר באפליקציית ispace. בוא נראה אם תוכל לעקוף את תוצאת השיא שלי.</string>
     <string name="msg_error_save_score">אתה חייב לרשום את שמך כדי לשמור את השיא שלך!</string>
     <string name="cant_do_nothing">זוהי החללית הנוכחית שלך</string>
     <string name="instructions">הוראות</string>
@@ -51,6 +51,6 @@
     <string name="dont_remember">אל תזכיר לי שוב</string>
     <string name="doubleClickExit">לחיצה כפולה אחורה כדי לצאת</string>
     <string name="msg_lose">אופס, התוצאה שלך לא מספיקה ל15 הגדולים. אולי בפעם הבאה :)</string>
-    <string name="text_user_coin">אספת </string>
+    <string name="text_user_coin">מטבעות שנאספו</string>
 
 </resources>
