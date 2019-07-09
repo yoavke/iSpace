@@ -80,20 +80,4 @@ public class Level {
     public int getLevelType() {
         return levelType;
     }
-
-    public double getSpeed() {
-        return speed;
-    }
-
-    public ArrayList<String> getObstacleTypes() {
-        return obstacleTypes;
-    }
-
-    public boolean isLevelEnded() {
-        return levelEnded;
-    }
-
-    public void setLevelEnded(boolean levelEnded) {
-        this.levelEnded = levelEnded;
-    }
 }
