@@ -3,7 +3,7 @@ package com.hit.ispace;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-public class SuperRock extends Obstacle implements IDestroyable{
+public class SuperRock implements IElement{
 
     private static final String TAG = SuperRock.class.getSimpleName();
 
@@ -45,11 +45,6 @@ public class SuperRock extends Obstacle implements IDestroyable{
     @Override
     public String sayMyName() {
         return "SuperRock";
-    }
-
-    @Override
-    public boolean destroy() {
-        return this.isDestroyable;
     }
 
     @Override

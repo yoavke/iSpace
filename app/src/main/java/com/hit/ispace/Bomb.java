@@ -3,7 +3,7 @@ package com.hit.ispace;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-public class Bomb extends Obstacle implements IDestroyable {
+public class Bomb implements IElement {
 
     private static final String TAG = Bomb.class.getSimpleName();
     private Point topLeft;
@@ -42,14 +42,6 @@ public class Bomb extends Obstacle implements IDestroyable {
     @Override
     public Bitmap getBitmapSrc() {
         return this.bitmapSrc;
-    }
-
-    @Override
-    public boolean destroy() {
-        //TODO make the destruction of all destroyable objects
-        Log.i(TAG, "Destroying all destroyable objects");
-
-        return this.isDestroyable;
     }
 
     @Override

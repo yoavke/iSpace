@@ -3,9 +3,7 @@ package com.hit.ispace;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-public class Rock extends Obstacle implements IDestroyable{
-
-    private static final String TAG = Obstacle.class.getSimpleName();
+public class Rock implements IElement{
 
     private Point topLeft;
     private Point bottomRight;
@@ -38,20 +36,13 @@ public class Rock extends Obstacle implements IDestroyable{
     }
 
     public Rock() {
-        this.destroyAnimation = CSettings.Animation.ROCK_ANIMATION;
+
     }
 
     public Rock(Point topLeft, Point bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
         this.hit = false;
-    }
-
-    @Override
-    public boolean destroy() {
-        //TODO make the destruction of all destroyable objects
-
-        return this.isDestroyable;
     }
 
     @Override
