@@ -337,6 +337,8 @@ public class LevelView extends View {
                                     Log.i(TAG, "GoodBomb hit!!!!!!");
                                     CopyOnWriteArrayList<IElement> list = LevelView.this.level.elementFactory.getElemList();
                                     int indexToRemove = (int)(Math.random()*list.size());
+                                    if (indexToRemove==list.indexOf(elem))
+                                        indexToRemove++;
                                     LevelView.this.level.elementFactory.setCollectedSize();
                                     Log.w(TAG,  LevelView.this.level.elementFactory.getElemList().get(indexToRemove).sayMyName() + " destroyed and its id was " + indexToRemove);
                                     LevelView.this.level.elementFactory.getElemList().remove(indexToRemove);
