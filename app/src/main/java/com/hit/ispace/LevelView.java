@@ -322,12 +322,15 @@ public class LevelView extends View {
                                     Log.i(TAG, "5 coin added. total of "+LevelView.this.level.getNumCoinsEarned()+" coins");
                                     break;
                                 case "Rock":
+                                    LevelView.this.setGameEnded(true);
+                                    break;
                                 case "Bomb":
+                                    LevelView.this.level.reduceNumCoins(true);
                                     LevelView.this.setGameEnded(true);
                                     break;
                                 case "SuperRock":
                                     Log.i(TAG, "SuperRock hit!!!!!!");
-                                    if (!LevelView.this.level.reduceNumCoins())
+                                    if (!LevelView.this.level.reduceNumCoins(false))
                                         LevelView.this.setGameEnded(true);
                                     break;
                                 case "GoodBomb":

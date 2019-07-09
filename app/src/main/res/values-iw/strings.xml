@@ -10,7 +10,7 @@
     <string name="game_over">סיום המשחק</string>
     <string name="high_score">תוצאת שיא</string>
     <string name="user_name">שם</string>
-    <string name="score">תוצאה</string>
+    <string name="score">מרחק שעברת</string>
     <string name="text_user_score">התוצאה שלך היא:</string>
     <string name="new_high_score">תוצאת שיא חדשה!!!</string>
     <string name="in_top_15">אתה ב-15 הראשונים המובילים</string>
