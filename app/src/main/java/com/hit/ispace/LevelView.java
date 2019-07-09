@@ -20,6 +20,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -202,6 +203,9 @@ public class LevelView extends View {
         if(db.ifCheckRemember() == 1){
             dialog.setContentView(R.layout.dialog_info_level);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            Window window = dialog.getWindow();
+            window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL, WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
             okDontRemember = (ImageButton) dialog.findViewById(R.id.btn_done);
             checkBoxDontRemember = (CheckBox) dialog.findViewById(R.id.check_box_dont_remember);
             okDontRemember.setOnClickListener(new View.OnClickListener() {
