@@ -14,7 +14,7 @@
         android:layout_height="310dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:background="@drawable/layout_ripple_level">
+        android:background="@drawable/layout_ripple_dialog_score">
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/msg_lose"
-            android:textColor="@color/whiteColor"
+            android:textColor="@color/pinkDarkColor"
             android:textStyle="bold"
             android:fontFamily="casual"
             android:gravity="center"
@@ -43,7 +43,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/icon_skeleton"
+        android:src="@drawable/icon_skeleton1"
         android:padding="10dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"/>

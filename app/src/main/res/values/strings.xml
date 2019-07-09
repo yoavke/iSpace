@@ -10,7 +10,7 @@
     <string name="high_score">High Score</string>
     <string name="user_name">Name</string>
     <string name="score">Distance</string>
-    <string name="text_user_score">Your distance is:</string>
+    <string name="text_user_score">Distance passed:</string>
     <string name="new_high_score">New High Score!!!</string>
     <string name="in_top_15">You are in the top 15</string>
     <string name="save">Save</string>
@@ -34,7 +34,7 @@
     <string name="success_update">Update succeeded</string>
     <string name="cant_buy">You don\'t have enough coins to buy this item</string>
     <string name="use_this_space">Use</string>
-    <string name="text_send_whatsapp_1">My distance is </string>
+    <string name="text_send_whatsapp_1">Distance passed </string>
     <string name="text_send_whatsapp_2">m in iSpace app. let\'s see if you can get a better score.</string>
     <string name="msg_error_save_score">You must type your name in order to save your record</string>
     <string name="cant_do_nothing">This is your current SpaceShip</string>

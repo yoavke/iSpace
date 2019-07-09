@@ -17,5 +17,9 @@
     <color name="greenColor">#67C76B</color>
     <color name="blueColor">#798DF0D6</color>
     <color name="purpleWhite">#66C051C5</color>
+    <color name="colorLayout1">#C5E6A1E3</color>
+    <color name="colorLayout2">#E9E1E9F8</color>
+    <color name="colorLayout3">#E9FFFFFF</color>
+    <color name="blueBtnColor">#6990D7</color>
 
 </resources>

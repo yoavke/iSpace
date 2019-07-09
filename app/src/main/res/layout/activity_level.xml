@@ -4,15 +4,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -21,7 +12,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/whiteColor"
+            android:background="@color/colorLayout1"
             android:orientation="horizontal">
 
             <TextView
@@ -33,7 +24,7 @@
                 android:paddingEnd="6dp"
                 android:paddingBottom="5dp"
                 android:text="@string/score"
-                android:textColor="@color/blackColor"
+                android:textColor="@color/whiteColor"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="serif"
@@ -47,7 +38,7 @@
                 android:fontFamily="casual"
                 android:gravity="center"
                 android:text="0000"
-                android:textColor="@color/pinkColor"
+                android:textColor="@color/pinkDarkColor"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="serif"
@@ -59,18 +50,17 @@
                 android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:src="@drawable/icon_coin"
-                android:layout_weight="3"
-                />
+                android:layout_weight="2"/>
 
             <TextView
                 android:id="@+id/coins_value"
-                android:layout_width="50dp"
+                android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:background="@drawable/layout_ripple"
+                android:background="@drawable/layout_ripple_white"
                 android:gravity="center"
                 android:text="0"
-                android:textColor="@color/pinkColor"
+                android:textColor="@color/pinkDarkColor"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:typeface="serif"

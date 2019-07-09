@@ -15,6 +15,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -36,6 +38,7 @@ public class HighScoreActivity extends AppCompatActivity {
     private TextView nameTopDialog;
     private ImageView imageView;
     private Button btnTopFreeStyle ,btnTopFaster , btnTopFreeGettingSick ;
+    private Animation animShake;
     Dialog dialog;
 
 
@@ -69,9 +72,17 @@ public class HighScoreActivity extends AppCompatActivity {
         AnimationDrawable animationDrawable = (AnimationDrawable)imageView.getDrawable();
         animationDrawable.start();
 
+        btnTopFreeStyle = (Button) findViewById(R.id.btn_top_free_style);
+        btnTopFaster = (Button) findViewById(R.id.btn_top_faster);
+        btnTopFreeGettingSick = (Button) findViewById(R.id.btn_top_getting_sick);
+
+        animShake = AnimationUtils.loadAnimation(this, R.anim.shake_high_score);
+        btnTopFreeStyle.startAnimation(animShake);
+        btnTopFaster.startAnimation(animShake);
+        btnTopFreeGettingSick.startAnimation(animShake);
+
         dialog = new Dialog(this);
 
-        btnTopFreeStyle = (Button) findViewById(R.id.btn_top_free_style);
         btnTopFreeStyle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +104,6 @@ public class HighScoreActivity extends AppCompatActivity {
             }
         });
 
-        btnTopFaster = (Button) findViewById(R.id.btn_top_faster);
         btnTopFaster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +125,6 @@ public class HighScoreActivity extends AppCompatActivity {
             }
         });
 
-        btnTopFreeGettingSick = (Button) findViewById(R.id.btn_top_getting_sick);
         btnTopFreeGettingSick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -3,8 +3,6 @@ package com.hit.ispace;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -13,8 +11,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.podcopic.animationlib.library.AnimationType;
 import com.podcopic.animationlib.library.StartSmartAnimation;
@@ -24,10 +22,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
 
     private ImageView logoIspace;
     private Button btnFreeStyle,btnFaster,btnGettingSick;
-    private Button btnSettings;
-    private Button btnScore;
-    private Button btnShop;
-    private Button btnInfo;
+    private ImageButton btnSettings,btnScore,btnShop,btnInfo;
     public SharedPreferences settings ;
     private Animation animShake;
     private boolean isPlayed;
@@ -44,14 +39,14 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     private void initView() {
         settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
 
-        logoIspace = findViewById(R.id.logo_img);
-        btnFreeStyle = findViewById(R.id.btn_freestyle);
-        btnFaster = findViewById(R.id.btn_faster);
-        btnGettingSick = findViewById(R.id.btn_getting_sick);
-        btnSettings = findViewById(R.id.btn_settings);
-        btnScore = findViewById(R.id.btn_score);
-        btnShop = findViewById(R.id.btn_shop);
-        btnInfo = findViewById(R.id.btn_info);
+        logoIspace = (ImageView) findViewById(R.id.logo_img);
+        btnFreeStyle = (Button) findViewById(R.id.btn_freestyle);
+        btnFaster = (Button) findViewById(R.id.btn_faster);
+        btnGettingSick = (Button) findViewById(R.id.btn_getting_sick);
+        btnSettings = (ImageButton) findViewById(R.id.btn_settings);
+        btnScore = (ImageButton) findViewById(R.id.btn_score);
+        btnShop = (ImageButton) findViewById(R.id.btn_shop);
+        btnInfo = (ImageButton) findViewById(R.id.btn_info);
 
 
         // Set animation for buttons

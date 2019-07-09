@@ -172,7 +172,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:fontFamily="casual"
-            android:text="@string/inst_dead_asteroid"
+            android:text="@string/inst_bad_bomb"
             android:textColor="@color/blackColor"
             android:textSize="10sp"
             android:textStyle="bold" />

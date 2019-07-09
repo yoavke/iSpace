@@ -14,7 +14,7 @@
         android:layout_height="370dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:background="@drawable/layout_ripple_level">
+        android:background="@drawable/layout_ripple_dialog_score">
         
         <TextView
             android:layout_width="wrap_content"
@@ -31,10 +31,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_high_score"
-            android:textColor="@color/blackColor"
+            android:textColor="@color/pinkDarkColor"
             android:textStyle="bold"
             android:fontFamily="casual"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"/>
     </LinearLayout>
@@ -42,7 +42,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/icon_skeleton"
+        android:src="@drawable/icon_skeleton1"
         android:padding="10dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"/>
@@ -132,8 +132,8 @@
             android:layout_width="190dp"
             android:layout_height="50dp"
             android:fontFamily="casual"
-            android:textColor="@color/blackColor"
-            android:background="@drawable/layout_ripple"
+            android:textColor="@color/pinkDarkColor"
+            android:background="@drawable/layout_ripple_white"
             android:layout_margin="10dp"
             android:textSize="20sp"
             android:gravity="center"
@@ -145,8 +145,8 @@
             android:id="@+id/btn_save"
             android:layout_width="60dp"
             android:layout_height="40dp"
-            android:textColor="@color/blackColor"
-            android:background="@drawable/scope_button_cant_use"
+            android:textColor="@color/whiteColor"
+            android:background="@drawable/scope_button_blue"
             android:text="@string/save"
             />
     </LinearLayout>
