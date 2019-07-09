@@ -70,12 +70,12 @@ public class LevelActivity extends AppCompatActivity {
         this.scoreTxt = findViewById(R.id.score_value);
         this.coinsTxt = findViewById(R.id.coins_value);
 
-        //ImageView imageView = (ImageView) findViewById(R.id.image);
-        //imageView.setBackgroundResource(R.drawable.frame_background);
-        //backgroundAnim = (AnimationDrawable) imageView.getBackground();
+        ImageView imageView = (ImageView) findViewById(R.id.image);
+        imageView.setBackgroundResource(R.drawable.frame_background);
+        backgroundAnim = (AnimationDrawable) imageView.getBackground();
 
         //set the background of the level view
-        levelView.setBackgroundColor(getResources().getColor(R.color.blackColor));
+        //levelView.setBackgroundColor(getResources().getColor(R.color.blackColor));
 
         final int levelType = getIntent().getIntExtra("levelType", 0);
         this.waitEndGameThread = new HandlerThread("wait for end of game thread");
@@ -161,11 +161,11 @@ public class LevelActivity extends AppCompatActivity {
         playSound(R.raw.start_level);
     }
 
-    //@Override
-    //public void onWindowFocusChanged(boolean hasFocus) {
-    //   super.onWindowFocusChanged(hasFocus);
-    //    backgroundAnim.start();
-    //}
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+       super.onWindowFocusChanged(hasFocus);
+        backgroundAnim.start();
+    }
 
     public void setValues() {
         runOnUiThread(new Runnable() {
