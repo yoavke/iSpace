@@ -46,7 +46,7 @@ public class LevelActivity extends AppCompatActivity {
     private TextView scoreTxt, coinsTxt;
     private LevelView levelView;
     DatabaseHelper mDatabaseHelper;
-
+    AnimationDrawable backgroundAnim;
     private int coinsEarned;
     private int kmPassed;
     private TextView msgHighScore,score,coin;
@@ -56,6 +56,7 @@ public class LevelActivity extends AppCompatActivity {
     private Button btnSave;
     private boolean doubleBackToExitPressedOnce = false;
     boolean isFlip = false;
+    private boolean isPlayed;
     Dialog dialog;
 
 
@@ -68,6 +69,10 @@ public class LevelActivity extends AppCompatActivity {
         levelView = findViewById(R.id.levelview);
         this.scoreTxt = findViewById(R.id.score_value);
         this.coinsTxt = findViewById(R.id.coins_value);
+
+        //ImageView imageView = (ImageView) findViewById(R.id.image);
+        //imageView.setBackgroundResource(R.drawable.frame_background);
+        //backgroundAnim = (AnimationDrawable) imageView.getBackground();
 
         //set the background of the level view
         levelView.setBackgroundColor(getResources().getColor(R.color.blackColor));
@@ -152,7 +157,15 @@ public class LevelActivity extends AppCompatActivity {
             Intent serviceIntent = new Intent(this, BackgroundMusic.class);
             startService(serviceIntent);
         }
+        isPlayed = getIntent().getBooleanExtra("isPlayed", false);
+        playSound(R.raw.start_level);
     }
+
+    //@Override
+    //public void onWindowFocusChanged(boolean hasFocus) {
+    //   super.onWindowFocusChanged(hasFocus);
+    //    backgroundAnim.start();
+    //}
 
     public void setValues() {
         runOnUiThread(new Runnable() {
@@ -171,7 +184,7 @@ public class LevelActivity extends AppCompatActivity {
     public void finishGame(int coinsEarned, int kmPassed) {
         this.coinsEarned = coinsEarned;
         this.kmPassed = kmPassed;
-        playSound(R.raw.high_score);
+        playSound(R.raw.fail_level);
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

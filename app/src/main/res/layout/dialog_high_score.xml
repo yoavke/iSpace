@@ -14,13 +14,13 @@
         android:layout_height="370dp"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:background="@color/blackColor">
+        android:background="@drawable/layout_ripple_level">
         
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/game_over"
-            android:textColor="@color/whiteColor"
+            android:textColor="@color/blackColor"
             android:textStyle="bold"
             android:fontFamily="casual"
             android:textSize="24sp"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_high_score"
-            android:textColor="@color/whiteColor"
+            android:textColor="@color/blackColor"
             android:textStyle="bold"
             android:fontFamily="casual"
             android:textSize="20sp"
@@ -42,7 +42,7 @@
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/icon_sekelton"
+        android:src="@drawable/icon_skeleton"
         android:padding="10dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"/>
@@ -61,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/text_user_coin"
-                android:textColor="@color/whiteColor"
+                android:textColor="@color/blackColor"
                 android:textStyle="bold"
                 android:fontFamily="casual"
                 android:textSize="20sp"
@@ -75,7 +75,7 @@
                 android:layout_marginLeft="20dp"
                 android:gravity="center"
                 android:fontFamily="casual"
-                android:textColor="@color/whiteColor"
+                android:textColor="@color/blackColor"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:typeface="serif" />
@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_user_score"
-            android:textColor="@color/whiteColor"
+            android:textColor="@color/blackColor"
             android:textStyle="bold"
             android:fontFamily="casual"
             android:textSize="20sp"
@@ -114,7 +114,7 @@
             android:layout_marginLeft="20dp"
             android:gravity="center"
             android:fontFamily="casual"
-            android:textColor="@color/whiteColor"
+            android:textColor="@color/blackColor"
             android:textSize="20sp"
             android:textStyle="bold"
             android:typeface="serif" />
@@ -132,7 +132,7 @@
             android:layout_width="190dp"
             android:layout_height="50dp"
             android:fontFamily="casual"
-            android:textColor="@color/whiteColor"
+            android:textColor="@color/blackColor"
             android:background="@drawable/layout_ripple"
             android:layout_margin="10dp"
             android:textSize="20sp"

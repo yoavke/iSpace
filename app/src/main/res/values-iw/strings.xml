@@ -11,14 +11,13 @@
     <string name="high_score">תוצאת שיא</string>
     <string name="user_name">שם</string>
     <string name="score">מרחק שעברת</string>
-    <string name="text_user_score">התוצאה שלך היא:</string>
+    <string name="text_user_score">המרחק שלך הוא:</string>
     <string name="new_high_score">תוצאת שיא חדשה!!!</string>
     <string name="in_top_15">אתה ב-15 הראשונים המובילים</string>
     <string name="save">שמור</string>
     <string name="free_style">סגנון חופשי</string>
     <string name="faster">מהר יותר</string>
     <string name="getting_sick">כאב ראש</string>
-    <string name="out_game">התוצאה שלך לא תישמר. האם אתה בטוח שברצונך לצאת?</string>
     <string name="msg_yes">כן</string>
     <string name="msg_no">לא</string>
     <string name="space_shop">חנות החלליות</string>
@@ -36,7 +35,7 @@
     <string name="success_update">העדכון הצליח</string>
     <string name="cant_buy">אין לך מספיק מטבעות כדי לקנות חללית זו</string>
     <string name="use_this_space">השתמש</string>
-    <string name="text_send_whatsapp_1">התוצאה שלי היא </string>
+    <string name="text_send_whatsapp_1">המרחק שלי הוא </string>
     <string name="text_send_whatsapp_2">, באפליקציית ispace. בוא נראה אם תוכל לעקוף את תוצאת השיא שלי.</string>
     <string name="msg_error_save_score">אתה חייב לרשום את שמך כדי לשמור את השיא שלך!</string>
     <string name="cant_do_nothing">זוהי החללית הנוכחית שלך</string>
@@ -47,6 +46,7 @@
     <string name="inst_good_bomb">מוחק אלמנט אקראי.</string>
     <string name="inst_ufo">גונב 3 מטבעות מאוסף המטבעות שלך. </string>
     <string name="inst_dead_asteroid">גורם למשחק להסתיים.</string>
+    <string name="inst_bad_bomb">גורם למשחק להסתייםגורם למשחק להסתיים ומפחיתה מחצית מהמטבעות שאספת. </string>
     <string name="good_luck">בהצלחה :)</string>
     <string name="dont_remember">אל תזכיר לי שוב</string>
     <string name="doubleClickExit">לחיצה כפולה אחורה כדי לצאת</string>

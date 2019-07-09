@@ -3,7 +3,9 @@ package com.hit.ispace;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import com.suke.widget.SwitchButton;
@@ -15,6 +17,8 @@ public class SettingMusicActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private com.suke.widget.SwitchButton setting_sound , setting_music;
     private ImageView imageView;
+    private boolean isPlayed;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,8 @@ public class SettingMusicActivity extends AppCompatActivity {
 
         settings = getSharedPreferences("PREFERENCES",MODE_PRIVATE);
         editor = settings.edit();
+        isPlayed = getIntent().getBooleanExtra("isPlayed", false);
+        playSound(R.raw.setting_music);
         initView();
     }
 
@@ -113,6 +119,34 @@ public class SettingMusicActivity extends AppCompatActivity {
         editor.commit();
     }
 
+    // Play the Sound
+    private void playSound ( int idOfSound){
+
+        if (readSetting("sound").equals("true")) {
+            try {
+                MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), idOfSound);
+                if (mediaPlayer != null) {
+                    mediaPlayer.start();
+                }
+
+                assert mediaPlayer != null;
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(@NonNull MediaPlayer mp) {
+                        if (mp.isPlaying()) {
+                            mp.stop();
+                        }
+
+                        mp.reset();
+                        mp.release();
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Override
     protected void onPause() {

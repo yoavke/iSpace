@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +30,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     private Button btnInfo;
     public SharedPreferences settings ;
     private Animation animShake;
+    private boolean isPlayed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             Intent serviceIntent = new Intent(this, BackgroundMusic.class);
             startService(serviceIntent);
         }
+        isPlayed = getIntent().getBooleanExtra("isPlayed", false);
 
     }
 
@@ -122,6 +126,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btn_info:
                 InfoClick(v);
+                playSound(R.raw.info);
             default:
                 break;
         }
@@ -151,7 +156,34 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         alert.show();
     }
 
+    // Play the Sound
+    private void playSound ( int idOfSound){
 
+        if (readSetting("sound").equals("true")) {
+            try {
+                MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), idOfSound);
+                if (mediaPlayer != null) {
+                    mediaPlayer.start();
+                }
+
+                assert mediaPlayer != null;
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(@NonNull MediaPlayer mp) {
+                        if (mp.isPlaying()) {
+                            mp.stop();
+                        }
+
+                        mp.reset();
+                        mp.release();
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Override
     protected void onPause() {

@@ -60,7 +60,6 @@ public class ShopActivity extends AppCompatActivity {
         number_of_coins = mDatabaseHelper.getTotalCoins();
         coins_total = findViewById(R.id.coins_value);
         coins_total.setText(String.valueOf(number_of_coins));
-
         //id of ImageView of coin
         final ImageView coinIv = findViewById(R.id.icon_animation_coin);
 
@@ -93,6 +92,8 @@ public class ShopActivity extends AppCompatActivity {
 
         settings = getSharedPreferences("PREFERENCES", MODE_PRIVATE);
         isPlayed = getIntent().getBooleanExtra("isPlayed", false);
+        playSound(R.raw.take_coin);
+
     }
 
     public String readSetting (String key)
