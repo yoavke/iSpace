@@ -6,7 +6,7 @@
     <string name="setting_sound">סאונד</string>
     <string name="setting_music">מוזיקה</string>
     <string name="ok">אוקיי</string>
-    <string name="info">מידע</string>
+    <string name="info">החלק את האצבע שלך כדי להכווין חללית בחלל להתחמק מאסטרואידים ולאסוף מטבעות. נסה לאסוף כמה שיותר מטבעות. קח אלמנטים ואתגר חברים עם התוצאת שיא שלך!\n\n תהנה!!!</string>
     <string name="game_over">סיום המשחק</string>
     <string name="high_score">תוצאת שיא</string>
     <string name="user_name">שם</string>
@@ -46,7 +46,7 @@
     <string name="inst_good_bomb">מוחק אלמנט אקראי.</string>
     <string name="inst_ufo">גונב 3 מטבעות מאוסף המטבעות שלך. </string>
     <string name="inst_dead_asteroid">גורם למשחק להסתיים.</string>
-    <string name="inst_bad_bomb">גורם למשחק להסתייםגורם למשחק להסתיים ומפחיתה מחצית מהמטבעות שאספת. </string>
+    <string name="inst_bad_bomb">גורם למשחק להסתיים ומפחיתה מחצית מהמטבעות שאספת. </string>
     <string name="good_luck">בהצלחה :)</string>
     <string name="dont_remember">אל תזכיר לי שוב</string>
     <string name="doubleClickExit">לחיצה כפולה אחורה כדי לצאת</string>
