@@ -1,7 +1,0 @@
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/frame_ovel" />
-    <item android:drawable="@drawable/icon_info"
-        android:width="35dp"
-        android:height="35dp"
-        android:gravity="center"/>
-</layer-list>

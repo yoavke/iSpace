@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import nl.dionsegijn.konfetti.KonfettiView;
@@ -32,6 +34,7 @@ public class HighScoreActivity extends AppCompatActivity {
     private boolean isPlayed;
     private KonfettiView konfetti;
     private TextView nameTopDialog;
+    private ImageView imageView;
     private Button btnTopFreeStyle ,btnTopFaster , btnTopFreeGettingSick ;
     Dialog dialog;
 
@@ -61,6 +64,11 @@ public class HighScoreActivity extends AppCompatActivity {
 
         container = findViewById(R.id.container_high_score_activity);
         high_score= MediaPlayer.create(this, R.raw.high_score);
+
+        imageView = findViewById(R.id.animation_star_view);
+        AnimationDrawable animationDrawable = (AnimationDrawable)imageView.getDrawable();
+        animationDrawable.start();
+
         dialog = new Dialog(this);
 
         btnTopFreeStyle = (Button) findViewById(R.id.btn_top_free_style);

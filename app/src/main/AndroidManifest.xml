@@ -30,9 +30,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name=".AddScore"
-            android:screenOrientation="portrait">
-        </activity>
         <service android:name=".BackgroundMusic"
             android:exported="false">
         <intent-filter>

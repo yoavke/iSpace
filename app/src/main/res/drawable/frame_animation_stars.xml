@@ -2,8 +2,9 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:oneshot="false">
 
-    <item android:drawable="@drawable/icon_star1" android:duration="300"/>
-    <item android:drawable="@drawable/icon_star2" android:duration="300"/>
-    <item android:drawable="@drawable/icon_star3" android:duration="300"/>
+    <item android:drawable="@drawable/icon_star0" android:duration="400"/>
+    <item android:drawable="@drawable/icon_star1" android:duration="400"/>
+    <item android:drawable="@drawable/icon_star2" android:duration="400"/>
+    <item android:drawable="@drawable/icon_star3" android:duration="400"/>
 
 </animation-list>

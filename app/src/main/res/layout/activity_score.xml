@@ -50,12 +50,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
             android:gravity="center"
             android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/animation_star_view"
+                android:src="@drawable/frame_animation_stars"/>
 
             <Button
                 android:id="@+id/btn_top_free_style"

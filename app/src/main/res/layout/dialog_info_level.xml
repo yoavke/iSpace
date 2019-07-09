@@ -60,6 +60,7 @@
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
+            android:layout_margin="10dp"
             android:fontFamily="casual"
             android:text="@string/elements"
             android:textColor="@color/blackColor"
